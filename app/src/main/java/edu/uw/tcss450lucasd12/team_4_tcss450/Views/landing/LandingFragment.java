@@ -1,4 +1,4 @@
-package Views;
+package edu.uw.tcss450lucasd12.team_4_tcss450.Views.landing;
 
 import android.os.Bundle;
 
