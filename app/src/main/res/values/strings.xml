@@ -18,4 +18,10 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="hello_blank_fragment">"Hello World!"</string>
+
+    <!--TODO: added for landing, weather, & contacts -->
+    <string name="title_landing">Landing</string>
+    <string name="title_weather">Weather</string>
+    <string name="title_contacts_init">Contacts</string>
+    <string name="title_chat_init">Chat</string>
 </resources>

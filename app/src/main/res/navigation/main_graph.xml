@@ -3,11 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
-    app:startDestination="@id/chatListFragment">
+    android:label="@string/title_weather"
+    app:startDestination="@id/landingFragment">
 
     <fragment
         android:id="@+id/chatListFragment"
         android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatListFragment"
-        android:label="fragment_chat_list"
+        android:label="@string/title_chat_init"
         tools:layout="@layout/fragment_chat_list" />
+    <fragment
+        android:id="@+id/weatherFragment"
+        android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.weather.WeatherFragment"
+        android:label="@string/title_weather"
+        tools:layout="@layout/fragment_weather" />
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.contacts.contactsFragment"
+        android:label="@string/title_contacts_init"
+        tools:layout="@layout/fragment_contacts" />
+    <fragment
+        android:id="@+id/landingFragment"
+        android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.landing.LandingFragment"
+        android:label="@string/title_landing"
+        tools:layout="@layout/fragment_landing" />
 </navigation>
