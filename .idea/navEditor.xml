@@ -63,13 +63,13 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="contactsFragment">
+                  <entry key="contactsListFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="572" />
-                            <option name="y" value="12" />
+                            <option name="x" value="632" />
+                            <option name="y" value="6" />
                           </Point>
                         </option>
                       </LayoutPositions>

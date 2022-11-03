@@ -17,13 +17,13 @@
         android:label="@string/title_weather"
         tools:layout="@layout/fragment_weather" />
     <fragment
-        android:id="@+id/contactsFragment"
-        android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.contacts.contactsFragment"
-        android:label="@string/title_contacts_init"
-        tools:layout="@layout/fragment_contacts" />
-    <fragment
         android:id="@+id/landingFragment"
         android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.landing.LandingFragment"
         android:label="@string/title_landing"
         tools:layout="@layout/fragment_landing" />
+    <fragment
+        android:id="@+id/contactsListFragment"
+        android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.contacts.ContactsListFragment"
+        android:label="@string/title_contacts_init"
+        tools:layout="@layout/fragment_contacts_list" />
 </navigation>
