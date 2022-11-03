@@ -4,12 +4,26 @@
 <!--SOURCE: https://www.geeksforgeeks.org/implementing-search-for-a-specific-blog-on-home-page-and-logout-functionality-in-social-media-android-app/-->
 
 <!--Search button for finding contacts-->
+
+    <item
+        android:id="@+id/landing"
+        android:icon="@drawable/ic_landing_home_24dp"
+        android:title="@string/home"/>
+
+    <item
+        android:id="@+id/weather"
+        android:icon="@drawable/ic_weather_cloud_24"
+        android:title="@string/weather" />
+
+    <item
+        android:id="@+id/chat"
+        android:icon="@drawable/ic_chat_24"
+        android:title="@string/chat" />
+
     <item
         android:id="@+id/search"
         android:icon="@drawable/ic_search_24dp"
-        android:title="Search"
-        app:actionViewClass="android.widget.SearchView"
-        app:showAsAction="always">
-    </item>
+        android:title="@string/search" />
+
 
 </menu>

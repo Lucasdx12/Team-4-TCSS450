@@ -300,7 +300,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/account_circle/baseline_account_circle_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/chat/baseline_chat_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -310,8 +310,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="d4af37" />
-                            <entry key="outputName" value="ic_contact_gold_24" />
+                            <entry key="outputName" value="ic_chat_24" />
                             <entry key="sourceFile" value="C:\Users\still\AndroidStudioProjects\Team-4-TCSS450" />
                           </map>
                         </option>

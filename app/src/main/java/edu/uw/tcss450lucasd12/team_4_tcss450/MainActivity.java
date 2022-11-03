@@ -1,8 +1,6 @@
 package edu.uw.tcss450lucasd12.team_4_tcss450;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -10,10 +8,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -28,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //adding back button in app bar (top of app):
-        ActionBar actionBar = getSupportActionBar(); //call action bar
+//        ActionBar actionBar = getSupportActionBar(); //call action bar
 //        actionBar.setDisplayHomeAsUpEnabled(true); //TODO: shows back button
 
         //Bottom navigation:
@@ -36,11 +32,18 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.landingFragment, R.id.weatherFragment, R.id.chatListFragment, R.id.contactsListFragment)
+                R.id.landing, R.id.weather, R.id.chat, R.id.search)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
     }
 
     //Adding settings options in top right corner of app's screen:

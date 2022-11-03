@@ -17,6 +17,11 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="settings">Setting</string>
+    <string name="home">Home</string>
+    <string name="weather">Weather</string>
+    <string name="chat">Chat</string>
+    <string name="search">Search</string>
     <string name="hello_blank_fragment">"Hello World!"</string>
 
     <!--TODO: added for landing, weather, & contacts -->
