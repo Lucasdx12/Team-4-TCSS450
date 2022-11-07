@@ -6,6 +6,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -16,10 +17,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
     //for bottom navigation implementation:
     private AppBarConfiguration mAppBarConfiguration;
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // For volley request
+        context = getApplicationContext();
 
         setContentView(R.layout.activity_main);
 
@@ -70,4 +75,10 @@ public class MainActivity extends AppCompatActivity {
 //        }
         return super.onOptionsItemSelected(item);
     }
+
+    // For Volley request
+    public static Context getContext() {
+        return context;
+    }
+
 }
