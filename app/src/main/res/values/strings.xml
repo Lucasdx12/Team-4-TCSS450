@@ -24,6 +24,12 @@
     <string name="search">Search</string>
     <string name="hello_blank_fragment">"Hello World!"</string>
 
+    <!-- Current Weather -->
+    <string name="currentCity">Tacoma</string>
+    <string name="currentTemp">42</string>
+    <string name="currentWeather">Drizzle</string>
+    <string name="currentHL">L:37   H:45</string>
+
     <!--TODO: added for landing, weather, & contacts -->
     <string name="title_landing">Landing</string>
     <string name="title_weather">Weather</string>

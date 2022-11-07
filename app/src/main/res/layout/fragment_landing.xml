@@ -1,13 +1,91 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Views.landing.LandingFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/title_landing" />
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_landing"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/weatherIcon"
+        android:layout_width="176dp"
+        android:layout_height="167dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_weather_cloud_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/currentCity"
+        android:layout_width="70dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/currentCity"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/weatherIcon"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/currentTemp"
+        android:layout_width="70dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/currentTemp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/weatherIcon"
+        app:layout_constraintTop_toBottomOf="@+id/currentCity" />
+
+    <TextView
+        android:id="@+id/currentHL"
+        android:layout_width="70dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="76dp"
+        android:text="@string/currentHL"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/weatherIcon"
+        app:layout_constraintTop_toBottomOf="@+id/currentWeather" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recentNotifications"
+        android:layout_width="362dp"
+        android:layout_height="411dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentHL" />
+
+    <TextView
+        android:id="@+id/currentWeather"
+        android:layout_width="70dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="69dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/currentWeather"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
+        app:layout_constraintStart_toEndOf="@+id/weatherIcon"
+        app:layout_constraintTop_toBottomOf="@+id/currentTemp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
