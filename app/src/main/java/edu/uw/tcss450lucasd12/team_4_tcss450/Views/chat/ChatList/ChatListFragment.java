@@ -13,6 +13,8 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 
 /**
  * A simple {@link Fragment} subclass.
+ * @author Paul Lee
+ * @version Fall 2022
  */
 public class ChatListFragment extends Fragment {
 
@@ -22,7 +24,7 @@ public class ChatListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_chat_list, container, false);
         if (view instanceof RecyclerView) {
             ((RecyclerView) view).setAdapter(
-                    new ChatListRecyclerViewAdapter(ChatListGenerator.getChatRoomList()));
+                    new ChatListRecyclerViewAdapter(ChatListGenerator.getChatList()));
         }
         return view;
     }

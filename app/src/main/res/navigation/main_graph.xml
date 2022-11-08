@@ -11,6 +11,9 @@
         android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatListFragment"
         android:label="@string/title_chat_init"
         tools:layout="@layout/fragment_chat_list" >
+        <action
+            android:id="@+id/action_chat_to_chatRoomFragment"
+            app:destination="@id/chatRoomFragment" />
     </fragment>
 
     <fragment
@@ -33,4 +36,9 @@
         android:label="@string/title_contacts_init"
         tools:layout="@layout/fragment_contacts_list">
     </fragment>
+    <fragment
+        android:id="@+id/chatRoomFragment"
+        android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatRoomFragment"
+        android:label="@string/title_chat_room"
+        tools:layout="@layout/fragment_chat_room" />
 </navigation>

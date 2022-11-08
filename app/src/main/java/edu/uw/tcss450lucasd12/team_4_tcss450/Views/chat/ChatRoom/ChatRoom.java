@@ -1,59 +1,56 @@
 package edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom;
 
+import androidx.annotation.Nullable;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class ChatRoom {
-    private String mMyMessage;
-    private String mUser;
-    private List<String> mOtherUsers;
-    private String mOtherMessage;
+/**
+ *
+ * @author Paul Lee
+ * @version Fall 2022
+ */
+public final class ChatRoom implements Serializable {
+    private final int mMessageId;
+    private final String mSender;
+    private final String mMessage;
+    private final String mTimeStamp;
+    private final String mUserName;
 
-    public static class Builder {
-        private final String mUser;
-        private final List<String> mOtherUsers;
-        private String mMyMessage = "";
-        private String mOtherMessage = "";
+    public ChatRoom(int messageId, String userName, String sender, String message, String timeStamp) {
+        this.mMessageId = messageId;
+        this.mUserName = userName;
+        this.mSender = sender;
+        this.mMessage = message;
+        this.mTimeStamp = timeStamp;
+    }
 
-        public Builder(String user, List<String> otherUsers) {
-            this.mUser = user;
-            this.mOtherUsers = otherUsers;
+    public int getMessageId() {
+        return this.mMessageId;
+    }
+
+    public String getUserName() {
+        return this.mUserName;
+    }
+
+    public String getSender() {
+        return this.mSender;
+    }
+
+    public String getMessage() {
+        return this.mMessage;
+    }
+
+    public String getTimeStamp() {
+        return this.mTimeStamp;
+    }
+
+    @Override
+    public boolean equals(@Nullable Object other) {
+        boolean result = false;
+        if (other instanceof ChatRoom) {
+            result = mMessageId == ((ChatRoom) other).mMessageId;
         }
-
-        public Builder addMyMessage(final String val) {
-            mMyMessage = val;
-            return this;
-        }
-
-        public Builder addOtherMessage(final String val) {
-            mOtherMessage = val;
-            return this;
-        }
-
-        public ChatRoom build() {
-            return new ChatRoom(this);
-        }
-    }
-
-    private ChatRoom(final Builder builder) {
-        this.mUser = builder.mUser;
-        this.mOtherUsers = builder.mOtherUsers;
-        this.mMyMessage = builder.mMyMessage;
-        this.mOtherMessage = builder.mOtherMessage;
-    }
-
-    public String getUser() {
-        return this.mUser;
-    }
-
-    public List<String> getOtherUsers() {
-        return this.mOtherUsers;
-    }
-
-    public String getMyMessage() {
-        return this.mMyMessage;
-    }
-
-    public String getOtherMessage() {
-        return this.mOtherMessage;
+        return result;
     }
 }

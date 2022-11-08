@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -13,6 +14,11 @@ import java.util.List;
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatCardBinding;
 
+/**
+ *
+ * @author Paul Lee
+ * @version Fall 2022
+ */
 public class ChatListRecyclerViewAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<ChatListRecyclerViewAdapter.ChatListViewHolder> {
 
     // Store all of the blogs to present
@@ -58,9 +64,10 @@ public class ChatListRecyclerViewAdapter extends androidx.recyclerview.widget.Re
 
         void setChat(final ChatList chat) {
             mChat = chat;
-            mBinding.cardRoot.setOnClickListener(view -> {
-                // TODO: Take the user to the chat room.
-            });
+            mBinding.cardRoot.setOnClickListener(view ->
+                    Navigation.findNavController(mView).navigate(
+                            ChatListFragmentDirections
+                                    .actionChatToChatRoomFragment()));
 
             mBinding.textChatTitle.setText(chat.getTitle());
 
