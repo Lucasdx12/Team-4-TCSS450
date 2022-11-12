@@ -27,10 +27,10 @@ public final class ChatListGenerator {
 //        for (int i = 0; i < CHATS.length; i++) {
             CHATS[0] = new ChatList
                     .Builder("Chat Room " + (1))
-                    .addRecentMessage(ChatRoomGenerator.getCHATS()[7].getUserName()
+                    .addRecentMessage(""
                                       + ": " +
-                                      ChatRoomGenerator.getCHATS()[7].getMessage())
-                    .addDate(ChatRoomGenerator.getCHATS()[7].getTimeStamp())
+                                      "")
+                    .addDate("2:22PM")
                     .build();
 //        }
     }

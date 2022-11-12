@@ -21,6 +21,8 @@ import org.json.JSONObject;
 import java.nio.charset.Charset;
 import java.util.Objects;
 
+import edu.uw.tcss450lucasd12.team_4_tcss450.R;
+
 public class RegisterViewModel extends AndroidViewModel {
 
     private MutableLiveData<JSONObject> mResponse;
@@ -65,7 +67,7 @@ public class RegisterViewModel extends AndroidViewModel {
                         final String username,
                         final String email,
                         final String password) {
-        String url = "https://tcss450-team4-webservice.herokuapp.com/auth";
+        String url = getApplication().getResources().getString(R.string.base_url) + "auth";
         JSONObject body = new JSONObject();
         try {
             body.put("first", first);

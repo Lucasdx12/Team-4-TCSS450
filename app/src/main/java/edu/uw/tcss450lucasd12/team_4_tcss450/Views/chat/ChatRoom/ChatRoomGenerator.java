@@ -20,23 +20,23 @@ public final class ChatRoomGenerator {
     public static int messages = 8;
 
     static {
-        chats = new ChatRoom[messages];
-        chats[0] = new ChatRoom(0, "test","test@testEmail.com", "Hello World!", "12:49 PM");
-        for (int i = 1; i < chats.length - 1; i++) {
-            chats[i] = new ChatRoom(0,
-                    mNames[i-1],
-                    mNames[i-1] + "@uw.edu",
-                    "Hello " + mNames[i],
-                    ((i % 12) + 1) + ":02 PM");
-            pointer++;
-        }
+//        chats = new ChatRoom[messages];
+//        chats[0] = new ChatRoom(0, "test","test@testEmail.com", "Hello World!", "12:49 PM");
+//        for (int i = 1; i < chats.length - 1; i++) {
+//            chats[i] = new ChatRoom(0,
+//                    mNames[i-1],
+//                    mNames[i-1] + "@uw.edu",
+//                    "Hello " + mNames[i],
+//                    ((i % 12) + 1) + ":02 PM");
+//            pointer++;
+//        }
 
         String message = "Hello everyone! How are you doing today? Are you having fun doing the TCSS 450 Project or no? What other class are you taking? Are they difficult? Good luck on this project and future projects!";
-        chats[7] = new ChatRoom(0,
-                                mNames[6],
-                        mNames[6] + "@uw.edu",
-                                message,
-                    "5:15 PM");
+//        chats[7] = new ChatRoom(0,
+//                                mNames[6],
+//                        mNames[6] + "@uw.edu",
+//                                message,
+//                    "5:15 PM");
     }
 
     public static List<ChatRoom> getChatRoomList() {

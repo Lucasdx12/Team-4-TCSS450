@@ -71,11 +71,15 @@ public class ChatListRecyclerViewAdapter extends androidx.recyclerview.widget.Re
 
             mBinding.textChatTitle.setText(chat.getTitle());
 
-            final String preview = Html.fromHtml(
-                    chat.getRecentMessage(),
-                    Html.FROM_HTML_MODE_COMPACT)
-                    .toString().substring(0,30);
-            mBinding.textRecentMessage.setText(preview);
+            if (chat.getRecentMessage().length() > 30) {
+                final String preview = Html.fromHtml(
+                                chat.getRecentMessage(),
+                                Html.FROM_HTML_MODE_COMPACT)
+                        .toString().substring(0,30);
+                mBinding.textRecentMessage.setText(preview);
+            } else {
+                mBinding.textRecentMessage.setText(chat.getRecentMessage());
+            }
             mBinding.textTimeOfMessage.setText(chat.getDate());
         }
     }

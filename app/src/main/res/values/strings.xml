@@ -39,4 +39,7 @@
     <string name="title_contacts_init">Contacts</string>
     <string name="title_chat_init">Chat</string>
     <string name="title_chat_room">Chat Room 1</string>
+
+    <!-- Web Service URL -->
+    <string name="base_url">https://tcss450-team4-webservice.herokuapp.com/</string>
 </resources>
