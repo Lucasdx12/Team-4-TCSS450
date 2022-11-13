@@ -8,4 +8,37 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="prompt_color">#757575</color>
+    <!--Fall colors-->
+    <color name="fall_yellow">#8B8000</color>
+    <color name="fall_orange">#FFA500</color>
+    <color name="fall_red">#FF5349</color>
+    <color name="fall_purple">#834468</color>
+    <color name="fall_brown">#9B673C</color>
+    <!--Winter colors-->
+    <color name="winter_lapis_lazuli">#2377A4</color>
+    <color name="winter_maximum_blue">#50A3C6</color>
+    <color name="winter_aero">#79C0D7</color>
+    <color name="winter_gainsboro">#DDDFDF</color>
+    <color name="winter_silver_sand">#C2C2C2</color>
+    <!--Spring colors-->
+    <color name="spring_light_forest">#C6D7B9</color>
+    <color name="spring_light_pink">#F6B9AD</color>
+    <color name="spring_pink">#EE6F68</color>
+    <color name="spring_light_orange">#F68F3C</color>
+    <color name="spring_forest_green">#5E8D5A</color>
+    <!--Summer colors-->
+    <color name="summer_dark_teal">#236E96</color>
+    <color name="summer_neon_blue">#15B2D3</color>
+    <color name="summer_yellow">#FFD700</color>
+    <color name="summer_orange">#F3872F</color>
+    <color name="summer_pink">#FF598F</color>
+
+    <!--UW Colors-->
+    <color name="uw_purple">#4B2E83</color>
+    <color name="uw_gold">#B7A57A</color>
+    <color name="uw_metallic_gold">#85753D</color>
+    <color name="uw_gray">#808080</color>
+    <color name="uw_white">#FFFFFF</color>
+    <color name="uw_black">#000000</color>
+
 </resources>
