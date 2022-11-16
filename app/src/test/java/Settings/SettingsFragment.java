@@ -1,4 +1,4 @@
-package edu.uw.tcss450lucasd12.team_4_tcss450;
+package Settings;
 
 import android.os.Bundle;
 
@@ -7,10 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
+
+import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 
 /**
  * A simple {@link Fragment} subclass.
