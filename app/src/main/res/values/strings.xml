@@ -42,4 +42,13 @@
 
     <!-- Web Service URL -->
     <string name="base_url">https://tcss450-team4-webservice.herokuapp.com/</string>
+
+    <string name="settings_string">dropDownMenu</string>
+    <string-array name="themes">
+        <item>Summer</item>
+        <item>Fall</item>
+        <item>Winter</item>
+        <item>Spring</item>
+        <item>UW</item>
+    </string-array>
 </resources>
