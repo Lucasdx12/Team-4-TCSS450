@@ -1,5 +1,6 @@
 package Helpers;
 
+import android.icu.text.NumberFormat;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -12,6 +13,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.DecimalFormat;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.MainActivity;
 
@@ -31,10 +34,10 @@ public class WeatherService {
     public static void getWeatherInfo(TextView cityText, TextView tempText, TextView tempHighLowText, TextView weatherText, String city) {
 
 
-
         // Properties
 //        String url = "https://tcss450-team4-webservice.herokuapp.com/weather?selectedCity=" + city;
         String url = "https://tcss450-team4-webservice.herokuapp.com/weather";
+
         JSONObject body = new JSONObject();
 
         try {
@@ -59,7 +62,8 @@ public class WeatherService {
 
                     // Get current Temp
                     String tempStr = jsonObject.getString("CurrentTemp");
-                    tempText.setText(tempStr);
+                    tempText.setText(convertKelToFer(tempStr));
+
 
                     JSONArray jsonArray = jsonObject.getJSONArray("weather");
                     JSONObject currentWeather = jsonArray.getJSONObject(0);
@@ -67,11 +71,11 @@ public class WeatherService {
                     weatherText.setText(weather);
 
                     String lowTempStr = jsonObject.getString("maxTemp");
-                    tempHighLowText.setText("L:" + lowTempStr + "  ");
+                    tempHighLowText.setText("L:" + convertKelToFer(lowTempStr) + "  ");
 
                     // Get High
                     String highTempStr = jsonObject.getString("lowTemp");
-                    tempHighLowText.setText(tempHighLowText.getText() + highTempStr);
+                    tempHighLowText.setText(tempHighLowText.getText() + convertKelToFer(highTempStr));
 
                 } catch (JSONException e) {
                     //e.printStackTrace();
@@ -93,6 +97,15 @@ public class WeatherService {
 
     // TODO: Get the weather and adjust the icon
     public void setWeatherIcon(String currentWeather) {
+
+    }
+
+    // This method will convert a string in Kel into Fer.
+    public static String convertKelToFer(String temp) {
+
+        DecimalFormat df = new DecimalFormat("#0.00");
+        Double num = (((Double.parseDouble(temp) - 273) * 9/5) + 32);
+        return  df.format(num) + " °F";
 
     }
 
