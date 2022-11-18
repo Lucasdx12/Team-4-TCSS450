@@ -37,7 +37,10 @@
                 android:text="Select a Theme"
                 android:textColor="#000"
                 android:textSize="20dp"
-                tools:layout_editor_absoluteY="69dp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.103"
+                tools:layout_editor_absoluteX="0dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.textfield.TextInputLayout>
 
