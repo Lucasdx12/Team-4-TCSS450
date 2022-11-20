@@ -21,7 +21,7 @@
     <string name="home">Home</string>
     <string name="weather">Weather</string>
     <string name="chat">Chat</string>
-    <string name="search">Search</string>
+    <string name="contacts">Contacts</string>
     <string name="chat_room_message">Type message here</string>
     <string name="sent_message">This is a sent message</string>
     <string name="received_message">This is a received message</string>
@@ -43,7 +43,17 @@
     <!-- Web Service URL -->
     <string name="base_url">https://tcss450-team4-webservice.herokuapp.com/</string>
 
-    <string name="settings_string">dropDownMenu</string>
+    <!-- SETTINGS (toolbar.xml): -->
+
+    <!-- Select themes: -->
+    <string name="settings_themes">Theme Colors</string>
+
+    <string name="theme_summer">Summer Theme </string>
+    <string name="theme_fall">Fall Theme</string>
+    <string name="theme_winter">Winter Theme</string>
+    <string name="theme_spring">Spring Theme</string>
+    <string name="theme_uw">UW Theme</string>
+
     <string-array name="themes">
         <item>Summer</item>
         <item>Fall</item>
@@ -51,4 +61,7 @@
         <item>Spring</item>
         <item>UW</item>
     </string-array>
+
+    <!-- log out of account: -->
+    <string name="settings_logoff">Log Out</string>
 </resources>

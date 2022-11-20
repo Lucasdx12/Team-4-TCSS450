@@ -21,9 +21,9 @@
         android:title="@string/chat" />
 
     <item
-        android:id="@+id/search"
-        android:icon="@drawable/ic_search_24dp"
-        android:title="@string/search" />
+        android:id="@+id/contacts"
+        android:icon="@drawable/ic_contact_icon_24dp"
+        android:title="@string/contacts" />
 
 
 </menu>

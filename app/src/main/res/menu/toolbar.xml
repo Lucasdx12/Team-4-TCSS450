@@ -4,6 +4,39 @@
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
+        android:icon="@drawable/ic_settings_toolbar_24dp"
         android:title="@string/settings"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom">
+
+        <menu>
+
+            <!-- Choose themes, the group section creates radio buttons to select a theme-->
+            <item android:id="@+id/theme_picker"
+                android:title="@string/settings_themes">
+
+                <menu>
+                    <group android:checkableBehavior="single">
+                        <item android:id="@+id/summer_theme"
+                            android:title="@string/theme_summer" />
+                        <item android:id="@+id/fall_theme"
+                            android:title="@string/theme_fall" />
+                        <item android:id="@+id/winter_theme"
+                            android:title="@string/theme_winter" />
+                        <item android:id="@+id/spring_theme"
+                            android:title="@string/theme_spring" />
+                        <item android:id="@+id/uw_theme"
+                            android:title="@string/theme_uw" />
+                    </group>
+                </menu>
+
+            </item>
+
+
+            <item android:id="@+id/log_out"
+                android:title="@string/settings_logoff"/>
+        </menu>
+
+
+        </item>
+
 </menu>
