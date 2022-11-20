@@ -1,12 +1,21 @@
 package Helpers;
 
-import android.icu.text.NumberFormat;
+import android.app.Application;
+import android.util.Log;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -14,30 +23,38 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.Charset;
 import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.MainActivity;
+import edu.uw.tcss450lucasd12.team_4_tcss450.R;
+import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
+import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
-public class WeatherService {
+
+public class WeatherService extends AndroidViewModel {
 
     //******************** Properties *****************************
+    private final MutableLiveData<JSONObject> mResponse;
 
     //******************** Constructor *****************************
 
-    public WeatherService() {
-
+    public WeatherService(@NonNull Application application) {
+        super(application);
+        mResponse = new MutableLiveData<>();
+        mResponse.setValue(new JSONObject());
     }
 
     //********************  Methods *****************************
 
-
-    public static void getWeatherInfo(TextView cityText, TextView tempText, TextView tempHighLowText, TextView weatherText, String city) {
-
+    public static void getWeatherInfo(TextView cityText, TextView tempText, TextView tempHighLowText, TextView weatherText, String city, String jwt) {
 
         // Properties
 //        String url = "https://tcss450-team4-webservice.herokuapp.com/weather?selectedCity=" + city;
         String url = "https://tcss450-team4-webservice.herokuapp.com/weather";
-
         JSONObject body = new JSONObject();
 
         try {
@@ -83,12 +100,25 @@ public class WeatherService {
                 }
 
             }
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 System.out.println("Error: " + error);
             }
-        });
+
+        }) {
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+
+                // Add headers <key,value>
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+
 
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.getContext());
         requestQueue.add(stringRequest);
@@ -100,6 +130,57 @@ public class WeatherService {
 
     }
 
+
+    public void getWeatherData(final String jwt) {
+        String url = "https://tcss450-team4-webservice.herokuapp.com/weather";
+
+        Request request = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null, // No body for this get request
+                null,
+                this::handleError) {
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+
+                // Add headers <key,value>
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        // Instantiate the RequestQueue and add the request to the queue.
+        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
+                .addToRequestQueue(request);
+
+    }
+
+    public void addResponseObserver(@NonNull LifecycleOwner owner,
+                                    @NonNull Observer<? super JSONObject> observer) {
+        mResponse.observe(owner, observer);
+    }
+
+    private void handleError(final VolleyError error) {
+        if (Objects.isNull(error.networkResponse)) {
+            Log.e("NETWORK ERROR", error.getMessage());
+        } else {
+            String data = new String(error.networkResponse.data, Charset.defaultCharset());
+            Log.e("CLIENT ERROR",
+                    error.networkResponse.statusCode +
+                            " " +
+                            data);
+        }
+    }
+
+    //******************** Helpers *****************************
+
     // This method will convert a string in Kel into Fer.
     public static String convertKelToFer(String temp) {
 
@@ -108,5 +189,4 @@ public class WeatherService {
         return  df.format(num) + " °F";
 
     }
-
 }

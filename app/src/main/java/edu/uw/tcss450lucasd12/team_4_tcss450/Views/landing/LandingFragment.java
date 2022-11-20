@@ -2,7 +2,9 @@ package edu.uw.tcss450lucasd12.team_4_tcss450.Views.landing;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -29,6 +31,7 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.MainActivity;
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatListGenerator;
 import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatListRecyclerViewAdapter;
+import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
 
 /**
@@ -44,11 +47,7 @@ public class LandingFragment extends Fragment {
     TextView mCurrentHL;
     ImageView mCurrentWeatherIcon;
     RecyclerView mNotifications;
-
-
-
-    // Formatter properties
-    DecimalFormat decimalFormat = new DecimalFormat("#.##");
+    private UserInfoViewModel mUserModel;
 
 
     //******************** Constructor *****************************
@@ -58,12 +57,19 @@ public class LandingFragment extends Fragment {
      */
     public LandingFragment() {
         // Required empty public constructor
+
     }
 
 
     //******************** View Methods *****************************
 
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ViewModelProvider provider = new ViewModelProvider(getActivity());
+        mUserModel = provider.get(UserInfoViewModel.class);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,7 +83,7 @@ public class LandingFragment extends Fragment {
         //mNotifications = (RecyclerView) view.findViewById(R.id.recentNotifications);
 
         // Get weather
-        WeatherService.getWeatherInfo(mCurrentCity, mCurrentTemp,mCurrentHL,mCurrentWeather, "Buckley");
+        WeatherService.getWeatherInfo(mCurrentCity, mCurrentTemp,mCurrentHL,mCurrentWeather, "Buckley", mUserModel.getJwt());
 
 
         if (view instanceof RecyclerView) {
