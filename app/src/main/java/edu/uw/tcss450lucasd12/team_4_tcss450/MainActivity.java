@@ -1,17 +1,24 @@
 package edu.uw.tcss450lucasd12.team_4_tcss450;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -25,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         MainActivityArgs args = MainActivityArgs.fromBundle(getIntent().getExtras());
 
         new ViewModelProvider(this,
@@ -35,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         // For volley request
         context = getApplicationContext();
 
+        setTheme(R.style.Theme_Team4TCSS450);
         setContentView(R.layout.activity_main);
 
         //adding back button in app bar (top of app):
@@ -47,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.landing, R.id.weather, R.id.chat, R.id.search)
+                R.id.landing, R.id.weather, R.id.chat, R.id.contacts)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
@@ -61,11 +68,13 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+
     //Adding settings options in top right corner of app's screen:
     //TODO: add options in the settings menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar, menu);
         return true;
     }
 
@@ -73,17 +82,67 @@ public class MainActivity extends AppCompatActivity {
     //TODO: add options in the settings menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) { //settings button
-            //TODO open a settings fragment
-            Log.d("SETTINGS", "Clicked");
-            return true;
-        }
-//        else if (id == android.R.id.home) { //TODO: back button
-//            this.finish();
-//            return true;
-//        }
-        return super.onOptionsItemSelected(item);
+        Spinner spinTheme = (Spinner) findViewById(R.id.theme_picker);
+
+            switch (item.getItemId()) {
+                case R.id.action_settings:
+                    Log.d("SETTINGS", "Clicked");
+                    openOptionsMenu();
+                    return true;
+                case R.id.theme_picker:
+                case R.id.summer_theme:
+
+                    if (item.isChecked()) {
+                        item.setChecked(false);
+                    } else {
+                        item.setChecked(true);
+                        setTheme(R.style.Summer);
+                    }
+                    return true;
+
+                case R.id.uw_theme:
+
+                    if (item.isChecked()) {
+                        item.setChecked(false);
+                    } else {
+                        item.setChecked(true);
+                        setTheme(R.style.UW);
+                    }
+                    return true;
+
+                case R.id.fall_theme:
+
+                    if (item.isChecked()) {
+                        item.setChecked(false);
+                    } else {
+                        item.setChecked(true);
+                        setTheme(R.style.Fall);
+                    }
+                    return true;
+
+                case R.id.winter_theme:
+
+                    if (item.isChecked()) {
+                        item.setChecked(false);
+                    } else {
+                        item.setChecked(true);
+                        setTheme(R.style.Winter);
+                    }
+                    return true;
+
+                case R.id.spring_theme:
+                    if (item.isChecked()) {
+                        item.setChecked(false);
+                    } else {
+                        item.setChecked(true);
+                        setTheme(R.style.Spring);
+                    }
+                    return true;
+//                case R.id.log_out: //TODO: make log out button for user
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+
     }
 
     // For Volley request

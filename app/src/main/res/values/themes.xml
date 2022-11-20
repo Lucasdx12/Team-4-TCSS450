@@ -15,12 +15,14 @@
     </style>
 
 
-    <style name="Summer">
+    <style name="Summer" parent="Theme.MaterialComponents.DayNight">
 
         <!-- Primary Brand Color -->
         <item name="colorPrimary">@color/summer_dark_teal</item>
         <item name="colorPrimaryVariant">@color/summer_orange</item>
         <item name="colorOnPrimary">@color/summer_pink</item>
+        <item name="android:background">@color/summer_neon_blue</item>
+        <item name="android:textColor">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/summer_neon_blue</item>
         <item name="colorSecondaryVariant">@color/summer_yellow</item>
@@ -30,12 +32,14 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Fall">
+    <style name="Fall" parent="Theme.MaterialComponents.DayNight">
 
         <!-- Primary Brand Color -->
         <item name="colorPrimary">@color/fall_brown</item>
         <item name="colorPrimaryVariant">@color/fall_yellow</item>
         <item name="colorOnPrimary">@color/fall_purple</item>
+        <item name="android:background">@color/fall_yellow</item>
+        <item name="android:textColor">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/fall_yellow</item>
         <item name="colorSecondaryVariant">@color/fall_orange</item>
@@ -45,12 +49,14 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Winter">
+    <style name="Winter" parent="Theme.MaterialComponents.DayNight">
 
         <!-- Primary Brand Color -->
         <item name="colorPrimary">@color/winter_aero</item>
         <item name="colorPrimaryVariant">@color/winter_lapis_lazuli</item>
         <item name="colorOnPrimary">@color/winter_gainsboro</item>
+        <item name="android:background">@color/winter_gainsboro</item>
+        <item name="android:textColor">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/winter_maximum_blue</item>
         <item name="colorSecondaryVariant">@color/winter_silver_sand</item>
@@ -60,12 +66,14 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Spring">
+    <style name="Spring" parent="Theme.MaterialComponents.DayNight">
 
         <!-- Primary Brand Color -->
         <item name="colorPrimary">@color/spring_light_forest</item>
         <item name="colorPrimaryVariant">@color/spring_light_orange</item>
         <item name="colorOnPrimary">@color/spring_pink</item>
+        <item name="android:background">@color/spring_light_pink</item>
+        <item name="android:textColor">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/spring_forest_green</item>
         <item name="colorSecondaryVariant">@color/spring_light_pink</item>
@@ -75,12 +83,14 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="UW">
+    <style name="UW" parent="Theme.MaterialComponents.DayNight">
 
         <!-- Primary Brand Color -->
         <item name="colorPrimary">@color/uw_purple</item>
         <item name="colorPrimaryVariant">@color/uw_metallic_gold</item>
         <item name="colorOnPrimary">@color/uw_white</item>
+        <item name="android:background">@color/uw_white</item>
+        <item name="android:textColor">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/uw_gold</item>
         <item name="colorSecondaryVariant">@color/uw_gray</item>
