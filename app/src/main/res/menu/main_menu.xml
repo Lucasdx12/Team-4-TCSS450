@@ -1,29 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<!--SOURCE: https://www.geeksforgeeks.org/implementing-search-for-a-specific-blog-on-home-page-and-logout-functionality-in-social-media-android-app/-->
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:textColor="@color/black"
+    android:background="@color/status_bar"
+    >
+<!--android:background="?android:attr/actionBarTheme"-->
 
 <!--Search button for finding contacts-->
 
     <item
         android:id="@+id/landing"
         android:icon="@drawable/ic_landing_home_24dp"
-        android:title="@string/home"/>
+        android:title="@string/home"
+        android:textColor="@color/black"/>
 
     <item
         android:id="@+id/weather"
         android:icon="@drawable/ic_weather_cloud_24"
-        android:title="@string/weather" />
+        android:title="@string/weather"
+        android:textColor="@color/black"/>
 
     <item
         android:id="@+id/chat"
         android:icon="@drawable/ic_chat_24"
-        android:title="@string/chat" />
+        android:title="@string/chat"
+        android:textColor="@color/black"/>
 
     <item
         android:id="@+id/contacts"
         android:icon="@drawable/ic_contact_icon_24dp"
-        android:title="@string/contacts" />
+        android:title="@string/contacts"
+        android:textColor="@color/black"
+        />
 
 
 </menu>

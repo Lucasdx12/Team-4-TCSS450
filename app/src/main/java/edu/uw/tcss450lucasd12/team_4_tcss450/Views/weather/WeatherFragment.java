@@ -43,7 +43,8 @@ public class WeatherFragment extends Fragment {
         mCurrentWeather = (TextView) view.findViewById(R.id.tempStyle);
         mCurrentHL = (TextView) view.findViewById(R.id.highAndLow);
 
-        WeatherService.getWeatherInfo(mCurrentCity, mCurrentTemp,mCurrentHL,mCurrentWeather, "Buckley");
+//        WeatherService.getWeatherInfo(mCurrentCity, mCurrentTemp,mCurrentHL,mCurrentWeather, "Buckley");
+        WeatherService.getWeatherInfo(mCurrentCity, mCurrentTemp, mCurrentHL, mCurrentWeather, "Tacoma", "Tacoma");
 
 
         return view;

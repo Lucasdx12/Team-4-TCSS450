@@ -310,8 +310,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_settings_toolbar_24dp" />
+                            <entry key="outputName" value="ic_black_settings_24dp" />
                             <entry key="sourceFile" value="C:\Users\still\AndroidStudioProjects\Team-4-TCSS450" />
                           </map>
                         </option>

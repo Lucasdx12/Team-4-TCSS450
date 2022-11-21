@@ -35,10 +35,18 @@
         android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.contacts.ContactsListFragment"
         android:label="@string/contacts"
         tools:layout="@layout/fragment_contacts_list">
+        <action
+            android:id="@+id/action_contacts_to_contactProfileFragment"
+            app:destination="@id/contactProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatRoomFragment"
         android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatRoomFragment"
         android:label="@string/title_chat_room"
         tools:layout="@layout/fragment_chat_room" />
+    <fragment
+        android:id="@+id/contactProfileFragment"
+        android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.contacts.ContactProfileFragment"
+        android:label="@string/title_contacts_profile"
+        tools:layout="@layout/fragment_contact_profile" />
 </navigation>

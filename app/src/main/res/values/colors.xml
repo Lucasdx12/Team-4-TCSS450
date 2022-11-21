@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="prompt_color">#757575</color>
+    <color name="status_bar">#537D90</color>
     <!--Fall colors-->
     <color name="fall_yellow">#8B8000</color>
     <color name="fall_orange">#FFA500</color>

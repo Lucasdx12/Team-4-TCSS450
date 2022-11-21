@@ -24,7 +24,7 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentContactsCardBin
 public class ContactsRecyclerViewAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<ContactsRecyclerViewAdapter.ContactsListViewHolder> {
 
     // Store all of the blogs to present
-    private final List<ContactsList> mContacts;
+    public final List<ContactsList> mContacts;
 
     public ContactsRecyclerViewAdapter(List<ContactsList> items) {
         this.mContacts = items;

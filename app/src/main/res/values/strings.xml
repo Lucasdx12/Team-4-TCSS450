@@ -37,6 +37,7 @@
     <string name="title_landing">Landing</string>
     <string name="title_weather">Weather</string>
     <string name="title_contacts_init">Contacts</string>
+    <string name="title_contacts_profile">Profile</string>
     <string name="title_chat_init">Chat</string>
     <string name="title_chat_room">Chat Room 1</string>
 

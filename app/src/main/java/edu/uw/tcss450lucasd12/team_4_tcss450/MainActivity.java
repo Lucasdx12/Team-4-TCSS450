@@ -1,5 +1,6 @@
 package edu.uw.tcss450lucasd12.team_4_tcss450;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
@@ -9,16 +10,25 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.app.Activity;
+import android.app.StatusBarManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -28,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     //for bottom navigation implementation:
     private AppBarConfiguration mAppBarConfiguration;
     private static Context context;
+
+    Handler mHandler; //use to refresh activity to see change in themes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
         setTheme(R.style.Theme_Team4TCSS450);
         setContentView(R.layout.activity_main);
 
+        this.mHandler = new Handler();
+//        m_Runnable.run();
+
         //adding back button in app bar (top of app):
 //        ActionBar actionBar = getSupportActionBar(); //call action bar
 //        actionBar.setDisplayHomeAsUpEnabled(true); //TODO: shows back button
@@ -59,6 +74,20 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+
+        //Action Bar (bar at top with settings and activity names):
+        ActionBar actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#acc8d7"));
+        actionBar.setBackgroundDrawable(colorDrawable);
+
+        //Status Bar (where notifications are):
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(this.getResources().getColor(R.color.status_bar));
+        }
     }
 
     @Override
@@ -70,16 +99,30 @@ public class MainActivity extends AppCompatActivity {
 
 
     //Adding settings options in top right corner of app's screen:
-    //TODO: add options in the settings menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.toolbar, menu);
+
+        //Action Bar (bar at top with settings and activity names):
+        ActionBar actionBar = getSupportActionBar();
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#acc8d7"));
+        actionBar.setBackgroundDrawable(colorDrawable);
+        //TODO: this currently crashes the app, investigate to refresh activity to show theme change
+//        MenuItem item = menu.findItem(R.id.theme_picker);
+//        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+//                startActivity(intent);
+//                return false;
+//            }
+//        });
+
         return true;
     }
 
     //Let user click the settings options:
-    //TODO: add options in the settings menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Spinner spinTheme = (Spinner) findViewById(R.id.theme_picker);
@@ -144,6 +187,15 @@ public class MainActivity extends AppCompatActivity {
             }
 
     }
+
+    //Refresh page. SOURCE: https://stackoverflow.com/questions/6134832/auto-refresh-the-activity
+    private final Runnable m_Runnable = new Runnable() {
+        public void run() {
+            Toast.makeText(MainActivity.this,"Refreshing",Toast.LENGTH_SHORT).show();
+
+            MainActivity.this.mHandler.postDelayed(m_Runnable,5000);
+        }
+    };
 
     // For Volley request
     public static Context getContext() {

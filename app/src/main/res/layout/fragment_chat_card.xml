@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    app:cardCornerRadius="5dp">
+    app:cardCornerRadius="5dp"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_inner"
@@ -18,7 +19,7 @@
             android:id="@+id/textChatTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/purple_700"
+            android:background="?android:attr/colorAccent"
             android:paddingLeft="8dp"
             android:paddingTop="8dp"
             android:paddingRight="8dp"
