@@ -27,35 +27,33 @@
 
     <TextView
         android:id="@+id/currentCity"
-        android:layout_width="70dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/currentCity"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.455"
         app:layout_constraintStart_toEndOf="@+id/weatherIcon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/currentTemp"
-        android:layout_width="70dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="71dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/currentTemp"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toEndOf="@+id/weatherIcon"
         app:layout_constraintTop_toBottomOf="@+id/currentCity" />
 
     <TextView
         android:id="@+id/currentHL"
-        android:layout_width="178dp"
-        android:layout_height="19dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="73dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="76dp"
@@ -71,19 +69,20 @@
         android:layout_width="362dp"
         android:layout_height="411dp"
         android:layout_marginTop="40dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currentHL"
         app:layoutManager="LinearLayoutManager"
-        tools:context="edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatListFragment"
+        tools:context="edu.uw.tcss450lucasd12.team_4_tcss450.Views.landing.LandingFragment"
         tools:listitem="@layout/fragment_chat_card"
         />
 
     <TextView
         android:id="@+id/currentWeather"
-        android:layout_width="70dp"
-        android:layout_height="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="69dp"
         android:layout_marginTop="16dp"
         android:text="@string/currentWeather"

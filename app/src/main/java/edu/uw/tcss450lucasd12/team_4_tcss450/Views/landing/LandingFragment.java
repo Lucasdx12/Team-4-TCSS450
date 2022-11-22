@@ -56,7 +56,6 @@ public class LandingFragment extends Fragment {
     RecyclerView mNotifications;
     private UserInfoViewModel mUserModel;
 
-//    private FragmentChatListBinding mBinding;
 
     //******************** Constructor *****************************
 
@@ -65,9 +64,7 @@ public class LandingFragment extends Fragment {
      */
     public LandingFragment() {
         // Required empty public constructor
-
     }
-
 
     //******************** View Methods *****************************
 
@@ -77,7 +74,6 @@ public class LandingFragment extends Fragment {
         super.onCreate(savedInstanceState);
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         mUserModel = provider.get(UserInfoViewModel.class);
-//        mBinding = FragmentChatListBinding.inflate(getLayoutInflater());
     }
 
     @Override
@@ -85,19 +81,13 @@ public class LandingFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_landing, container,false);
 
-//        mCurrentCity = (TextView) view.findViewById(R.id.currentCity);
-//        mCurrentTemp = (TextView) view.findViewById(R.id.currentTemp);
-//        mCurrentWeather = (TextView) view.findViewById(R.id.currentWeather);
-//        mCurrentHL = (TextView) view.findViewById(R.id.currentHL);
-//        mNotifications = (RecyclerView) view.findViewById(R.id.recentNotifications);
-//        mNotifications = mBinding.listRoot;
-        // Get weather
-//        WeatherService.getWeatherInfo(mCurrentCity, mCurrentTemp,mCurrentHL,mCurrentWeather, "Buckley", mUserModel.getJwt());
+        mCurrentCity = (TextView) view.findViewById(R.id.currentCity);
+        mCurrentTemp = (TextView) view.findViewById(R.id.currentTemp);
+        mCurrentWeather = (TextView) view.findViewById(R.id.currentWeather);
+        mCurrentHL = (TextView) view.findViewById(R.id.currentHL);
 
-//        if (view instanceof RecyclerView) {
-//            ((RecyclerView) view).setAdapter(
-//                    new ChatListRecyclerViewAdapter(ChatListGenerator.getChatList()));
-//        }
+        // Get weather
+        WeatherService.getWeatherInfo(mCurrentCity, mCurrentTemp,mCurrentHL,mCurrentWeather, "Buckley", mUserModel.getJwt());
 
 
         return view;
@@ -119,10 +109,5 @@ public class LandingFragment extends Fragment {
     }
 
     //********************  Methods *****************************
-
-
-
-
-
 
 }
