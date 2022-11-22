@@ -2,7 +2,9 @@ package edu.uw.tcss450lucasd12.team_4_tcss450.Views.weather;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import java.text.DecimalFormat;
 
 import Helpers.WeatherService;
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
+import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,8 +30,15 @@ public class WeatherFragment extends Fragment {
     TextView mCurrentHL;
     ImageView mCurrentWeatherIcon;
     RecyclerView mNotifications;
+    private UserInfoViewModel mUserModel;
 
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ViewModelProvider provider = new ViewModelProvider(getActivity());
+        mUserModel = provider.get(UserInfoViewModel.class);
+    }
 
 
 
@@ -43,7 +53,7 @@ public class WeatherFragment extends Fragment {
         mCurrentWeather = (TextView) view.findViewById(R.id.tempStyle);
         mCurrentHL = (TextView) view.findViewById(R.id.highAndLow);
 
-//        WeatherService.getWeatherInfo(mCurrentCity, mCurrentTemp,mCurrentHL,mCurrentWeather, "Buckley");
+        WeatherService.getWeatherInfo(mCurrentCity, mCurrentTemp,mCurrentHL,mCurrentWeather, "Buckley", mUserModel.getJwt());
         WeatherService.getWeatherInfo(mCurrentCity, mCurrentTemp, mCurrentHL, mCurrentWeather, "Tacoma", "Tacoma");
 
 
