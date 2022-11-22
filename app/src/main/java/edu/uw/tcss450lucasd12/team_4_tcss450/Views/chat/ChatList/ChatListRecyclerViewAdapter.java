@@ -60,8 +60,6 @@ public class ChatListRecyclerViewAdapter extends androidx.recyclerview.widget.Re
         public final View mView;
         public FragmentChatCardBinding mBinding;
 
-        private ChatList mChatList;
-
         public ChatListViewHolder(View view) {
             super(view);
             mView = view;
