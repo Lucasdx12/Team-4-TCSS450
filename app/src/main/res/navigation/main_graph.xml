@@ -28,6 +28,9 @@
         android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.landing.LandingFragment"
         android:label="@string/title_landing"
         tools:layout="@layout/fragment_landing" >
+        <action
+            android:id="@+id/action_landing_to_chatRoomFragment"
+            app:destination="@id/chatRoomFragment" />
     </fragment>
 
     <fragment
