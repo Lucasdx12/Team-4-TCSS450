@@ -10,14 +10,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/chat_margin"
+        android:layout_gravity="end"
+        android:background="?android:attr/colorAccent"
         app:cardCornerRadius="5dp"
-        app:cardElevation="0dp"
-        android:layout_gravity="end">
+        app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/innerLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="?android:attr/colorAccent">
 
             <TextView
                 android:id="@+id/textMessage"
@@ -27,6 +29,8 @@
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="?android:attr/colorAccent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
