@@ -55,6 +55,8 @@
         android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.contacts.ContactProfileFragment"
         android:label="@string/title_contacts_profile"
         tools:layout="@layout/fragment_contact_profile" />
+
+    <fragment
         android:id="@+id/contactFragment"
         android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.contacts.ContactFragment"
         android:label="@string/title_contacts_profile" >
