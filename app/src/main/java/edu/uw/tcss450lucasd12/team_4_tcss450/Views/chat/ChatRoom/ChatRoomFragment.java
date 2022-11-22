@@ -41,7 +41,6 @@ public class ChatRoomFragment extends Fragment {
 
     private ChatRoomFragmentArgs mArgs;
 
-
     public ChatRoomFragment() {
         // Empty constructor
     }
@@ -83,7 +82,6 @@ public class ChatRoomFragment extends Fragment {
 
         // Send the user to the bottom of the recycler view.
         recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
-
 
         // Send button was clicked. Send the message via the SendViewModel.
         binding.buttonSendMessage.setOnClickListener(button -> {
