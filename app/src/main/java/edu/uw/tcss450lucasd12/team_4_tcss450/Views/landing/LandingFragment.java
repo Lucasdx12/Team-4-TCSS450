@@ -115,7 +115,7 @@ public class LandingFragment extends Fragment {
         lists.add(first);
         lists.add(second);
 
-        binding.recentNotifications.setAdapter(new ChatListRecyclerViewAdapter(lists));
+        binding.recentNotifications.setAdapter(new LandingRecyclerViewAdapter(lists));
     }
 
     //********************  Methods *****************************

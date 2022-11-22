@@ -69,39 +69,15 @@ public class ChatListRecyclerViewAdapter extends androidx.recyclerview.widget.Re
         }
 
         void setChat(final ChatList chat) {
-//            final Resources res = mView.getContext().getResources();
-//            final CardView card = mBinding.cardRoot;
-//
-//            int standard = (int) res.getDimension(R.dimen.chat_margin);
-//            int extended = (int) res.getDimension(R.dimen.chat_margin_sided);
-//            mChatList = chat;
-//            Log.i("CHATLISTRECYCLERVIEW", chat.getChatId() + "");
             mBinding.cardRoot.setOnClickListener(button -> {
                 Navigation.findNavController(mView).navigate(
                         ChatListFragmentDirections
                                 .actionChatToChatRoomFragment(chat));
             });
-//
+
             mBinding.textChatTitle.setText(chat.getTitle());
             mBinding.textRecentMessage.setText(chat.getRecentMessage());
             mBinding.textTimeOfMessage.setText(chat.getTimeStamp());
-//
-//            ViewGroup.MarginLayoutParams layoutParams =
-//                    (ViewGroup.MarginLayoutParams) card.getLayoutParams();
-//
-//            layoutParams.setMargins(extended, extended, extended, extended);
-//
-//            card.setCardBackgroundColor(res.getColor(R.color.purple_700, null));
-//            card.setMinimumWidth(standard / 5);
-//
-//            mBinding.textChatTitle.setTextColor(
-//                    res.getColor(R.color.white, null));
-//            mBinding.textRecentMessage.setTextColor(
-//                    res.getColor(R.color.black, null));
-//            mBinding.textTimeOfMessage.setTextColor(
-//                    res.getColor(R.color.black, null));
-//
-//            card.requestLayout();
         }
     }
 }

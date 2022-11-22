@@ -67,51 +67,19 @@ public class ChatRoomRecyclerViewAdapter extends RecyclerView.Adapter<ChatRoomRe
         }
 
         void setMessage(final ChatRoom message) {
-//            final Resources res = mView.getContext().getResources();
-//            final CardView card = mBinding.messageRoot;
-//
-//            int standard = (int) res.getDimension(R.dimen.chat_margin);
-//            int extended = (int) res.getDimension(R.dimen.chat_margin_sided);
 
             if (mEmail.equals(message.getSender())) {
                 // This message is from the user. Format it so that the message
                 // sent by this user is on the right side.
                 mBinding.textMessage.setText(message.getMessage());
-//                ViewGroup.MarginLayoutParams layoutParams =
-//                        (ViewGroup.MarginLayoutParams) card.getLayoutParams();
 
-                // Set the left margin
-//                layoutParams.setMargins(extended, standard, standard, standard);
-
-                // Set this View to the right side. Android Studio refers it
-                // as the "end" side.
-//                ((FrameLayout.LayoutParams) card.getLayoutParams()).gravity =
-//                        Gravity.END;
-//
-//                card.setCardBackgroundColor(res.getColor(R.color.purple_500, null));
             } else {
                 // This message is from another user. Format it so that the message
                 // sent by other users is on the left side.
                 mBinding.textMessage.setText(message.getSender() +
                         ": " + message.getMessage());
-//                ViewGroup.MarginLayoutParams layoutParams =
-//                        (ViewGroup.MarginLayoutParams) card.getLayoutParams();
-//
-//                // Set the right margin
-//                layoutParams.setMargins(standard, standard, extended, standard);
-//
-//                // Set this View to the left side. Android Studio refers it
-//                // as the "start" side.
-//                ((FrameLayout.LayoutParams) card.getLayoutParams()).gravity =
-//                        Gravity.START;
-//
-//                card.setCardBackgroundColor(res.getColor(R.color.purple_700, null));
 
             }
-//            card.setMinimumWidth(100000);
-//            mBinding.textMessage.setTextColor(
-//                    res.getColor(R.color.white, null));
-//            card.requestLayout();
         }
     }
 
