@@ -17,6 +17,7 @@ import java.text.DecimalFormat;
 
 import Helpers.WeatherService;
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
+import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentWeatherBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
 /**
@@ -52,9 +53,10 @@ public class WeatherFragment extends Fragment {
         mCurrentTemp = (TextView) view.findViewById(R.id.currentTemperature);
         mCurrentWeather = (TextView) view.findViewById(R.id.tempStyle);
         mCurrentHL = (TextView) view.findViewById(R.id.highAndLow);
+        FragmentWeatherBinding binding = FragmentWeatherBinding.bind(view);
 
         WeatherService.getWeatherInfo(mCurrentCity, mCurrentTemp,mCurrentHL,mCurrentWeather, "Buckley", mUserModel.getJwt());
-        WeatherService.getWeatherInfo(mCurrentCity, mCurrentTemp, mCurrentHL, mCurrentWeather, "Tacoma", "Tacoma");
+        WeatherService.getForecast(binding, mUserModel.getJwt());
 
 
         return view;

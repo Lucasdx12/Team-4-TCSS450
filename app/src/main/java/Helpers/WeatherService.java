@@ -34,6 +34,7 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.MainActivity;
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatListBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentLandingBinding;
+import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentWeatherBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
@@ -97,7 +98,69 @@ public class WeatherService extends AndroidViewModel {
 
                     // Get High
                     String highTempStr = jsonObject.getString("lowTemp");
-                    tempHighLowText.setText(tempHighLowText.getText() + convertKelToFer(highTempStr));
+                    tempHighLowText.setText(tempHighLowText.getText() + " H: " + convertKelToFer(highTempStr));
+
+                } catch (JSONException e) {
+                    //e.printStackTrace();
+                    System.out.println("Error: " + e);
+                }
+
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("Error: " + error);
+            }
+
+        }) {
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+
+                // Add headers <key,value>
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.getContext());
+        requestQueue.add(stringRequest);
+
+    }
+
+    public static void getForecast(FragmentWeatherBinding binding, String jwt) {
+
+
+        String url = "https://tcss450-team4-webservice.herokuapp.com/forecast";
+        JSONObject body = new JSONObject();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+
+                // Call the API
+                try {
+
+                    // Set the temp labels
+                    JSONObject jsonObject = new JSONObject(response);
+                    String tempStr =  "L:"  + convertKelToFer(jsonObject.getString("dayOneTempMin")) + " H: " + convertKelToFer(jsonObject.getString("dayOneTempMax"));
+                    binding.tempDayOne.setText((tempStr));
+
+                    tempStr =  "L:"  + convertKelToFer(jsonObject.getString("dayTwoTempMin")) + " H: " + convertKelToFer(jsonObject.getString("dayTwoTempMax"));
+                    binding.tempDayTwo.setText((tempStr));
+
+                    tempStr =  "L:"  + convertKelToFer(jsonObject.getString("dayThreeTempMin")) + " H: " + convertKelToFer(jsonObject.getString("dayThreeTempMax"));
+                    binding.tempDayThree.setText((tempStr));
+
+                    tempStr =  "L:"  + convertKelToFer(jsonObject.getString("dayFourTempMin")) + " H: " + convertKelToFer(jsonObject.getString("dayFourTempMax"));
+                    binding.tempDayFour.setText((tempStr));
+
+                   tempStr =  "L:"  + convertKelToFer(jsonObject.getString("dayFiveTempMin")) + " H: " + convertKelToFer(jsonObject.getString("dayFiveTempMax"));
+                    binding.tempDayFive.setText((tempStr));
 
                 } catch (JSONException e) {
                     //e.printStackTrace();
@@ -136,36 +199,36 @@ public class WeatherService extends AndroidViewModel {
     }
 
 
-    public void getWeatherData(final String jwt) {
-        String url = "https://tcss450-team4-webservice.herokuapp.com/weather";
-
-        Request request = new JsonObjectRequest(
-                Request.Method.GET,
-                url,
-                null, // No body for this get request
-                null,
-                this::handleError) {
-
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-
-                // Add headers <key,value>
-                headers.put("Authorization", jwt);
-                return headers;
-            }
-        };
-
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                10_000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        // Instantiate the RequestQueue and add the request to the queue.
-        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
-                .addToRequestQueue(request);
-
-    }
+//    public void getWeatherData(final String jwt) {
+//        String url = "https://tcss450-team4-webservice.herokuapp.com/weather";
+//
+//        Request request = new JsonObjectRequest(
+//                Request.Method.GET,
+//                url,
+//                null, // No body for this get request
+//                null,
+//                this::handleError) {
+//
+//            @Override
+//            public Map<String, String> getHeaders() {
+//                Map<String, String> headers = new HashMap<>();
+//
+//                // Add headers <key,value>
+//                headers.put("Authorization", jwt);
+//                return headers;
+//            }
+//        };
+//
+//        request.setRetryPolicy(new DefaultRetryPolicy(
+//                10_000,
+//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//
+//        // Instantiate the RequestQueue and add the request to the queue.
+//        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
+//                .addToRequestQueue(request);
+//
+//    }
 
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
