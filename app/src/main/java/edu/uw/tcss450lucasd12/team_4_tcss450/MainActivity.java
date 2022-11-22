@@ -41,12 +41,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatRoom;
 import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatRoomViewModel;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.ActivityMainBinding;
+import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatRoomBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.NewMessageCountViewModel;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 import edu.uw.tcss450lucasd12.team_4_tcss450.services.PushReceiver;
 
 public class MainActivity extends AppCompatActivity {
-
     // For Pushy (Notifications) to the user.
     private MainPushMessageReceiver mPushMessageReceiver;
     private NewMessageCountViewModel mNewMessageModel;
@@ -103,19 +103,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        mNewMessageModel.addMessageCountObserver(this, count -> {
-//            BadgeDrawable badge = mBinding.navView.getOrCreateBadge(R.id.chatRoomFragment);
-//            badge.setMaxCharacterCount(2);
-//            if (count > 0) {
-//                // New messages!!! Update and show the notification badge.
-//                badge.setNumber(count);
-//                badge.setVisible(true);
-//            } else {
-//                // User did some action to clear the new messages, remove the badge.
-//                badge.clearNumber();
-//                badge.setVisible(false);
-//            }
-//        });
+        mNewMessageModel.addMessageCountObserver(this, count -> {
+            BadgeDrawable badge = navView.getOrCreateBadge(R.id.chatRoomFragment);
+            badge.setMaxCharacterCount(2);
+            if (count > 0) {
+                // New messages!!! Update and show the notification badge.
+                badge.setNumber(count);
+                badge.setVisible(true);
+            } else {
+                // User did some action to clear the new messages, remove the badge.
+                badge.clearNumber();
+                badge.setVisible(false);
+            }
+        });
 
 
         //Action Bar (bar at top with settings and activity names):
