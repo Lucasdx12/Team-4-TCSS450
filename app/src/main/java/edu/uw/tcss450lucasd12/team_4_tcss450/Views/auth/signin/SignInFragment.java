@@ -78,13 +78,17 @@ public class SignInFragment extends Fragment {
         mSignInModel.addResponseObserver(getViewLifecycleOwner(),
                 this::observeSignInResponse);
 
-//        mPushyTokenViewModel.addResponseObserver(getViewLifecycleOwner(),
-//                this::observePushyPutResponse);
+        mPushyTokenViewModel.addResponseObserver(getViewLifecycleOwner(),
+                this::observePushyPutResponse);
 
         SignInFragmentArgs args = SignInFragmentArgs.fromBundle(getArguments());
         mBinding.editEmail.setText(args.getEmail().equals("default") ? "" : args.getEmail());
         mBinding.editPassword.setText(args.getPassword().equals("default") ? "" : args.getPassword());
 
+
+        // Don't allow sign in until pushy token is retrieved
+        mPushyTokenViewModel.addTokenObserver(getViewLifecycleOwner(), token ->
+                mBinding.buttonLogin.setEnabled(!token.isEmpty()));
     }
 
     /**
@@ -94,6 +98,12 @@ public class SignInFragment extends Fragment {
         mPushyTokenViewModel.sendTokenToWebservice(mUserViewModel.getJwt());
     }
 
+    /**
+     * An observer on the HTTP Response from the web server. This observer should be
+     * attached to PushyTokenViewModel.
+     *
+     * @param response the Response from the server.
+     */
     private void observePushyPutResponse(final JSONObject response) {
         if (response.length() > 0) {
             if (response.has("code")) {
@@ -151,38 +161,6 @@ public class SignInFragment extends Fragment {
      * An observer on the HTTP Response from the web server. This observer should be
      * attached to SignInViewModel.
      *
-     * @param response the Response from the server
-     */
-//    private void observeResponse(final JSONObject response) {
-//        if (response.length() > 0) {
-//            if (response.has("code")) {
-//                try {
-//                    mBinding.editEmail.setError(
-//                            "Error Authenticating: " +
-//                                    response.getJSONObject("data").getString("message"));
-//                } catch (JSONException e) {
-//                    Log.e("JSON Parse Error", e.getMessage());
-//                }
-//            } else {
-//                try {
-//                    navigateToSuccess(
-//                            mBinding.editEmail.getText().toString(),
-//                            response.getString("token")
-//                    );
-//                } catch (JSONException e) {
-//                    Log.e("JSON Parse Error", e.getMessage());
-//                }
-//            }
-//        } else {
-//            Log.d("JSON Response", "No Response");
-//        }
-//
-//    }
-
-    /**
-     * An observer on the HTTP Response from the web server. This observer should be
-     * attached to SignInViewModel.
-     *
      * @param response the Response from the server.
      */
     private void observeSignInResponse(final JSONObject response) {
@@ -202,8 +180,8 @@ public class SignInFragment extends Fragment {
                                     mBinding.editEmail.getText().toString(),
                                     response.getString("token")
                             )).get(UserInfoViewModel.class);
-                    navigateToSuccess(mBinding.editEmail.getText().toString(),
-                            mUserViewModel.getJwt());
+
+                    sendPushyToken();
                 } catch (JSONException e) {
                     Log.e("JSON PARSE ERROR", e.getMessage());
                 }

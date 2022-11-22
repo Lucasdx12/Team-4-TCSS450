@@ -2,16 +2,21 @@ package edu.uw.tcss450lucasd12.team_4_tcss450;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.BroadcastReceiver;
 import android.app.Activity;
 import android.app.StatusBarManager;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -30,11 +35,22 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatRoom;
+import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatRoomViewModel;
+import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.ActivityMainBinding;
+import edu.uw.tcss450lucasd12.team_4_tcss450.model.NewMessageCountViewModel;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
+import edu.uw.tcss450lucasd12.team_4_tcss450.services.PushReceiver;
 
 public class MainActivity extends AppCompatActivity {
+
+    // For Pushy (Notifications) to the user.
+    private MainPushMessageReceiver mPushMessageReceiver;
+    private NewMessageCountViewModel mNewMessageModel;
+
     //for bottom navigation implementation:
     private AppBarConfiguration mAppBarConfiguration;
     private static Context context;
@@ -49,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         new ViewModelProvider(this,
                 new UserInfoViewModel.UserInfoViewModelFactory(args.getEmail(), args.getJwt())
         ).get(UserInfoViewModel.class);
+
+        mNewMessageModel = new ViewModelProvider(this).get(NewMessageCountViewModel.class);
 
         // For volley request
         context = getApplicationContext();
@@ -75,6 +93,30 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+        mNewMessageModel = new ViewModelProvider(this).get(NewMessageCountViewModel.class);
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (destination.getId() == R.id.chatRoomFragment) {
+                // When the user navigates to the chats page, reset the new message count.
+                // This will need some extra logic for the project as it should have
+                // multiple chat rooms.
+                mNewMessageModel.reset();
+            }
+        });
+
+//        mNewMessageModel.addMessageCountObserver(this, count -> {
+//            BadgeDrawable badge = mBinding.navView.getOrCreateBadge(R.id.chatRoomFragment);
+//            badge.setMaxCharacterCount(2);
+//            if (count > 0) {
+//                // New messages!!! Update and show the notification badge.
+//                badge.setNumber(count);
+//                badge.setVisible(true);
+//            } else {
+//                // User did some action to clear the new messages, remove the badge.
+//                badge.clearNumber();
+//                badge.setVisible(false);
+//            }
+//        });
+
 
         //Action Bar (bar at top with settings and activity names):
         ActionBar actionBar = getSupportActionBar();
@@ -86,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
             Window window = this.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.setStatusBarColor(this.getResources().getColor(R.color.status_bar));
+            window.setStatusBarColor(this.getResources().getColor(R.color.status_bar, null));
         }
     }
 
@@ -124,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Let user click the settings options:
+    //TODO: add options in the settings menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Spinner spinTheme = (Spinner) findViewById(R.id.theme_picker);
@@ -201,6 +244,54 @@ public class MainActivity extends AppCompatActivity {
     // For Volley request
     public static Context getContext() {
         return context;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mPushMessageReceiver == null) {
+            mPushMessageReceiver = new MainPushMessageReceiver();
+        }
+        IntentFilter intentFilter = new IntentFilter(PushReceiver.RECEIVED_NEW_MESSAGE);
+        registerReceiver(mPushMessageReceiver, intentFilter);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mPushMessageReceiver != null) {
+            unregisterReceiver(mPushMessageReceiver);
+        }
+    }
+
+    /**
+     * A BroadcastReceiver that listens for messages sent from PushReceiver
+     */
+    private class MainPushMessageReceiver extends BroadcastReceiver {
+        private ChatRoomViewModel mModel = new ViewModelProvider(MainActivity.this).get(ChatRoomViewModel.class);
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            NavController navController =
+                    Navigation.findNavController(MainActivity.this, R.id.nav_host_fragment);
+
+            NavDestination navDestination = navController.getCurrentDestination();
+
+            if (intent.hasExtra("chatMessage")) {
+
+                ChatRoom chatRoom = (ChatRoom) intent.getSerializableExtra("chatMessage");
+
+                // If the user is not on the chat screen, update the
+                // NewMessageCountView Model
+                if (navDestination.getId() != R.id.chatRoomFragment) {
+                    mNewMessageModel.increment();
+                }
+
+                // Inform the view model holding chatroom messages of the new
+                // message.
+                mModel.addMessage(intent.getIntExtra("chatid", -1), chatRoom);
+            }
+        }
     }
 
 }

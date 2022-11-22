@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
@@ -31,6 +32,8 @@ import java.util.Objects;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.MainActivity;
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
+import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatListBinding;
+import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentLandingBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
@@ -39,6 +42,8 @@ public class WeatherService extends AndroidViewModel {
 
     //******************** Properties *****************************
     private final MutableLiveData<JSONObject> mResponse;
+
+    private FragmentLandingBinding mBinding;
 
     //******************** Constructor *****************************
 

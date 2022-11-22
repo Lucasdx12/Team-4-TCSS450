@@ -20,19 +20,14 @@ public final class ChatListGenerator {
     private static final ChatList[] CHATS;
     private static final String[] mNames = {"Paul", "Lucas", "Alexz", "Alec", "Steph", "David", "Charles"};
 
-    public static final int ROOM = 1;
+    public static final int ROOM = 2;
 
     static {
         CHATS = new ChatList[ROOM];
-//        for (int i = 0; i < CHATS.length; i++) {
-            CHATS[0] = new ChatList
-                    .Builder("Chat Room " + (1))
-                    .addRecentMessage(""
-                                      + ": " +
-                                      "")
-                    .addDate("2:22PM")
-                    .build();
-//        }
+        for (int i = 1; i < CHATS.length + 1; i++) {
+            CHATS[0] = new ChatList(i, "Chat Room Title" + i,
+                    "Recent Message" + i, "4:25PM");
+        }
     }
 
     public static List<ChatList> getChatList() {

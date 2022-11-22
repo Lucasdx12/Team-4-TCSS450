@@ -176,7 +176,7 @@ public class ChatRoomViewModel extends AndroidViewModel {
     private void handleSuccess(final JSONObject response) {
         List<ChatRoom> list;
         if (!response.has("chatId")) {
-            throw new IllegalStateException("Unexpected response in ChatViewModel: " + response);
+            throw new IllegalStateException("Unexpected response in ChatRoomViewModel: " + response);
         }
         try {
             list = getMessageListByChatId(response.getInt("chatId"));
@@ -203,7 +203,7 @@ public class ChatRoomViewModel extends AndroidViewModel {
             // Inform observers of the change (setValue)
             getOrCreateMapEntry(response.getInt("chatId")).setValue(list);
         } catch (JSONException e) {
-            Log.e("JSON PARSE ERROR", "Found in handle Success ChatViewModel");
+            Log.e("JSON PARSE ERROR", "Found in handle Success ChatRoomViewModel");
             Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
         }
     }

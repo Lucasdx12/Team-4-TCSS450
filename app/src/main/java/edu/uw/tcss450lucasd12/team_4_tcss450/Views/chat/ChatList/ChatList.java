@@ -1,5 +1,10 @@
 package edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList;
 
+import androidx.annotation.Nullable;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 /**
@@ -7,40 +12,21 @@ import java.io.Serializable;
  * @author Paul Lee
  * @version Autumn 2022
  */
-public class ChatList implements Serializable {
+public final class ChatList implements Serializable {
+    private final int mChatId;
     private final String mTitle;
     private final String mRecentMessage;
-    private final String mDate;
+    private final String mTimeStamp;
 
-    public static class Builder {
-        private final String mTitle;
-        private String mRecentMessage = "";
-        private String mDate = "";
-
-        public Builder(String title) {
-            this.mTitle = title;
-        }
-
-        public Builder addRecentMessage(final String val) {
-            mRecentMessage = val;
-            return this;
-        }
-
-        public Builder addDate(final String val) {
-            mDate = val;
-            return this;
-        }
-
-        public ChatList build() {
-            return new ChatList(this);
-        }
-
+    public ChatList(int chatId, String title, String recentMessage, String timeStamp) {
+        this.mChatId = chatId;
+        this.mTitle = title;
+        this.mRecentMessage = recentMessage;
+        this.mTimeStamp = timeStamp;
     }
 
-    private ChatList(final Builder builder) {
-        this.mTitle = builder.mTitle;
-        this.mRecentMessage = builder.mRecentMessage;
-        this.mDate = builder.mDate;
+    public int getChatId() {
+        return this.mChatId;
     }
 
     public String getTitle() {
@@ -51,7 +37,21 @@ public class ChatList implements Serializable {
         return this.mRecentMessage;
     }
 
-    public String getDate() {
-        return this.mDate;
+    public String getTimeStamp() {
+        return this.mTimeStamp;
+    }
+
+    /**
+     * Provides equality solely based on chatId.
+     * @param other the other object to check for equality.
+     * @return true if other message ID matches this message ID, false otherwise.
+     */
+    @Override
+    public boolean equals(@Nullable Object other) {
+        boolean result = false;
+        if (other instanceof ChatList) {
+            result = mChatId == ((ChatList) other).mChatId;
+        }
+        return result;
     }
 }

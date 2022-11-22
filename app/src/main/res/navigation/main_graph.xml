@@ -31,13 +31,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/chatRoomFragment"
-        android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatRoomFragment"
-        android:label="@string/title_chat_room"
-        tools:layout="@layout/fragment_chat_room" />
-
-<!--Contacts list-->
-    <fragment
         android:id="@+id/contacts"
         android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.contacts.ContactsListFragment"
         android:label="@string/contacts"
@@ -49,6 +42,19 @@
 
 <!--Contact profile-->
     <fragment
+        android:id="@+id/chatRoomFragment"
+        android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatRoomFragment"
+        android:label="@string/title_chat_room"
+        tools:layout="@layout/fragment_chat_room" >
+        <argument
+            android:name="chat"
+            app:argType="edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatList" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactProfileFragment"
+        android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.contacts.ContactProfileFragment"
+        android:label="@string/title_contacts_profile"
+        tools:layout="@layout/fragment_contact_profile" />
         android:id="@+id/contactFragment"
         android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.contacts.ContactFragment"
         android:label="@string/title_contacts_profile" >

@@ -11,6 +11,9 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
     android:orientation="vertical"
     tools:context="edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatListFragment"
     tools:listitem="@layout/fragment_chat_card" />

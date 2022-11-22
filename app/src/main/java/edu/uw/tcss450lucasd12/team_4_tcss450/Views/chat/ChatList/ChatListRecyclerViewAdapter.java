@@ -1,11 +1,16 @@
 package edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList;
 
+import android.content.res.Resources;
 import android.text.Html;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,10 +26,11 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatCardBinding
  */
 public class ChatListRecyclerViewAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<ChatListRecyclerViewAdapter.ChatListViewHolder> {
 
-    // Store all of the blogs to present
+    // Store all of the chats to present
     private final List<ChatList> mChats;
 
     public ChatListRecyclerViewAdapter(List<ChatList> items) {
+
         this.mChats = items;
     }
 
@@ -54,7 +60,7 @@ public class ChatListRecyclerViewAdapter extends androidx.recyclerview.widget.Re
         public final View mView;
         public FragmentChatCardBinding mBinding;
 
-        private ChatList mChat;
+        private ChatList mChatList;
 
         public ChatListViewHolder(View view) {
             super(view);
@@ -63,24 +69,39 @@ public class ChatListRecyclerViewAdapter extends androidx.recyclerview.widget.Re
         }
 
         void setChat(final ChatList chat) {
-            mChat = chat;
-            mBinding.cardRoot.setOnClickListener(view ->
-                    Navigation.findNavController(mView).navigate(
-                            ChatListFragmentDirections
-                                    .actionChatToChatRoomFragment()));
-
+//            final Resources res = mView.getContext().getResources();
+//            final CardView card = mBinding.cardRoot;
+//
+//            int standard = (int) res.getDimension(R.dimen.chat_margin);
+//            int extended = (int) res.getDimension(R.dimen.chat_margin_sided);
+//            mChatList = chat;
+//            Log.i("CHATLISTRECYCLERVIEW", chat.getChatId() + "");
+            mBinding.cardRoot.setOnClickListener(button -> {
+                Navigation.findNavController(mView).navigate(
+                        ChatListFragmentDirections
+                                .actionChatToChatRoomFragment(chat));
+            });
+//
             mBinding.textChatTitle.setText(chat.getTitle());
-
-            if (chat.getRecentMessage().length() > 30) {
-                final String preview = Html.fromHtml(
-                                chat.getRecentMessage(),
-                                Html.FROM_HTML_MODE_COMPACT)
-                        .toString().substring(0,30);
-                mBinding.textRecentMessage.setText(preview);
-            } else {
-                mBinding.textRecentMessage.setText(chat.getRecentMessage());
-            }
-            mBinding.textTimeOfMessage.setText(chat.getDate());
+            mBinding.textRecentMessage.setText(chat.getRecentMessage());
+            mBinding.textTimeOfMessage.setText(chat.getTimeStamp());
+//
+//            ViewGroup.MarginLayoutParams layoutParams =
+//                    (ViewGroup.MarginLayoutParams) card.getLayoutParams();
+//
+//            layoutParams.setMargins(extended, extended, extended, extended);
+//
+//            card.setCardBackgroundColor(res.getColor(R.color.purple_700, null));
+//            card.setMinimumWidth(standard / 5);
+//
+//            mBinding.textChatTitle.setTextColor(
+//                    res.getColor(R.color.white, null));
+//            mBinding.textRecentMessage.setTextColor(
+//                    res.getColor(R.color.black, null));
+//            mBinding.textTimeOfMessage.setTextColor(
+//                    res.getColor(R.color.black, null));
+//
+//            card.requestLayout();
         }
     }
 }
