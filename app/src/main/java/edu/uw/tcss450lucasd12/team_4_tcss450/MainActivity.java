@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mNewMessageModel.addMessageCountObserver(this, count -> {
-            BadgeDrawable badge = navView.getOrCreateBadge(R.id.chatRoomFragment);
+            BadgeDrawable badge = navView.getOrCreateBadge(R.id.chat);
             badge.setMaxCharacterCount(2);
             if (count > 0) {
                 // New messages!!! Update and show the notification badge.
