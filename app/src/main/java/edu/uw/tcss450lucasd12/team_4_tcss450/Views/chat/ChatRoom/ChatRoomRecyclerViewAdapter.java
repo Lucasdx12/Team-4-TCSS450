@@ -67,17 +67,37 @@ public class ChatRoomRecyclerViewAdapter extends RecyclerView.Adapter<ChatRoomRe
         }
 
         void setMessage(final ChatRoom message) {
+            final Resources res = mView.getContext().getResources();
+
+            int standard = (int) res.getDimension(R.dimen.chat_margin);
+            int extended = (int) res.getDimension(R.dimen.chat_margin_sided);
 
             if (mEmail.equals(message.getSender())) {
                 // This message is from the user. Format it so that the message
                 // sent by this user is on the right side.
                 mBinding.textMessage.setText(message.getMessage());
 
+                ViewGroup.MarginLayoutParams layoutParams =
+                        (ViewGroup.MarginLayoutParams) mBinding.messageRoot.getLayoutParams();
+
+                layoutParams.setMargins(extended, standard, standard, standard);
+
+                ((FrameLayout.LayoutParams) mBinding.messageRoot.getLayoutParams()).gravity =
+                        Gravity.END;
+
             } else {
                 // This message is from another user. Format it so that the message
                 // sent by other users is on the left side.
                 mBinding.textMessage.setText(message.getSender() +
                         ": " + message.getMessage());
+
+                ViewGroup.MarginLayoutParams layoutParams =
+                        (ViewGroup.MarginLayoutParams) mBinding.messageRoot.getLayoutParams();
+
+                layoutParams.setMargins(standard, standard, extended, standard);
+
+                ((FrameLayout.LayoutParams) mBinding.messageRoot.getLayoutParams()).gravity =
+                        Gravity.START;
 
             }
         }

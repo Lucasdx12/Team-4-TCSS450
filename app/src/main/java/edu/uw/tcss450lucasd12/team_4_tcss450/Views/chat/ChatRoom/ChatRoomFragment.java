@@ -35,8 +35,6 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
  */
 public class ChatRoomFragment extends Fragment {
 
-    private static final int HARD_CODED_CHAT_ID = 2;
-
     private ChatRoomViewModel mChatModel;
     private UserInfoViewModel mUserModel;
     private ChatSendViewModel mSendModel;
@@ -57,9 +55,7 @@ public class ChatRoomFragment extends Fragment {
         mSendModel = provider.get(ChatSendViewModel.class);
 
         mArgs = ChatRoomFragmentArgs.fromBundle(getArguments());
-        Log.e("MARGSTESTING", mArgs.getChat().getChatId() + "!!!");
         mChatModel.getFirstMessages(mArgs.getChat().getChatId(), mUserModel.getJwt());
-        Log.e("CHATROOMFRAGMENT", mUserModel.getJwt());
     }
 
     @Override
@@ -74,44 +70,45 @@ public class ChatRoomFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         FragmentChatRoomBinding binding = FragmentChatRoomBinding.bind(getView());
 
-
-        Log.e("CHATROOMFRAGMENT", mArgs.getChat().getChatId() + "");
-
         // SetRefreshing shows the internal Swiper view progress bar. Show this until messages load.
         binding.swipeContainer.setRefreshing(true);
 
         final RecyclerView recyclerView = binding.recyclerMessageBoard;
 
-            // Set the Adapter to hold a reference to the list FOR THIS chat ID that the ViewModel
-            // holds.
-            recyclerView.setAdapter(new ChatRoomRecyclerViewAdapter(
-                    mChatModel.getMessageListByChatId(mArgs.getChat().getChatId()),
-                    mUserModel.getEmail()));
+        // Set the Adapter to hold a reference to the list FOR THIS chat ID that the ViewModel
+        // holds.
+        recyclerView.setAdapter(new ChatRoomRecyclerViewAdapter(
+                mChatModel.getMessageListByChatId(mArgs.getChat().getChatId()),
+                mUserModel.getEmail()));
 
-            // Send button was clicked. Send the message via the SendViewModel.
-            binding.buttonSendMessage.setOnClickListener(button -> {
-                mSendModel.sendMessage(mArgs.getChat().getChatId(),
-                        mUserModel.getJwt(),
-                        binding.editTextMessage.getText().toString());
-            });
+        // Send the user to the bottom of the recycler view.
+        recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
 
-            // When the user scrolls to the to of the recycler view, the swiper list will "refresh"
-            // The user is out of messages, go out to the service and get more.
-            binding.swipeContainer.setOnRefreshListener(() ->
-                    mChatModel.getNextMessages(mArgs.getChat().getChatId(), mUserModel.getJwt()));
 
-            mChatModel.addMessageObserver(mArgs.getChat().getChatId(), getViewLifecycleOwner(),
-                    list -> {
-                        /*
-                         * This solution needs work on the scroll position. As a group,
-                         * you will need to come up with some solution to manage the
-                         * recyclerview scroll position. You also should consider a
-                         * solution for when the keyboard is on the screen.
-                         */
-                        recyclerView.getAdapter().notifyDataSetChanged();
-                        recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
-                        binding.swipeContainer.setRefreshing(false);
-                    });
+        // Send button was clicked. Send the message via the SendViewModel.
+        binding.buttonSendMessage.setOnClickListener(button -> {
+            mSendModel.sendMessage(mArgs.getChat().getChatId(),
+                    mUserModel.getJwt(),
+                    binding.editTextMessage.getText().toString());
+        });
+
+        // When the user scrolls to the to of the recycler view, the swiper list will "refresh"
+        // The user is out of messages, go out to the service and get more.
+        binding.swipeContainer.setOnRefreshListener(() ->
+                mChatModel.getNextMessages(mArgs.getChat().getChatId(), mUserModel.getJwt()));
+
+        mChatModel.addMessageObserver(mArgs.getChat().getChatId(), getViewLifecycleOwner(),
+                list -> {
+                    /*
+                     * This solution needs work on the scroll position. As a group,
+                     * you will need to come up with some solution to manage the
+                     * recyclerview scroll position. You also should consider a
+                     * solution for when the keyboard is on the screen.
+                     */
+                    recyclerView.getAdapter().notifyDataSetChanged();
+                    recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
+                    binding.swipeContainer.setRefreshing(false);
+                });
 
         // When we get the response back from the server, clear the edittext.
         mSendModel.addResponseObserver(getViewLifecycleOwner(), response ->

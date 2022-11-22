@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import Helpers.ChatHelper;
 import Helpers.WeatherService;
 import edu.uw.tcss450lucasd12.team_4_tcss450.MainActivity;
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
@@ -98,14 +99,9 @@ public class LandingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         FragmentLandingBinding binding = FragmentLandingBinding.bind(getView());
 
-        List<ChatList> lists = new ArrayList<>();
-        ChatList first = new ChatList(1, "Global Chat", "untitled", "N/A");
-        ChatList second = new ChatList(2, "Chat", "untitled2", "N/A2");
+        ChatHelper chatHelper = new ChatHelper();
 
-        lists.add(first);
-        lists.add(second);
-
-        binding.recentNotifications.setAdapter(new LandingRecyclerViewAdapter(lists));
+        binding.recentNotifications.setAdapter(new LandingRecyclerViewAdapter(chatHelper.getChatList()));
     }
 
     //********************  Methods *****************************

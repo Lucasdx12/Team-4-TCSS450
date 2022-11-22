@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import Helpers.ChatHelper;
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatCardBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatListBinding;
@@ -35,19 +36,13 @@ public class ChatListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        List<ChatList> lists = new ArrayList<>();
-        ChatList first = new ChatList(1, "Global Chat", "untitled", "N/A");
-        ChatList second = new ChatList(2, "Chat", "untitled2", "N/A2");
-
-
-        lists.add(first);
-        lists.add(second);
+        ChatHelper chatHelper = new ChatHelper();
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chat_list, container, false);
         if (view instanceof RecyclerView) {
             ((RecyclerView) view).setAdapter(
-                    new ChatListRecyclerViewAdapter(lists));
+                    new ChatListRecyclerViewAdapter(chatHelper.getChatList()));
         }
         return view;
     }
