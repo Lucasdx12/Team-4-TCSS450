@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         // For volley request
         context = getApplicationContext();
 
-        setTheme(R.style.Theme_Team4TCSS450);
+        setTheme(R.style.UW);
         setContentView(R.layout.activity_main);
 
         this.mHandler = new Handler();
@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#acc8d7"));
         actionBar.setBackgroundDrawable(colorDrawable);
+
         //TODO: this currently crashes the app, investigate to refresh activity to show theme change
 //        MenuItem item = menu.findItem(R.id.theme_picker);
 //        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {

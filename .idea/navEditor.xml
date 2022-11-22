@@ -110,18 +110,6 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="contactProfileFragment">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="292" />
-                            <option name="y" value="432" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="contacts">
                     <value>
                       <LayoutPositions>
@@ -139,6 +127,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="contactsProfile">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="292" />
+                            <option name="y" value="432" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

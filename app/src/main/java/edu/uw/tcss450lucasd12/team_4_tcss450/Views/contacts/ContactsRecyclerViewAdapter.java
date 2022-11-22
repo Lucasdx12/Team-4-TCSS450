@@ -1,19 +1,13 @@
 package edu.uw.tcss450lucasd12.team_4_tcss450.Views.contacts;
 
-import android.text.Html;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SearchView;
-import androidx.core.view.MenuItemCompat;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -24,9 +18,9 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentContactsCardBin
 public class ContactsRecyclerViewAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<ContactsRecyclerViewAdapter.ContactsListViewHolder> {
 
     // Store all of the blogs to present
-    public final List<ContactsList> mContacts;
+    public final List<Contact> mContacts;
 
-    public ContactsRecyclerViewAdapter(List<ContactsList> items) {
+    public ContactsRecyclerViewAdapter(List<Contact> items) {
         this.mContacts = items;
     }
 
@@ -46,10 +40,10 @@ public class ContactsRecyclerViewAdapter extends androidx.recyclerview.widget.Re
     @Override
     public void onBindViewHolder(@NonNull ContactsListViewHolder holder, int position) {
 //        String userImage = mContacts.get(position).getImage(); //TODO: add image for contact
-        String username = mContacts.get(position).getNickname();
-        String usermail = mContacts.get(position).getEmail();
-        holder.name.setText(username);
-        holder.email.setText(usermail);
+//        String username = mContacts.get(position).getNickname();
+//        String usermail = mContacts.get(position).getEmail();
+//        holder.name.setText(username);
+//        holder.email.setText(usermail);
 
         holder.setContact(mContacts.get(position));
     }
@@ -64,7 +58,7 @@ public class ContactsRecyclerViewAdapter extends androidx.recyclerview.widget.Re
         ImageView profileImage;
         TextView name, email;
 
-        private ContactsList mContact;
+        private Contact mContact;
 
         public ContactsListViewHolder(View view) {
             super(view);
@@ -73,12 +67,24 @@ public class ContactsRecyclerViewAdapter extends androidx.recyclerview.widget.Re
             profileImage = itemView.findViewById(R.id.imagep);
             name = itemView.findViewById(R.id.namep);
             email = itemView.findViewById(R.id.emailp);
+
+//            mBinding.emailp.setOnClickListener(this::handleMoreOrLess);
         }
 
-        void setContact(final ContactsList contact) {
+
+//        private void handleMoreOrLess(final View button) {
+//            mExpandedFlags.put(mContact, !mExpandedFlags.get(mContact));
+//            displayPreview();
+//        }
+
+        void setContact(final Contact contact) {
             mContact = contact;
-            mBinding.cardRoot.setOnClickListener(view -> {
-                // TODO: Take the user to specific user's profile.
+
+            // TODO: Take the user to specific user's profile.
+            mBinding.contactCard.setOnClickListener(view -> {
+                Navigation.findNavController(mView).navigate(
+                        ContactsListFragmentDirections
+                                .actionContactsToContactFragment(contact));
             });
 
 //            final String preview1 = Html.fromHtml(

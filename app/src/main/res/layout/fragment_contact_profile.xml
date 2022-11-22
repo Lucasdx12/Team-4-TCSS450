@@ -15,7 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.211"
-        app:srcCompat="@drawable/ic_account_circle_24dp" />
+        app:srcCompat="@drawable/ic_account_circle_24dp"
+        android:contentDescription="Contact's profile picture"/>
 
     <TextView
         android:id="@+id/namep"
@@ -23,54 +24,42 @@
         android:layout_height="91dp"
         android:text="Name"
         android:textAlignment="center"
-        android:textSize="30sp"
+        android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@+id/friendButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagep" />
+        app:layout_constraintTop_toBottomOf="@+id/imagep"
+        android:contentDescription="Username of contact"/>
 
     <ToggleButton
         android:id="@+id/friendButton"
-        android:layout_width="220dp"
-        android:layout_height="62dp"
-        android:text="friend status"
-        android:textOff="Status: Friend"
-        android:textOn="Status: Not Friend"
+        android:layout_width="222dp"
+        android:layout_height="93dp"
         android:onClick="getid"
+        android:text="friend status"
+        android:textOff="Remove Friend"
+        android:textOn="Add Friend"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagep" />
-
-    <EditText
-        android:id="@+id/statusInfoText"
-        android:layout_width="219dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="none"
-        android:text="click to change status"
-        android:textAlignment="center"
-        android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/block_switch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/friendButton"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/imagep"
+        android:contentDescription="Click to change friend status"/>
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/block_switch"
-        android:layout_width="112dp"
-        android:layout_height="48dp"
+        android:layout_width="119dp"
+        android:layout_height="69dp"
         android:layout_marginBottom="48dp"
+        android:contentDescription="Click to block user"
         android:text="Blocked"
-        android:textColorHighlight="#DB4779"
-        android:textColorLink="#E91E63"
+        android:textColor="@color/uw_gray"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/statusInfoText" />
+        app:layout_constraintTop_toBottomOf="@+id/friendButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
