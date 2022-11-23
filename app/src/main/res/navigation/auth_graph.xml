@@ -24,6 +24,9 @@
                 android:name="password"
                 app:argType="string"
                 android:defaultValue="default" />
+        <action
+            android:id="@+id/action_signInFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -46,4 +49,9 @@
             android:name="jwt"
             app:argType="string" />
     </activity>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.auth.forgotpassword.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" />
 </navigation>

@@ -72,6 +72,11 @@ public class SignInFragment extends Fragment {
                 Navigation.findNavController(getView()).navigate(
                         SignInFragmentDirections.actionSignInFragmentToRegisterFragment()
                 ));
+
+        mBinding.buttonForgotPassword.setOnClickListener(button ->
+                Navigation.findNavController(getView()).navigate(
+                        SignInFragmentDirections.actionSignInFragmentToForgotPasswordFragment()
+                ));
         //add when register is working
         mBinding.buttonLogin.setOnClickListener(this::attemptSignIn);
 

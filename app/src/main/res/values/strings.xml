@@ -26,6 +26,8 @@
     <string name="sent_message">This is a sent message</string>
     <string name="received_message">This is a received message</string>
     <string name="hello_blank_fragment">"Hello World!"</string>
+    <string name="prompt_email_pass">Send email to reset your password.</string>
+
 
     <!-- Current Weather -->
     <string name="currentCity">Tacoma</string>

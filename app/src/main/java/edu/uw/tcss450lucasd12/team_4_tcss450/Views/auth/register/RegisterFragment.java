@@ -80,28 +80,33 @@ public class RegisterFragment extends Fragment {
         mNameValidator.processResult(
                 mNameValidator.apply(binding.editFirstName.getText().toString().trim()),
                 this::validateLast,
-                result -> binding.editFirstName.setError("Please enter a first name."));
+                result -> binding.editFirstName.setError("Please enter a first name.\n"+
+                                                         " * Must be of length 1"));
     }
 
     private void validateLast() {
         mNameValidator.processResult(
                 mNameValidator.apply(binding.editLastName.getText().toString().trim()),
                 this::validateDisplay,
-                result -> binding.editLastName.setError("Please enter a last name."));
+                result -> binding.editLastName.setError("Please enter a last name.\n"+
+                                                        " * Must be of length 1"));
     }
 
     private void validateDisplay() {
         mNameValidator.processResult(
                 mNameValidator.apply(binding.editDisplayName.getText().toString().trim()),
                 this::validateEmail,
-                result -> binding.editDisplayName.setError("Please enter a display name."));
+                result -> binding.editDisplayName.setError("Please enter a display name of length 1\n"+
+                                                           " * Must be unique."));
     }
 
     private void validateEmail() {
         mEmailValidator.processResult(
                 mEmailValidator.apply(binding.editEmail.getText().toString().trim()),
                 this::validatePasswordsMatch,
-                result -> binding.editEmail.setError("Please enter a valid Email address."));
+                result -> binding.editEmail.setError("Please enter a valid Email address.\n"+
+                                                     " * Must include an @\n"+
+                                                     " * No spaces are allowed."));
     }
 
     private void validatePasswordsMatch() {
@@ -119,7 +124,12 @@ public class RegisterFragment extends Fragment {
         mPassWordValidator.processResult(
                 mPassWordValidator.apply(binding.editPassword.getText().toString()),
                 this::verifyAuthWithServer,
-                result -> binding.editPassword.setError("Please enter a valid Password."));
+                result -> binding.editPassword.setError("Please enter a valid Password.\n"+
+                                                        " * Must be at least 7 characters long.\n"+
+                                                        " * Must include a special character (@#$%&*!?)\n"+
+                                                        " * Must include either a lower case or upper case letter\n"+
+                                                        " * Must include a digit (0-9)\n"+
+                                                        " * No spaces are allowed."));
     }
 
     private void verifyAuthWithServer() {
