@@ -44,7 +44,7 @@
     <string name="title_chat_room">Chat Room 1</string>
 
     <!-- Web Service URL -->
-    <string name="base_url">https://tcss450-team4-webservice.herokuapp.com/</string>
+    <string name="base_url">https://tcss450-2022au-group4.herokuapp.com/</string>
 
     <!-- SETTINGS (toolbar.xml): -->
 
