@@ -159,7 +159,7 @@ public class WeatherService extends AndroidViewModel {
                     tempStr =  "L:"  + convertKelToFer(jsonObject.getString("dayFourTempMin")) + " H: " + convertKelToFer(jsonObject.getString("dayFourTempMax"));
                     binding.tempDayFour.setText((tempStr));
 
-                   tempStr =  "L:"  + convertKelToFer(jsonObject.getString("dayFiveTempMin")) + " H: " + convertKelToFer(jsonObject.getString("dayFiveTempMax"));
+                    tempStr =  "L:"  + convertKelToFer(jsonObject.getString("dayFiveTempMin")) + " H: " + convertKelToFer(jsonObject.getString("dayFiveTempMax"));
                     binding.tempDayFive.setText((tempStr));
 
                 } catch (JSONException e) {
