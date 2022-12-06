@@ -58,31 +58,6 @@ public class SettingsFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-//        spinner = spinner.findViewById(R.id.spiiner);
-//
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(SettingsFragment.this, android.R.layout.simple_spinner_item,themes);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapter);
-//
-//        spinner.setOnItemSelectedListener(new AdapterView<?> parent, View view, int position, long id) {
-//
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent) {
-//                String value = parent.getItemAtPosition(position).toString();
-//                Toast.makeText(SettingsFragment.this, value, Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        };
-
-        //ArrayAdapter<CharSequence>adapter=ArrayAdapter.createFromResource(SettingsFragment.this, R.array.themes, android.R.layout.simple_spinner_item);
-
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        //spinner.setAdapter(adapter);
-
     }
 
 

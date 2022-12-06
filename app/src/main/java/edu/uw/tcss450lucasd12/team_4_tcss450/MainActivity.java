@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         // For volley request
         context = getApplicationContext();
 
-        setTheme(R.style.UW);
+
         setContentView(R.layout.activity_main);
 
         this.mHandler = new Handler();
@@ -165,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
     //Let user click the settings options:
     //TODO: add options in the settings menu
     @Override
@@ -177,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
                     openOptionsMenu();
                     return true;
                 case R.id.theme_picker:
+
                 case R.id.summer_theme:
 
                     if (item.isChecked()) {
@@ -191,19 +193,25 @@ public class MainActivity extends AppCompatActivity {
 
                     if (item.isChecked()) {
                         item.setChecked(false);
+                        this.recreate();
                     } else {
                         item.setChecked(true);
                         setTheme(R.style.UW);
+                        this.recreate();
                     }
+
                     return true;
 
                 case R.id.fall_theme:
 
                     if (item.isChecked()) {
                         item.setChecked(false);
+                        this.recreate();
                     } else {
                         item.setChecked(true);
                         setTheme(R.style.Fall);
+                        this.recreate();
+
                     }
                     return true;
 
@@ -215,6 +223,7 @@ public class MainActivity extends AppCompatActivity {
                         item.setChecked(true);
                         setTheme(R.style.Winter);
                     }
+                    refreshPage();
                     return true;
 
                 case R.id.spring_theme:
@@ -232,6 +241,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void refreshPage() {
+        finish();
+        startActivity(getIntent());
+    }
     //Refresh page. SOURCE: https://stackoverflow.com/questions/6134832/auto-refresh-the-activity
     private final Runnable m_Runnable = new Runnable() {
         public void run() {
