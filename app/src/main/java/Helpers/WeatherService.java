@@ -225,19 +225,19 @@ public class WeatherService extends AndroidViewModel {
                     JSONObject jsonObject = new JSONObject(response);
 
                     // Temp
-                    String tempStr =  "H:"  + convertKelToFer(jsonObject.getString("slotOneTemp"));
+                    String tempStr = convertKelToFer(jsonObject.getString("slotOneTemp"));
                     binding.slotOneTemp.setText((tempStr));
 
-                    tempStr =  "H:"  + convertKelToFer(jsonObject.getString("slotTwoTemp"));
+                    tempStr = convertKelToFer(jsonObject.getString("slotTwoTemp"));
                     binding.slotTwoTemp.setText((tempStr));
 
-                    tempStr =  "H:"  + convertKelToFer(jsonObject.getString("slotThreeTemp"));
+                    tempStr = convertKelToFer(jsonObject.getString("slotThreeTemp"));
                     binding.slotThreeTemp.setText((tempStr));
 
-                    tempStr =  "H:"  + convertKelToFer(jsonObject.getString("slotFourTemp"));
+                    tempStr = convertKelToFer(jsonObject.getString("slotFourTemp"));
                     binding.slotFourTemp.setText((tempStr));
 
-                    tempStr =  "H:"  + convertKelToFer(jsonObject.getString("slotFiveTemp"));
+                    tempStr = convertKelToFer(jsonObject.getString("slotFiveTemp"));
                     binding.slotFiveTemp.setText((tempStr));
 
                     // Time
