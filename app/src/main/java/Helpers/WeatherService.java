@@ -343,7 +343,7 @@ public class WeatherService extends AndroidViewModel {
     public static int getWeatherIcon(ImageView currentWeather, String weather) {
 
 
-        switch(weather) {
+        switch(weather.toLowerCase()) {
             case "fog":
                 return R.drawable.fogicon;
             case "sun":
