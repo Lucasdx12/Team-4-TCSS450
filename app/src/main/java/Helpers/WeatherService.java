@@ -25,8 +25,10 @@ import org.json.JSONObject;
 
 import java.nio.charset.Charset;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -90,7 +92,7 @@ public class WeatherService extends AndroidViewModel {
                     weatherText.setText(weather);
 
                     // Weather Icon
-                    weatherIcon.setImageResource(getWeatherIcon(weatherIcon, weather));
+                    weatherIcon.setImageResource(getWeatherIcon(weather));
 
                     String lowTempStr = jsonObject.getString("lowTemp");
                     tempHighLowText.setText("L:" + convertKelToFer(lowTempStr) + "  ");
@@ -163,19 +165,19 @@ public class WeatherService extends AndroidViewModel {
                     binding.tempDayFive.setText((tempStr));
 
                     tempStr =  jsonObject.getString("dayOneWeather");
-                    binding.dayOneIcon.setImageResource(getWeatherIcon(binding.dayOneIcon, tempStr));
+                    binding.dayOneIcon.setImageResource(getWeatherIcon(tempStr));
 
                     tempStr =  jsonObject.getString("dayTwoWeather");
-                    binding.dayTwoIcon.setImageResource(getWeatherIcon(binding.dayTwoIcon, tempStr));
+                    binding.dayTwoIcon.setImageResource(getWeatherIcon(tempStr));
 
                     tempStr =  jsonObject.getString("dayThreeWeather");
-                    binding.dayThreeIcon.setImageResource(getWeatherIcon(binding.dayThreeIcon, tempStr));
+                    binding.dayThreeIcon.setImageResource(getWeatherIcon(tempStr));
 
                     tempStr =  jsonObject.getString("dayFourWeather");
-                    binding.dayFourIcon.setImageResource(getWeatherIcon(binding.dayFourIcon, tempStr));
+                    binding.dayFourIcon.setImageResource(getWeatherIcon(tempStr));
 
                     tempStr =  jsonObject.getString("dayFiveWeather");
-                    binding.dayFiveIcon.setImageResource(getWeatherIcon(binding.dayFiveIcon, tempStr));
+                    binding.dayFiveIcon.setImageResource(getWeatherIcon(tempStr));
 
                 } catch (JSONException e) {
                     //e.printStackTrace();
@@ -258,19 +260,19 @@ public class WeatherService extends AndroidViewModel {
 
                     // Icons
                     tempStr =  jsonObject.getString("slotOneWeather");
-                    binding.slotOneWeather.setImageResource(getWeatherIcon(binding.slotOneWeather, tempStr));
+                    binding.slotOneWeather.setImageResource(getWeatherIcon(tempStr));
 
                     tempStr =  jsonObject.getString("slotTwoWeather");
-                    binding.slotTwoWeather.setImageResource(getWeatherIcon(binding.slotTwoWeather, tempStr));
+                    binding.slotTwoWeather.setImageResource(getWeatherIcon(tempStr));
 
                     tempStr =  jsonObject.getString("slotThreeWeather");
-                    binding.slotThreeWeather.setImageResource(getWeatherIcon(binding.slotThreeWeather, tempStr));
+                    binding.slotThreeWeather.setImageResource(getWeatherIcon(tempStr));
 
                     tempStr =  jsonObject.getString("slotFourWeather");
-                    binding.slotFourWeather.setImageResource(getWeatherIcon(binding.slotFourWeather, tempStr));
+                    binding.slotFourWeather.setImageResource(getWeatherIcon(tempStr));
 
                     tempStr =  jsonObject.getString("slotFiveWeather");
-                    binding.slotFiveWeather.setImageResource(getWeatherIcon(binding.slotFiveWeather, tempStr));
+                    binding.slotFiveWeather.setImageResource(getWeatherIcon(tempStr));
 
                 } catch (JSONException e) {
                     //e.printStackTrace();
@@ -333,14 +335,15 @@ public class WeatherService extends AndroidViewModel {
 
     }
 
+    // Time in 3 hour increments
     public static String convertTime(String time) {
-
         Date date = new Date(Integer.parseInt(time) * 1000L);
-        return (String) DateFormat.format("hh",   date);
-
+        SimpleDateFormat simpDate;
+        simpDate = new SimpleDateFormat("kk:mm");
+        return simpDate.format(date).toString();
     }
 
-    public static int getWeatherIcon(ImageView currentWeather, String weather) {
+    public static int getWeatherIcon(String weather) {
 
 
         switch(weather.toLowerCase()) {
