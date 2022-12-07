@@ -3,21 +3,19 @@ package Helpers;
 import android.app.Application;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -34,11 +32,8 @@ import java.util.Objects;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.MainActivity;
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
-import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatListBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentLandingBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentWeatherBinding;
-import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
-import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
 
 public class WeatherService extends AndroidViewModel {
@@ -58,14 +53,14 @@ public class WeatherService extends AndroidViewModel {
 
     //********************  Methods *****************************
 
-    public static void getWeatherInfo(TextView cityText, TextView tempText, TextView tempHighLowText, TextView weatherText, String city, String jwt) {
+    public static void getWeatherInfo(TextView cityText, TextView tempText, TextView tempHighLowText, TextView weatherText, ImageView weatherIcon, String jwt) {
 
         // Properties
         String url = "https://tcss450-2022au-group4.herokuapp.com/weather";
         JSONObject body = new JSONObject();
 
         try {
-            body.put("selectedCity", city);
+            body.put("selectedCity", weatherIcon);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -94,12 +89,17 @@ public class WeatherService extends AndroidViewModel {
                     String weather  = currentWeather.getString("main");
                     weatherText.setText(weather);
 
+                    // Weather Icon
+                    weatherIcon.setImageResource(getWeatherIcon(weatherIcon, weather));
+
                     String lowTempStr = jsonObject.getString("maxTemp");
                     tempHighLowText.setText("L:" + convertKelToFer(lowTempStr) + "  ");
 
                     // Get High
                     String highTempStr = jsonObject.getString("lowTemp");
                     tempHighLowText.setText(tempHighLowText.getText() + " H: " + convertKelToFer(highTempStr));
+
+
 
                 } catch (JSONException e) {
                     //e.printStackTrace();
@@ -162,6 +162,21 @@ public class WeatherService extends AndroidViewModel {
                     tempStr =  "L:"  + convertKelToFer(jsonObject.getString("dayFiveTempMin")) + " H: " + convertKelToFer(jsonObject.getString("dayFiveTempMax"));
                     binding.tempDayFive.setText((tempStr));
 
+                    tempStr =  jsonObject.getString("dayOneWeather");
+                    binding.dayOneIcon.setImageResource(getWeatherIcon(binding.dayOneIcon, tempStr));
+
+                    tempStr =  jsonObject.getString("dayTwoWeather");
+                    binding.dayTwoIcon.setImageResource(getWeatherIcon(binding.dayTwoIcon, tempStr));
+
+                    tempStr =  jsonObject.getString("dayThreeWeather");
+                    binding.dayThreeIcon.setImageResource(getWeatherIcon(binding.dayThreeIcon, tempStr));
+
+                    tempStr =  jsonObject.getString("dayFourWeather");
+                    binding.dayFourIcon.setImageResource(getWeatherIcon(binding.dayFourIcon, tempStr));
+
+                    tempStr =  jsonObject.getString("dayFiveWeather");
+                    binding.dayFiveIcon.setImageResource(getWeatherIcon(binding.dayFiveIcon, tempStr));
+
                 } catch (JSONException e) {
                     //e.printStackTrace();
                     System.out.println("Error: " + e);
@@ -194,8 +209,6 @@ public class WeatherService extends AndroidViewModel {
     }
 
     public static void getHourlyForecast(FragmentWeatherBinding binding, String jwt) {
-
-
 
         String url = "https://tcss450-2022au-group4.herokuapp.com/hourlyForecast";
         JSONObject body = new JSONObject();
@@ -243,6 +256,22 @@ public class WeatherService extends AndroidViewModel {
                     tempStr =  jsonObject.getString("slotFiveTime");
                     binding.slotFiveTime.setText((convertTime(tempStr)));
 
+                    // Icons
+                    tempStr =  jsonObject.getString("slotOneWeather");
+                    binding.slotOneWeather.setImageResource(getWeatherIcon(binding.slotOneWeather, tempStr));
+
+                    tempStr =  jsonObject.getString("slotTwoWeather");
+                    binding.slotTwoWeather.setImageResource(getWeatherIcon(binding.slotTwoWeather, tempStr));
+
+                    tempStr =  jsonObject.getString("slotThreeWeather");
+                    binding.slotThreeWeather.setImageResource(getWeatherIcon(binding.slotThreeWeather, tempStr));
+
+                    tempStr =  jsonObject.getString("slotFourWeather");
+                    binding.slotFourWeather.setImageResource(getWeatherIcon(binding.slotFourWeather, tempStr));
+
+                    tempStr =  jsonObject.getString("slotFiveWeather");
+                    binding.slotFiveWeather.setImageResource(getWeatherIcon(binding.slotFiveWeather, tempStr));
+
                 } catch (JSONException e) {
                     //e.printStackTrace();
                     System.out.println("Error: " + e);
@@ -274,42 +303,6 @@ public class WeatherService extends AndroidViewModel {
 
     }
 
-    // TODO: Get the weather and adjust the icon
-    public String getWeatherIcon(String currentWeather) {
-
-        String weather;
-
-        switch(currentWeather) {
-            case "fog":
-                weather = "fogIcon";
-            case "sun":
-                weather = "sunIcon";
-            case "sunny":
-                weather = "sunIcon";
-            case "snow":
-                weather = "snowIcon";
-            case "rain":
-                weather = "rainIcon";
-            case "raining":
-                weather = "rainIcon";
-            case "light rain":
-                weather = "rainIcon";
-            case "heavy rain":
-                weather = "rainIcon";
-            case "drizzle":
-                weather = "rainIcon";
-            case "haze":
-                weather = "hazeIcon";
-            case "wind":
-                weather = "windIcon";
-            case "clouds":
-                weather = "cloudIcon";
-            default:
-                weather = "cloudIcon";
-
-        }
-        return weather;
-    }
 
 
     public void addResponseObserver(@NonNull LifecycleOwner owner,
@@ -345,5 +338,38 @@ public class WeatherService extends AndroidViewModel {
         Date date = new Date(Integer.parseInt(time) * 1000L);
         return (String) DateFormat.format("hh",   date);
 
+    }
+
+    public static int getWeatherIcon(ImageView currentWeather, String weather) {
+
+
+        switch(weather) {
+            case "fog":
+                return R.drawable.fogicon;
+            case "sun":
+                return R.drawable.summericon;
+            case "sunny":
+                return R.drawable.summericon;
+            case "snow":
+                return R.drawable.snowicon;
+            case "rain":
+                return R.drawable.rainicon;
+            case "raining":
+                return R.drawable.rainicon;
+            case "light rain":
+                return R.drawable.rainicon;
+            case "heavy rain":
+                return R.drawable.rainicon;
+            case "drizzle":
+                return R.drawable.rainicon;
+            case "haze":
+                return R.drawable.hazeicon;
+            case "wind":
+                return R.drawable.windicon;
+            case "clouds":
+                return R.drawable.cloudicon;
+            default:
+                return R.drawable.partlycloudyicon;
+        }
     }
 }
