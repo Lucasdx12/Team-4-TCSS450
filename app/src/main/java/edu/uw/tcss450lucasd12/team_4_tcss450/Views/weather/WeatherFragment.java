@@ -55,9 +55,10 @@ public class WeatherFragment extends Fragment {
         mCurrentTemp = (TextView) view.findViewById(R.id.currentTemperature);
         mCurrentWeather = (TextView) view.findViewById(R.id.tempStyle);
         mCurrentHL = (TextView) view.findViewById(R.id.highAndLow);
+        mCurrentWeatherIcon = (ImageView) view.findViewById(R.id.weatherPicture);
         FragmentWeatherBinding binding = FragmentWeatherBinding.bind(view);
 
-        WeatherService.getWeatherInfo(mCurrentCity, mCurrentTemp,mCurrentHL,mCurrentWeather, "Buckley", mUserModel.getJwt());
+        WeatherService.getWeatherInfo(mCurrentCity, mCurrentTemp,mCurrentHL,mCurrentWeather, mCurrentWeatherIcon, mUserModel.getJwt());
         WeatherService.getForecast(binding, mUserModel.getJwt());
         getHourlyForecast(binding, mUserModel.getJwt());
 

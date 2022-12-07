@@ -86,9 +86,10 @@ public class LandingFragment extends Fragment {
         mCurrentTemp = (TextView) view.findViewById(R.id.currentTemp);
         mCurrentWeather = (TextView) view.findViewById(R.id.currentWeather);
         mCurrentHL = (TextView) view.findViewById(R.id.currentHL);
+        mCurrentWeatherIcon = (ImageView) view.findViewById(R.id.weatherIcon);
 
         // Get weather
-        WeatherService.getWeatherInfo(mCurrentCity, mCurrentTemp,mCurrentHL,mCurrentWeather, "Buckley", mUserModel.getJwt());
+        WeatherService.getWeatherInfo(mCurrentCity, mCurrentTemp,mCurrentHL,mCurrentWeather, mCurrentWeatherIcon, mUserModel.getJwt());
 
 
         return view;
