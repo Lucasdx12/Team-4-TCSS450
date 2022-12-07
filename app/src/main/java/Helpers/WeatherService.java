@@ -92,11 +92,11 @@ public class WeatherService extends AndroidViewModel {
                     // Weather Icon
                     weatherIcon.setImageResource(getWeatherIcon(weatherIcon, weather));
 
-                    String lowTempStr = jsonObject.getString("maxTemp");
+                    String lowTempStr = jsonObject.getString("lowTemp");
                     tempHighLowText.setText("L:" + convertKelToFer(lowTempStr) + "  ");
 
                     // Get High
-                    String highTempStr = jsonObject.getString("lowTemp");
+                    String highTempStr = jsonObject.getString("maxTemp");
                     tempHighLowText.setText(tempHighLowText.getText() + " H: " + convertKelToFer(highTempStr));
 
 
