@@ -39,12 +39,12 @@
             android:paddingBottom="8dp"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/text_timeOfMessage"
+            app:layout_constraintEnd_toStartOf="@+id/textTimeOfMessage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textChatTitle" />
 
         <TextView
-            android:id="@+id/text_timeOfMessage"
+            android:id="@+id/textTimeOfMessage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"

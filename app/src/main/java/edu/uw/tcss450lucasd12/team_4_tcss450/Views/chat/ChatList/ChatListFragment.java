@@ -4,21 +4,18 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import Helpers.ChatHelper;
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
-import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatCardBinding;
+import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatAddMemberViewModel;
+import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentAddChatCardBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatListBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
@@ -29,21 +26,67 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
  */
 public class ChatListFragment extends Fragment {
 
+    private ChatListViewModel mListModel;
+    private UserInfoViewModel mUserModel;
+    private ChatAddRoomViewModel mAddChatModel;
+
+    private ChatAddMemberViewModel mAddMemModel;
+
     public ChatListFragment() {
         // Empty constructor
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ViewModelProvider provider = new ViewModelProvider(getActivity());
+        mUserModel = provider.get(UserInfoViewModel.class);
+        mListModel = provider.get(ChatListViewModel.class);
+        mAddChatModel = provider.get(ChatAddRoomViewModel.class);
+
+        mAddMemModel = provider.get(ChatAddMemberViewModel.class);
+
+        mListModel.getChats(mUserModel.getJwt());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ChatHelper chatHelper = new ChatHelper();
-
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_chat_list, container, false);
-        if (view instanceof RecyclerView) {
-            ((RecyclerView) view).setAdapter(
-                    new ChatListRecyclerViewAdapter(chatHelper.getChatList()));
-        }
-        return view;
+        return inflater.inflate(R.layout.fragment_chat_list, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        FragmentChatListBinding binding = FragmentChatListBinding.bind(getView());
+
+        final RecyclerView recyclerView = binding.listRoot;
+        recyclerView.setAdapter(new ChatListRecyclerViewAdapter(
+                mListModel.getChatList()
+        ));
+
+        binding.addChatRoomButton.setOnClickListener(button -> {
+//            binding.cardRootAddRoom.setVisibility(ViewGroup.VISIBLE);
+            openDialog();
+        });
+
+        mListModel.addChatListObserver(getViewLifecycleOwner(), list -> {
+            recyclerView.getAdapter().notifyDataSetChanged();
+        });
+
+//        mAddChatModel.addResponseObserver(getViewLifecycleOwner(), response -> {
+//                mAddMemModel.addMember(mAddChatModel.getChatId(),
+//                        mUserModel.getJwt());
+//        });
+
+        mAddMemModel.addResponseObserver(getViewLifecycleOwner(), response -> {
+            recyclerView.getAdapter().notifyDataSetChanged();
+        });
+    }
+
+    private void openDialog() {
+        DialogFragment dialogFragment = new ChatAddDialog();
+        dialogFragment.show(getChildFragmentManager(), "addroom");
     }
 }

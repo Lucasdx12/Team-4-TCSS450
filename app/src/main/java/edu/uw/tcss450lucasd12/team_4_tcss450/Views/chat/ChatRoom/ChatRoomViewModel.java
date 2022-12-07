@@ -27,6 +27,7 @@ import java.util.Objects;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
+import edu.uw.tcss450lucasd12.team_4_tcss450.model.NewMessageCountViewModel;
 
 /**
  *

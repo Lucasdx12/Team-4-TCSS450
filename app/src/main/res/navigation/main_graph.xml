@@ -67,4 +67,12 @@
             android:name="contact"
             app:argType="edu.uw.tcss450lucasd12.team_4_tcss450.Views.contacts.Contact" />
     </fragment>
+    <fragment
+        android:id="@+id/chatRoomSetting"
+        android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoomSetting.ChatRoomSetting"
+        android:label="ChatRoomSetting" >
+        <argument
+            android:name="chat"
+            app:argType="edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatRoom" />
+    </fragment>
 </navigation>

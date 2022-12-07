@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel;
 
 public class NewMessageCountViewModel extends ViewModel {
 
-    // Use MAP<Integer, MutableLiveData<Integer>>
     private MutableLiveData<Integer> mNewMessageCount;
 
     public NewMessageCountViewModel() {
