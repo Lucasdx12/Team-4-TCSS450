@@ -53,5 +53,9 @@
         android:id="@+id/forgotPasswordFragment"
         android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.auth.forgotpassword.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
-        tools:layout="@layout/fragment_forgot_password" />
+        tools:layout="@layout/fragment_forgot_password" >
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
 </navigation>
