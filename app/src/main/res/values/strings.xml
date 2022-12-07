@@ -23,8 +23,6 @@
     <string name="chat">Chat</string>
     <string name="contacts">Contacts</string>
     <string name="chat_room_message">Type message here</string>
-    <string name="sent_message">This is a sent message</string>
-    <string name="received_message">This is a received message</string>
     <string name="hello_blank_fragment">"Hello World!"</string>
     <string name="prompt_email_pass">Send email to reset your password.</string>
 
@@ -35,13 +33,20 @@
     <string name="currentWeather">Drizzle</string>
     <string name="currentHL">L:37   H:45</string>
 
+    <!-- Chats -->
+    <string name="text_chat_room_name">Chat Room Name:</string>
+    <string name="enter_chat_room_name">Enter Chat Room Name Here</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_member">Add Member</string>
+
     <!--TODO: added for landing, weather, & contacts -->
     <string name="title_landing">Landing</string>
     <string name="title_weather">Weather</string>
     <string name="title_contacts_init">Contacts</string>
     <string name="title_contacts_profile">Profile</string>
     <string name="title_chat_init">Chat</string>
-    <string name="title_chat_room">Chat Room 1</string>
+    <string name="title_chat_room">Chat Room</string>
 
     <!-- Web Service URL -->
     <string name="base_url">https://tcss450-2022au-group4.herokuapp.com/</string>

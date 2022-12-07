@@ -38,6 +38,7 @@ import android.widget.Toast;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatListViewModel;
 import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatRoom;
 import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatRoomViewModel;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.ActivityMainBinding;
@@ -47,8 +48,10 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 import edu.uw.tcss450lucasd12.team_4_tcss450.services.PushReceiver;
 
 public class MainActivity extends AppCompatActivity {
+
     // For Pushy (Notifications) to the user.
     private MainPushMessageReceiver mPushMessageReceiver;
+
     private NewMessageCountViewModel mNewMessageModel;
 
     //for bottom navigation implementation:
@@ -93,30 +96,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        mNewMessageModel = new ViewModelProvider(this).get(NewMessageCountViewModel.class);
-        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if (destination.getId() == R.id.chatRoomFragment) {
-                // When the user navigates to the chats page, reset the new message count.
-                // This will need some extra logic for the project as it should have
-                // multiple chat rooms.
-                mNewMessageModel.reset();
-            }
-        });
-
-        mNewMessageModel.addMessageCountObserver(this, count -> {
-            BadgeDrawable badge = navView.getOrCreateBadge(R.id.chat);
-            badge.setMaxCharacterCount(2);
-            if (count > 0) {
-                // New messages!!! Update and show the notification badge.
-                badge.setNumber(count);
-                badge.setVisible(true);
-            } else {
-                // User did some action to clear the new messages, remove the badge.
-                badge.clearNumber();
-                badge.setVisible(false);
-            }
-        });
-
+        messageCount(navView, navController);
 
         //Action Bar (bar at top with settings and activity names):
         ActionBar actionBar = getSupportActionBar();
@@ -245,6 +225,32 @@ public class MainActivity extends AppCompatActivity {
         finish();
         startActivity(getIntent());
     }
+    private void messageCount(BottomNavigationView navView, NavController navController) {
+
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (destination.getId() == R.id.chatRoomFragment) {
+                // When the user navigates to the chats page, reset the new message count.
+                // This will need some extra logic for the project as it should have
+                // multiple chat rooms.
+                mNewMessageModel.reset();
+            }
+        });
+
+        mNewMessageModel.addMessageCountObserver(this, count -> {
+            BadgeDrawable badge = navView.getOrCreateBadge(R.id.chat);
+            badge.setMaxCharacterCount(10);
+            if (count > 0) {
+                // New messages!!! Update and show the notification badge.
+                badge.setNumber(count);
+                badge.setVisible(true);
+            } else {
+                // User did some action to clear the new messages, remove the badge.
+                badge.clearNumber();
+                badge.setVisible(false);
+            }
+        });
+    }
+
     //Refresh page. SOURCE: https://stackoverflow.com/questions/6134832/auto-refresh-the-activity
     private final Runnable m_Runnable = new Runnable() {
         public void run() {
