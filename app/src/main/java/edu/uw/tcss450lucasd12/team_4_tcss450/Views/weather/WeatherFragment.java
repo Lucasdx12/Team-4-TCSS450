@@ -1,5 +1,7 @@
 package edu.uw.tcss450lucasd12.team_4_tcss450.Views.weather;
 
+import static Helpers.WeatherService.getHourlyForecast;
+
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -57,6 +59,7 @@ public class WeatherFragment extends Fragment {
 
         WeatherService.getWeatherInfo(mCurrentCity, mCurrentTemp,mCurrentHL,mCurrentWeather, "Buckley", mUserModel.getJwt());
         WeatherService.getForecast(binding, mUserModel.getJwt());
+        getHourlyForecast(binding, mUserModel.getJwt());
 
 
         return view;

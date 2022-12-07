@@ -60,7 +60,8 @@ public class WeatherService extends AndroidViewModel {
 
         // Properties
 //        String url = "https://tcss450-team4-webservice.herokuapp.com/weather?selectedCity=" + city;
-        String url = "https://tcss450-team4-webservice.herokuapp.com/weather";
+        //String url = "https://tcss450-team4-webservice.herokuapp.com/weather";
+        String url = "https://tcss450-2022au-group4.herokuapp.com/weather";
         JSONObject body = new JSONObject();
 
         try {
@@ -134,7 +135,8 @@ public class WeatherService extends AndroidViewModel {
     public static void getForecast(FragmentWeatherBinding binding, String jwt) {
 
 
-        String url = "https://tcss450-team4-webservice.herokuapp.com/forecast";
+       // String url = "https://tcss450-team4-webservice.herokuapp.com/forecast";
+        String url = "https://tcss450-2022au-group4.herokuapp.com/forecast";
         JSONObject body = new JSONObject();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -161,6 +163,87 @@ public class WeatherService extends AndroidViewModel {
 
                     tempStr =  "L:"  + convertKelToFer(jsonObject.getString("dayFiveTempMin")) + " H: " + convertKelToFer(jsonObject.getString("dayFiveTempMax"));
                     binding.tempDayFive.setText((tempStr));
+
+                } catch (JSONException e) {
+                    //e.printStackTrace();
+                    System.out.println("Error: " + e);
+                }
+
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("Error: " + error);
+            }
+
+        }) {
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+
+                // Add headers <key,value>
+                headers.put("Authorization", jwt);
+                return headers;
+            }
+        };
+
+
+        RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.getContext());
+        requestQueue.add(stringRequest);
+
+    }
+
+    public static void getHourlyForecast(FragmentWeatherBinding binding, String jwt) {
+
+
+        //String url = "https://tcss450-team4-webservice.herokuapp.com/hourlyForecast";
+        String url = "https://tcss450-2022au-group4.herokuapp.com/hourlyForecast";
+        JSONObject body = new JSONObject();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+
+                // Call the API
+                try {
+
+                    // Set the temp labels
+                    JSONObject jsonObject = new JSONObject(response);
+
+                    // Temp
+                    String tempStr =  "H:"  + convertKelToFer(jsonObject.getString("slotOneTemp"));
+                    binding.slotOneTemp.setText((tempStr));
+
+                    tempStr =  "H:"  + convertKelToFer(jsonObject.getString("slotTwoTemp"));
+                    binding.slotTwoTemp.setText((tempStr));
+
+                    tempStr =  "H:"  + convertKelToFer(jsonObject.getString("slotThreeTemp"));
+                    binding.slotThreeTemp.setText((tempStr));
+
+                    tempStr =  "H:"  + convertKelToFer(jsonObject.getString("slotFourTemp"));
+                    binding.slotThreeTemp.setText((tempStr));
+
+                    tempStr =  "H:"  + convertKelToFer(jsonObject.getString("slotFiveTemp"));
+                    binding.slotFourTemp.setText((tempStr));
+
+                    // Time
+                    tempStr =  jsonObject.getString("slotOneTime");
+                    binding.slotOneTemp.setText((tempStr));
+
+                    tempStr =  jsonObject.getString("slotTwoTime");
+                    binding.slotTwoTemp.setText((tempStr));
+
+                    tempStr =  jsonObject.getString("slotThreeTime");
+                    binding.slotThreeTemp.setText((tempStr));
+
+                    tempStr =  jsonObject.getString("slotFourTime");
+                    binding.slotThreeTemp.setText((tempStr));
+
+                    tempStr =  jsonObject.getString("slotFiveTime");
+                    binding.slotFourTemp.setText((tempStr));
 
                 } catch (JSONException e) {
                     //e.printStackTrace();

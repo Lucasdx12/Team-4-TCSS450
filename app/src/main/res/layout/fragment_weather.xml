@@ -10,24 +10,54 @@
     <!-- TODO: Update blank fragment layout -->
 
     <ImageView
-        android:id="@+id/dayFiveCon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/slotFourWeather"
+        android:layout_width="42dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="252dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_weather_cloud_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dayFourIcon" />
+        app:layout_constraintTop_toBottomOf="@+id/slotFourTime" />
 
     <ImageView
-        android:id="@+id/dayFourIcon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/slotFiveWeather"
+        android:layout_width="42dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="324dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_weather_cloud_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dayThreeIcon" />
+        app:layout_constraintTop_toBottomOf="@+id/slotFiveTime" />
+
+    <ImageView
+        android:id="@+id/slotThreeWeather"
+        android:layout_width="42dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="184dp"
+        android:layout_marginBottom="11dp"
+        android:src="@drawable/ic_weather_cloud_24"
+        app:layout_constraintBottom_toTopOf="@+id/slotThreeTemp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/slotTwoWeather"
+        android:layout_width="42dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_weather_cloud_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slotTwoTime" />
+
+    <ImageView
+        android:id="@+id/slotOneWeather"
+        android:layout_width="42dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_weather_cloud_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slotOneTime" />
 
     <TextView
         android:id="@+id/textView2"
@@ -44,8 +74,8 @@
 
     <TextView
         android:id="@+id/currentCity"
-        android:layout_width="137dp"
-        android:layout_height="64dp"
+        android:layout_width="128dp"
+        android:layout_height="36dp"
         android:text="N/A"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,8 +84,8 @@
 
     <ImageView
         android:id="@+id/weatherPicture"
-        android:layout_width="166dp"
-        android:layout_height="110dp"
+        android:layout_width="152dp"
+        android:layout_height="102dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_weather_cloud_24"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,84 +98,29 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="156dp"
+        android:layout_marginTop="2dp"
         android:src="@drawable/ic_weather_cloud_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weatherPicture" />
-
-    <ImageView
-        android:id="@+id/dayTwoIcon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/ic_weather_cloud_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dayOneIcon" />
-
-    <ImageView
-        android:id="@+id/dayThreeIcon"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_weather_cloud_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dayTwoIcon" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:text="Current Temp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tempStyle" />
-
-    <TextView
-        android:id="@+id/tempStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="380dp"
-        android:text="*Style of weather*"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentTemperature" />
-
-    <TextView
-        android:id="@+id/highAndLow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="40dp"
-        android:text="H: N/A L: N/A"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/tempStyle" />
-
-    <TextView
-        android:id="@+id/currentTemperature"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weatherPicture" />
+        app:layout_constraintTop_toBottomOf="@+id/slotTwoTemp" />
 
     <TextView
         android:id="@+id/tempDayOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.359"
+        app:layout_constraintHorizontal_bias="0.424"
         app:layout_constraintStart_toEndOf="@+id/dayOneIcon"
         app:layout_constraintTop_toBottomOf="@+id/highAndLow" />
 
@@ -156,31 +131,39 @@
         android:layout_marginTop="40dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.359"
+        app:layout_constraintHorizontal_bias="0.424"
         app:layout_constraintStart_toEndOf="@+id/dayTwoIcon"
         app:layout_constraintTop_toBottomOf="@+id/tempDayOne" />
 
-    <TextView
-        android:id="@+id/tempDayThree"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.359"
-        app:layout_constraintStart_toEndOf="@+id/dayThreeIcon"
-        app:layout_constraintTop_toBottomOf="@+id/tempDayTwo" />
+    <ImageView
+        android:id="@+id/dayThreeIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_weather_cloud_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dayTwoIcon" />
 
-    <TextView
-        android:id="@+id/tempDayFour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.359"
-        app:layout_constraintStart_toEndOf="@+id/dayFourIcon"
-        app:layout_constraintTop_toBottomOf="@+id/tempDayThree" />
+    <ImageView
+        android:id="@+id/dayFourIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_weather_cloud_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dayThreeIcon" />
+
+    <ImageView
+        android:id="@+id/dayFiveCon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_weather_cloud_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dayFourIcon" />
 
     <TextView
         android:id="@+id/tempDayFive"
@@ -189,8 +172,184 @@
         android:layout_marginTop="44dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.359"
+        app:layout_constraintHorizontal_bias="0.424"
         app:layout_constraintStart_toEndOf="@+id/dayFiveCon"
         app:layout_constraintTop_toBottomOf="@+id/tempDayFour" />
+
+    <TextView
+        android:id="@+id/tempDayFour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.424"
+        app:layout_constraintStart_toEndOf="@+id/dayFourIcon"
+        app:layout_constraintTop_toBottomOf="@+id/tempDayThree" />
+
+    <TextView
+        android:id="@+id/tempDayThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.424"
+        app:layout_constraintStart_toEndOf="@+id/dayThreeIcon"
+        app:layout_constraintTop_toBottomOf="@+id/tempDayTwo" />
+
+    <ImageView
+        android:id="@+id/dayTwoIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_weather_cloud_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dayOneIcon" />
+
+    <TextView
+        android:id="@+id/tempStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*Style of weather*"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentTemperature" />
+
+    <TextView
+        android:id="@+id/highAndLow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="16dp"
+        android:text="H: N/A L: N/A"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/slotThreeTemp" />
+
+    <TextView
+        android:id="@+id/currentTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weatherPicture" />
+
+    <TextView
+        android:id="@+id/slotFiveTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slotFiveWeather" />
+
+    <TextView
+        android:id="@+id/slotTwoTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/slotOneTemp"
+        app:layout_constraintTop_toBottomOf="@+id/slotTwoWeather" />
+
+    <TextView
+        android:id="@+id/slotThreeTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="84dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/slotFourTemp"
+        app:layout_constraintHorizontal_bias="0.222"
+        app:layout_constraintStart_toEndOf="@+id/slotTwoTemp"
+        app:layout_constraintTop_toBottomOf="@+id/tempStyle" />
+
+    <TextView
+        android:id="@+id/slotFourTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/slotFiveTemp"
+        app:layout_constraintTop_toBottomOf="@+id/slotFourWeather" />
+
+    <TextView
+        android:id="@+id/slotOneTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/slotOneWeather"
+        app:layout_constraintVertical_bias="0.888" />
+
+    <TextView
+        android:id="@+id/slotOneTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/slotTwoTime"
+        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tempStyle" />
+
+    <TextView
+        android:id="@+id/slotTwoTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/slotThreeTime"
+        app:layout_constraintTop_toBottomOf="@+id/tempStyle" />
+
+    <TextView
+        android:id="@+id/slotThreeTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/slotThreeWeather"
+        app:layout_constraintEnd_toStartOf="@+id/slotFourTime"
+        app:layout_constraintTop_toBottomOf="@+id/tempStyle"
+        app:layout_constraintVertical_bias="0.166" />
+
+    <TextView
+        android:id="@+id/slotFourTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="104dp"
+        android:layout_marginBottom="96dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/highAndLow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tempStyle"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/slotFiveTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintStart_toEndOf="@+id/slotFourTime"
+        app:layout_constraintTop_toBottomOf="@+id/tempStyle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
