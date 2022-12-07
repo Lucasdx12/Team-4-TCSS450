@@ -1,6 +1,7 @@
 package Helpers;
 
 import android.app.Application;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ import org.json.JSONObject;
 
 import java.nio.charset.Charset;
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -59,8 +61,6 @@ public class WeatherService extends AndroidViewModel {
     public static void getWeatherInfo(TextView cityText, TextView tempText, TextView tempHighLowText, TextView weatherText, String city, String jwt) {
 
         // Properties
-//        String url = "https://tcss450-team4-webservice.herokuapp.com/weather?selectedCity=" + city;
-        //String url = "https://tcss450-team4-webservice.herokuapp.com/weather";
         String url = "https://tcss450-2022au-group4.herokuapp.com/weather";
         JSONObject body = new JSONObject();
 
@@ -134,8 +134,6 @@ public class WeatherService extends AndroidViewModel {
 
     public static void getForecast(FragmentWeatherBinding binding, String jwt) {
 
-
-       // String url = "https://tcss450-team4-webservice.herokuapp.com/forecast";
         String url = "https://tcss450-2022au-group4.herokuapp.com/forecast";
         JSONObject body = new JSONObject();
 
@@ -198,7 +196,7 @@ public class WeatherService extends AndroidViewModel {
     public static void getHourlyForecast(FragmentWeatherBinding binding, String jwt) {
 
 
-        //String url = "https://tcss450-team4-webservice.herokuapp.com/hourlyForecast";
+
         String url = "https://tcss450-2022au-group4.herokuapp.com/hourlyForecast";
         JSONObject body = new JSONObject();
 
@@ -224,26 +222,26 @@ public class WeatherService extends AndroidViewModel {
                     binding.slotThreeTemp.setText((tempStr));
 
                     tempStr =  "H:"  + convertKelToFer(jsonObject.getString("slotFourTemp"));
-                    binding.slotThreeTemp.setText((tempStr));
+                    binding.slotFourTemp.setText((tempStr));
 
                     tempStr =  "H:"  + convertKelToFer(jsonObject.getString("slotFiveTemp"));
-                    binding.slotFourTemp.setText((tempStr));
+                    binding.slotFiveTemp.setText((tempStr));
 
                     // Time
                     tempStr =  jsonObject.getString("slotOneTime");
-                    binding.slotOneTemp.setText((tempStr));
+                    binding.slotOneTime.setText((convertTime(tempStr)));
 
                     tempStr =  jsonObject.getString("slotTwoTime");
-                    binding.slotTwoTemp.setText((tempStr));
+                    binding.slotTwoTime.setText((convertTime(tempStr)));
 
                     tempStr =  jsonObject.getString("slotThreeTime");
-                    binding.slotThreeTemp.setText((tempStr));
+                    binding.slotThreeTime.setText((convertTime(tempStr)));
 
                     tempStr =  jsonObject.getString("slotFourTime");
-                    binding.slotThreeTemp.setText((tempStr));
+                    binding.slotFourTime.setText((convertTime(tempStr)));
 
                     tempStr =  jsonObject.getString("slotFiveTime");
-                    binding.slotFourTemp.setText((tempStr));
+                    binding.slotFiveTime.setText((convertTime(tempStr)));
 
                 } catch (JSONException e) {
                     //e.printStackTrace();
@@ -277,41 +275,42 @@ public class WeatherService extends AndroidViewModel {
     }
 
     // TODO: Get the weather and adjust the icon
-    public void setWeatherIcon(String currentWeather) {
+    public String getWeatherIcon(String currentWeather) {
 
+        String weather;
+
+        switch(currentWeather) {
+            case "fog":
+                weather = "fogIcon";
+            case "sun":
+                weather = "sunIcon";
+            case "sunny":
+                weather = "sunIcon";
+            case "snow":
+                weather = "snowIcon";
+            case "rain":
+                weather = "rainIcon";
+            case "raining":
+                weather = "rainIcon";
+            case "light rain":
+                weather = "rainIcon";
+            case "heavy rain":
+                weather = "rainIcon";
+            case "drizzle":
+                weather = "rainIcon";
+            case "haze":
+                weather = "hazeIcon";
+            case "wind":
+                weather = "windIcon";
+            case "clouds":
+                weather = "cloudIcon";
+            default:
+                weather = "cloudIcon";
+
+        }
+        return weather;
     }
 
-
-//    public void getWeatherData(final String jwt) {
-//        String url = "https://tcss450-team4-webservice.herokuapp.com/weather";
-//
-//        Request request = new JsonObjectRequest(
-//                Request.Method.GET,
-//                url,
-//                null, // No body for this get request
-//                null,
-//                this::handleError) {
-//
-//            @Override
-//            public Map<String, String> getHeaders() {
-//                Map<String, String> headers = new HashMap<>();
-//
-//                // Add headers <key,value>
-//                headers.put("Authorization", jwt);
-//                return headers;
-//            }
-//        };
-//
-//        request.setRetryPolicy(new DefaultRetryPolicy(
-//                10_000,
-//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-//
-//        // Instantiate the RequestQueue and add the request to the queue.
-//        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
-//                .addToRequestQueue(request);
-//
-//    }
 
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
@@ -338,6 +337,13 @@ public class WeatherService extends AndroidViewModel {
         DecimalFormat df = new DecimalFormat("#0.00");
         Double num = (((Double.parseDouble(temp) - 273) * 9/5) + 32);
         return  df.format(num) + " °F";
+
+    }
+
+    public static String convertTime(String time) {
+
+        Date date = new Date(Integer.parseInt(time) * 1000L);
+        return (String) DateFormat.format("hh",   date);
 
     }
 }

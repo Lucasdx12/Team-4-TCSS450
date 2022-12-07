@@ -43,7 +43,7 @@
         android:id="@+id/slotTwoWeather"
         android:layout_width="42dp"
         android:layout_height="40dp"
-        android:layout_marginStart="120dp"
+        android:layout_marginStart="112dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_weather_cloud_24"
         app:layout_constraintStart_toStartOf="parent"
@@ -299,10 +299,10 @@
         android:id="@+id/slotOneTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/slotTwoTime"
-        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tempStyle" />
 
@@ -311,9 +311,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/slotThreeTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tempStyle" />
 
     <TextView
@@ -321,10 +322,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
-        android:layout_marginEnd="8dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/slotThreeWeather"
-        app:layout_constraintEnd_toStartOf="@+id/slotFourTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tempStyle"
         app:layout_constraintVertical_bias="0.166" />
 
@@ -333,11 +334,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="104dp"
         android:layout_marginBottom="96dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/highAndLow"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.702"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tempStyle"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -348,8 +350,8 @@
         android:layout_marginTop="8dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.16"
-        app:layout_constraintStart_toEndOf="@+id/slotFourTime"
+        app:layout_constraintHorizontal_bias="0.889"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tempStyle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
