@@ -164,6 +164,7 @@ public class WeatherService extends AndroidViewModel {
                     tempStr =  "L:"  + convertKelToFer(jsonObject.getString("dayFiveTempMin")) + " H: " + convertKelToFer(jsonObject.getString("dayFiveTempMax"));
                     binding.tempDayFive.setText((tempStr));
 
+                    // Set Icons
                     tempStr =  jsonObject.getString("dayOneWeather");
                     binding.dayOneIcon.setImageResource(getWeatherIcon(tempStr));
 
@@ -178,6 +179,22 @@ public class WeatherService extends AndroidViewModel {
 
                     tempStr =  jsonObject.getString("dayFiveWeather");
                     binding.dayFiveIcon.setImageResource(getWeatherIcon(tempStr));
+
+                    // Set dates
+                    tempStr =  jsonObject.getString("dayOne");
+                    binding.dayOneText.setText(convertDate(tempStr));
+
+                    tempStr =  jsonObject.getString("dayTwo");
+                    binding.dayTwoText.setText(convertDate(tempStr));
+
+                    tempStr =  jsonObject.getString("dayThree");
+                    binding.dayThreeText.setText(convertDate(tempStr));
+
+                    tempStr =  jsonObject.getString("dayFour");
+                    binding.dayFourText.setText(convertDate(tempStr));
+
+                    tempStr =  jsonObject.getString("dayFive");
+                    binding.dayFiveText.setText(convertDate(tempStr));
 
                 } catch (JSONException e) {
                     //e.printStackTrace();
@@ -341,6 +358,12 @@ public class WeatherService extends AndroidViewModel {
         SimpleDateFormat simpDate;
         simpDate = new SimpleDateFormat("kk:mm");
         return simpDate.format(date).toString();
+    }
+
+    public static String convertDate(String time) {
+        Date date = new Date(Integer.parseInt(time) * 1000L);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E");
+        return simpleDateFormat.format(date);
     }
 
     public static int getWeatherIcon(String weather) {
