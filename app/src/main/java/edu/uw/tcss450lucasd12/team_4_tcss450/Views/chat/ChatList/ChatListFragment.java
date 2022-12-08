@@ -14,8 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
-import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatAddMemberViewModel;
-import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentAddChatCardBinding;
+import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoomSetting.ChatAddMemberViewModel;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatListBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
@@ -28,8 +27,7 @@ public class ChatListFragment extends Fragment {
 
     private ChatListViewModel mListModel;
     private UserInfoViewModel mUserModel;
-    private ChatAddRoomViewModel mAddChatModel;
-
+    private ChatAddRoomViewModel mAddRoomModel;
     private ChatAddMemberViewModel mAddMemModel;
 
     public ChatListFragment() {
@@ -42,7 +40,7 @@ public class ChatListFragment extends Fragment {
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         mUserModel = provider.get(UserInfoViewModel.class);
         mListModel = provider.get(ChatListViewModel.class);
-        mAddChatModel = provider.get(ChatAddRoomViewModel.class);
+        mAddRoomModel = provider.get(ChatAddRoomViewModel.class);
 
         mAddMemModel = provider.get(ChatAddMemberViewModel.class);
 
@@ -66,19 +64,18 @@ public class ChatListFragment extends Fragment {
                 mListModel.getChatList()
         ));
 
-        binding.addChatRoomButton.setOnClickListener(button -> {
-//            binding.cardRootAddRoom.setVisibility(ViewGroup.VISIBLE);
-            openDialog();
-        });
+        binding.addChatRoomButton.setOnClickListener(button -> openDialog());
+
 
         mListModel.addChatListObserver(getViewLifecycleOwner(), list -> {
             recyclerView.getAdapter().notifyDataSetChanged();
         });
 
-//        mAddChatModel.addResponseObserver(getViewLifecycleOwner(), response -> {
-//                mAddMemModel.addMember(mAddChatModel.getChatId(),
-//                        mUserModel.getJwt());
-//        });
+        mAddRoomModel.addResponseObserver(getViewLifecycleOwner(), response -> {
+//            mAddMemModel.addMember(mAddChatModel.getChatId(),
+//                    mUserModel.getJwt());
+//            recyclerView.getAdapter().notifyDataSetChanged();
+        });
 
         mAddMemModel.addResponseObserver(getViewLifecycleOwner(), response -> {
             recyclerView.getAdapter().notifyDataSetChanged();

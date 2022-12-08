@@ -27,6 +27,7 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
 
 public class ChatAddRoomViewModel extends AndroidViewModel {
     private final MutableLiveData<JSONObject> mResponse;
+    private int chatId = -1;
 
     public ChatAddRoomViewModel(@NonNull Application application) {
         super(application);
@@ -37,6 +38,15 @@ public class ChatAddRoomViewModel extends AndroidViewModel {
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
         mResponse.observe(owner, observer);
+    }
+
+    public int getChatId() {
+        if (this.chatId == -1) {
+            Log.e("WHHYYYY", "CHATID IS: " + this.chatId);
+        } else {
+            Log.e("ChatAddRoomViewModel getChatId method", "Let's see: " + this.chatId);
+        }
+        return this.chatId;
     }
 
     public void createRoom(final String jwt, final String name) {
@@ -77,40 +87,20 @@ public class ChatAddRoomViewModel extends AndroidViewModel {
                 .addToRequestQueue(request);
     }
 
-    public void addInitialMember(final int chatId, final String jwt) {
-        String url = getApplication().getResources().getString(R.string.base_url) +
-                "chats/" + chatId;
-
-        Request request = new JsonObjectRequest(
-                Request.Method.PUT,
-                url,
-                null,
-                mResponse::setValue,
-                this::handleError) {
-
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> headers = new HashMap<>();
-
-                // Add headers <key,value>
-                headers.put("Authorization", jwt);
-                return headers;
-            }
-        };
-
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                10_000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        // Instantiate the RequestQueue and add the request to the queue.
-        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
-                .addToRequestQueue(request);
-    }
-
     private void handleSuccess(final JSONObject response) {
+        try {
+            Log.e("CHATADDROOMVIEWMODEL", response.toString());
+            int chatId2 = response.getInt("chatID");
+            Log.e("CHATADDROOM INTEGER", "New Chat Id: " + chatId2);
 
-        mResponse.setValue(response);
+            chatId = response.getInt("chatID");
+            Log.e("ChatAddRoom Instance Integer", "Changed CHat Id: " + chatId);
+            mResponse.setValue(response);
+
+        } catch (JSONException e) {
+            Log.e("JSON PARSE ERROR", "Found in handle Success ChatAddRoomViewModel");
+            Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
+        }
     }
 
     private void handleError(final VolleyError error) {

@@ -58,6 +58,9 @@
         <argument
             android:name="chat"
             app:argType="edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatList" />
+        <action
+            android:id="@+id/action_chatRoomFragment_to_chatRoomSetting"
+            app:destination="@id/chatRoomSetting" />
     </fragment>
     <fragment
         android:id="@+id/contactProfileFragment"
@@ -78,7 +81,7 @@
         android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoomSetting.ChatRoomSetting"
         android:label="ChatRoomSetting" >
         <argument
-            android:name="chat"
-            app:argType="edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatRoom" />
+            android:name="chatId"
+            app:argType="integer" />
     </fragment>
 </navigation>

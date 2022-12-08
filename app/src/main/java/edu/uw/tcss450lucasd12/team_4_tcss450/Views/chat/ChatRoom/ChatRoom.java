@@ -42,6 +42,7 @@ public final class ChatRoom implements Serializable {
                 msg.getString("message"),
                 msg.getString("email"),
                 msg.getString("timestamp"));
+//                msg.getString("username"));
     }
 
     public int getMessageId() {

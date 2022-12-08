@@ -16,10 +16,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".Views.chat.ChatRoomSetting.ChatRoomSetting"
-        tools:listitem="@layout/fragment_room_member_card" />
+        tools:listitem="@layout/fragment_chat_member_card" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonAddMember"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add_member"

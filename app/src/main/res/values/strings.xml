@@ -35,11 +35,15 @@
     <string name="currentHL">L:37   H:45</string>
 
     <!-- Chats -->
-    <string name="text_chat_room_name">Chat Room Name:</string>
+    <string name="create_chat_room">Create Chat Room</string>
     <string name="enter_chat_room_name">Enter Chat Room Name Here</string>
-    <string name="confirm">Confirm</string>
+    <string name="create_room">Create</string>
     <string name="cancel">Cancel</string>
-    <string name="add_member">Add Member</string>
+    <string name="title_add_member">Add Member</string>
+    <string name="enter_member_email">Enter Member\'s Email</string>
+    <string name="add_member">Add</string>
+    <string name="delete_member">Delete</string>
+    <string name="ok">OK</string>
 
     <!--TODO: added for landing, weather, & contacts -->
     <string name="title_landing">Landing</string>

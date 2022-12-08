@@ -1,4 +1,4 @@
-package edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom;
+package edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoomSetting;
 
 import android.app.Application;
 import android.util.Log;
@@ -14,43 +14,40 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
 
-public class ChatGetEmailViewModel extends AndroidViewModel {
-    private MutableLiveData<List<String>> mEmails;
+public class ChatAddMemberViewModel extends AndroidViewModel {
+    private final MutableLiveData<JSONObject> mResponse;
 
-    public ChatGetEmailViewModel(@NonNull Application application) {
+    public ChatAddMemberViewModel(@NonNull Application application) {
         super(application);
-        mEmails = new MutableLiveData<>();
-        mEmails.setValue(new ArrayList<>());
+        mResponse = new MutableLiveData<>();
+        mResponse.setValue(new JSONObject());
     }
 
     public void addResponseObserver(@NonNull LifecycleOwner owner,
-                                    @NonNull Observer<? super List<String>> observer) {
-        mEmails.observe(owner, observer);
+                                    @NonNull Observer<? super JSONObject> observer) {
+        mResponse.observe(owner, observer);
     }
 
-    public void getAllEmails(final String jwt, final int chatId) {
+    public void addMember(final int chatId, final String jwt) {
         String url = getApplication().getResources().getString(R.string.base_url) +
-                "chats/" + chatId;
+            "chats/" + chatId;
 
         Request request = new JsonObjectRequest(
-                Request.Method.GET,
+                Request.Method.PUT,
                 url,
                 null,
-                this::handleSuccess,
+                mResponse::setValue,
                 this::handleError) {
 
             @Override
@@ -73,41 +70,12 @@ public class ChatGetEmailViewModel extends AndroidViewModel {
                 .addToRequestQueue(request);
     }
 
-    private void handleSuccess(final JSONObject response) {
-        List<String> emails;
-
-        try {
-            emails = new ArrayList<>();
-            JSONArray listOfEmails = response.getJSONArray("rows");
-            for (int i = 0; i < listOfEmails.length(); i++) {
-                JSONObject email = listOfEmails.getJSONObject(i);
-                String userEmail = email.getString("email");
-
-                if (!emails.contains(userEmail)) {
-                    // Don't add a duplicate
-                    emails.add(0, userEmail);
-                } else {
-                    // This shouldn't happen but could with the asynchronous
-                    // nature of the application
-                    Log.wtf("Email already received",
-                            "Or duplicate email: " + userEmail);
-                }
-            }
-
-            // Inform observers of the change (setValue)
-            mEmails.setValue(emails);
-        } catch (JSONException e) {
-            Log.e("JSON PARSE ERROR", "Found ing handle Success ChatGetEmailViewModel");
-            Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
-        }
-    }
-
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
-            Log.e("NETWORK ERROR IN CHATGETEMAILVIEWMODEL", error.getMessage());
+            Log.e("NETWORK ERROR", error.getMessage());
         } else {
             String data = new String(error.networkResponse.data, Charset.defaultCharset());
-            Log.e("CLIENT ERROR IN CHATGETEMAILVIEWMODEL",
+            Log.e("CLIENT ERROR",
                     error.networkResponse.statusCode +
                     " " +
                     data);

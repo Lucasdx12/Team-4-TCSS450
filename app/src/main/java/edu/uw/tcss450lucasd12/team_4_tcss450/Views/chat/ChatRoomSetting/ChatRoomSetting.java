@@ -4,18 +4,18 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
-import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatAddMemberViewModel;
-import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatDeleteMemberViewModel;
-import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatGetEmailViewModel;
-import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatRoomBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatRoomSettingBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
@@ -29,7 +29,7 @@ public class ChatRoomSetting extends Fragment {
     private ChatGetEmailViewModel mEmailModel;
     private UserInfoViewModel mUserModel;
 
-//    private ChatRoomSettingArgs mArgs;
+    private ChatRoomSettingArgs mArgs;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +41,8 @@ public class ChatRoomSetting extends Fragment {
         mEmailModel = provider.get(ChatGetEmailViewModel.class);
         mUserModel = provider.get(UserInfoViewModel.class);
 
-//        mArgs = ChatRoomSettingArgs.fromBundle(getArguments());
+        mArgs = ChatRoomSettingArgs.fromBundle(getArguments());
+        mEmailModel.getAllEmails(mUserModel.getJwt(), mArgs.getChatId());
     }
 
     @Override
@@ -56,7 +57,30 @@ public class ChatRoomSetting extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         FragmentChatRoomSettingBinding binding = FragmentChatRoomSettingBinding.bind(getView());
 
-//        mDelMemModel.deleteMember(mArgs.getChat().getMessageId(), mUserModel.getJwt(), mUserModel.getEmail());
+        final RecyclerView recyclerView = binding.memberList;
 
+        recyclerView.setAdapter(new ChatRoomSettingRecyclerViewAdapter(
+                mEmailModel.getListOfEmailsByChatId(mArgs.getChatId()),
+                mArgs.getChatId(),
+                mUserModel.getJwt(),
+                mDelMemModel
+        ));
+
+        binding.buttonAddMember.setOnClickListener(button -> {
+            openDialog();
+        });
+
+        mEmailModel.addResponseObserver(mArgs.getChatId(), getViewLifecycleOwner(), list -> {
+            recyclerView.getAdapter().notifyDataSetChanged();
+        });
+
+        mDelMemModel.addResponseObserver(getViewLifecycleOwner(), observer -> {
+            recyclerView.getAdapter().notifyDataSetChanged();
+        });
+    }
+
+    private void openDialog() {
+        DialogFragment dialogFragment = new ChatAddMemDialog();
+        dialogFragment.show(getChildFragmentManager(), "addmember");
     }
 }

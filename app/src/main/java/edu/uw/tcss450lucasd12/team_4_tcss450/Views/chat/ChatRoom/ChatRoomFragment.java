@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -80,6 +81,12 @@ public class ChatRoomFragment extends Fragment {
 
         // Send the user to the bottom of the recycler view.
         recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
+
+        binding.button.setOnClickListener(button -> {
+            Navigation.findNavController(getView()).navigate(
+                    ChatRoomFragmentDirections
+                            .actionChatRoomFragmentToChatRoomSetting(mArgs.getChat().getChatId()));
+        });
 
         // Send button was clicked. Send the message via the SendViewModel.
         binding.buttonSendMessage.setOnClickListener(button -> {
