@@ -40,11 +40,16 @@
             </item>
 
 
-            <item android:id="@+id/log_out"
-                android:title="@string/settings_logoff"/>
+        <item android:id="@+id/log_out"
+            android:title="@string/settings_logoff"/>
+
+        <item android:id="@+id/ChangePassword"
+            android:title="@string/settings_change_password"/>
         </menu>
+    </item>
 
 
-        </item>
+
+
 
 </menu>

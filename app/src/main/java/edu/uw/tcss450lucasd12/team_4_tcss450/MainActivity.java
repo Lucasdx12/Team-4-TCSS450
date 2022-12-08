@@ -1,7 +1,10 @@
 package edu.uw.tcss450lucasd12.team_4_tcss450;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
@@ -11,6 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.app.Activity;
 import android.app.StatusBarManager;
@@ -60,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
     Handler mHandler; //use to refresh activity to see change in themes
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.landing, R.id.weather, R.id.chat, R.id.contacts)
+                R.id.landing, R.id.weather, R.id.chat, R.id.contacts,R.id.ChangePassword)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
@@ -148,10 +154,10 @@ public class MainActivity extends AppCompatActivity {
 
     //Let user click the settings options:
     //TODO: add options in the settings menu
+    @SuppressLint("ResourceType")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Spinner spinTheme = (Spinner) findViewById(R.id.theme_picker);
-
             switch (item.getItemId()) {
                 case R.id.action_settings:
                     Log.d("SETTINGS", "Clicked");
@@ -163,9 +169,11 @@ public class MainActivity extends AppCompatActivity {
 
                     if (item.isChecked()) {
                         item.setChecked(false);
+                        this.recreate();
                     } else {
                         item.setChecked(true);
                         setTheme(R.style.Summer);
+                        this.recreate();
                     }
                     return true;
 
@@ -199,9 +207,11 @@ public class MainActivity extends AppCompatActivity {
 
                     if (item.isChecked()) {
                         item.setChecked(false);
+                        this.recreate();
                     } else {
                         item.setChecked(true);
                         setTheme(R.style.Winter);
+                        this.recreate();
                     }
                     refreshPage();
                     return true;
@@ -209,12 +219,16 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.spring_theme:
                     if (item.isChecked()) {
                         item.setChecked(false);
+                        this.recreate();
                     } else {
                         item.setChecked(true);
                         setTheme(R.style.Spring);
+                        this.recreate();
                     }
                     return true;
 //                case R.id.log_out: //TODO: make log out button for user
+                case R.id.ChangePassword:
+                    return true;
                 default:
                     return super.onOptionsItemSelected(item);
             }

@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ import Helpers.ChatHelper;
 import Helpers.WeatherService;
 import edu.uw.tcss450lucasd12.team_4_tcss450.MainActivity;
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
+import edu.uw.tcss450lucasd12.team_4_tcss450.Views.auth.signin.SignInFragmentDirections;
 import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatList;
 import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatListFragment;
 import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatListGenerator;
@@ -48,13 +50,12 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 public class LandingFragment extends Fragment {
 
     //******************** Properties *****************************
-
-    TextView mCurrentCity;
-    TextView mCurrentTemp;
-    TextView mCurrentWeather;
-    TextView mCurrentHL;
-    ImageView mCurrentWeatherIcon;
-    RecyclerView mNotifications;
+    private TextView mCurrentCity;
+    private TextView mCurrentTemp;
+    private TextView mCurrentWeather;
+    private TextView mCurrentHL;
+    private ImageView mCurrentWeatherIcon;
+    private RecyclerView mNotifications;
     private UserInfoViewModel mUserModel;
 
 

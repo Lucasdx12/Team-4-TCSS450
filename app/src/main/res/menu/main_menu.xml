@@ -33,6 +33,12 @@
         android:title="@string/contacts"
         android:textColor="@color/black"
         />
+    <item
+        android:id="@+id/ChangePassword"
+        android:icon="@drawable/ic_password"
+        android:title="@string/title_change_password"
+        android:textColor="@color/black"
+        />
 
 
 </menu>

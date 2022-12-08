@@ -25,6 +25,7 @@
     <string name="chat_room_message">Type message here</string>
     <string name="hello_blank_fragment">"Hello World!"</string>
     <string name="prompt_email_pass">Send email to reset your password.</string>
+    <string name="prompt_change_pass">Change your password.</string>
 
 
     <!-- Current Weather -->
@@ -47,6 +48,7 @@
     <string name="title_contacts_profile">Profile</string>
     <string name="title_chat_init">Chat</string>
     <string name="title_chat_room">Chat Room</string>
+    <string name="title_change_password">Change Password</string>
 
     <!-- Web Service URL -->
     <string name="base_url">https://tcss450-2022au-group4.herokuapp.com/</string>
@@ -72,4 +74,5 @@
 
     <!-- log out of account: -->
     <string name="settings_logoff">Log Out</string>
+    <string name="settings_change_password">Change Password</string>
 </resources>

@@ -7,6 +7,12 @@
     app:startDestination="@id/landing">
 
     <fragment
+        android:id="@+id/ChangePassword"
+        android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.auth.changepassword.ChangePasswordFragment"
+        android:label="@string/title_change_password"
+        tools:layout="@layout/fragment_change_password"/>
+
+    <fragment
         android:id="@+id/chat"
         android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatListFragment"
         android:label="@string/title_chat_init"

@@ -24,8 +24,19 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="/private/var/folders/gq/4y7pzp1j7231jd3kkzgn9whm0000gn/T/ic_android_black_24dp.xml" />
+                                                <entry key="imagePath" value="C:\Users\alexzr\AppData\Local\Temp\baseline_password_24.xml" />
                                                 <entry key="opacityPercent" value="60" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                      <entry key="clipartAsset">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/password/baseline_password_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -37,7 +48,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="$USER_HOME$/Downloads/fogIcon.png" />
+                                                <entry key="imagePath" value="C:\Users\alexzr\Downloads\fogIcon.png" />
                                                 <entry key="opacityPercent" value="60" />
                                               </map>
                                             </option>
@@ -70,9 +81,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/fogIcon.png" />
-                                      <entry key="outputName" value="fogIcon" />
+                                      <entry key="imageAsset" value="C:\Users\alexzr\Downloads\fogIcon.png" />
+                                      <entry key="outputName" value="ic_password" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -88,7 +98,9 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="imagePath" value="/private/var/folders/gq/4y7pzp1j7231jd3kkzgn9whm0000gn/T/ic_android_black_24dp.xml" />
+                                                <entry key="color" value="000000" />
+                                                <entry key="imagePath" value="C:\Users\alexzr\AppData\Local\Temp\ic_android_black_24dp.xml" />
+                                                <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -100,7 +112,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="$USER_HOME$/Downloads/cloudIcon.png" />
+                                                <entry key="imagePath" value="C:\Users\alexzr\Downloads" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -133,10 +145,7 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="generateLegacyIcon" value="false" />
-                                      <entry key="generatePlayStoreIcon" value="false" />
-                                      <entry key="generateRoundIcon" value="false" />
-                                      <entry key="outputName" value="cloudIcon" />
+                                      <entry key="outputName" value="ic_password" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -153,7 +162,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="/private/var/folders/gq/4y7pzp1j7231jd3kkzgn9whm0000gn/T/ic_android_black_24dp.xml" />
+                                                <entry key="imagePath" value="C:\Users\alexzr\AppData\Local\Temp\ic_android_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -165,7 +174,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="$USER_HOME$/Downloads/fogIcon.png" />
+                                                <entry key="imagePath" value="C:\Users\alexzr\Downloads\fogIcon.png" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -198,7 +207,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/fogIcon.png" />
+                                      <entry key="imageAsset" value="C:\Users\alexzr\Downloads\fogIcon.png" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -215,7 +224,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="/private/var/folders/gq/4y7pzp1j7231jd3kkzgn9whm0000gn/T/ic_android_black_24dp.xml" />
+                                                <entry key="imagePath" value="C:\Users\alexzr\AppData\Local\Temp\ic_android_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -295,7 +304,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="imagePath" value="/private/var/folders/gq/4y7pzp1j7231jd3kkzgn9whm0000gn/T/ic_android_black_24dp.xml" />
+                                                <entry key="imagePath" value="C:\Users\alexzr\AppData\Local\Temp\ic_android_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -339,6 +348,11 @@
                                 </PersistentState>
                               </value>
                             </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>
