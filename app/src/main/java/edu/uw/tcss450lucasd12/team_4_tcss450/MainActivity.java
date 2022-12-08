@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -48,6 +49,7 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatRoomViewMod
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.ActivityMainBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatRoomBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.NewMessageCountViewModel;
+import edu.uw.tcss450lucasd12.team_4_tcss450.model.PushyTokenViewModel;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 import edu.uw.tcss450lucasd12.team_4_tcss450.services.PushReceiver;
 
@@ -226,13 +228,36 @@ public class MainActivity extends AppCompatActivity {
                         this.recreate();
                     }
                     return true;
-//                case R.id.log_out: //TODO: make log out button for user
+                case R.id.log_out: //TODO: make log out button for user
+                    signOut();
+                    return true;
+
                 case R.id.ChangePassword:
                     return true;
                 default:
                     return super.onOptionsItemSelected(item);
             }
 
+    }
+
+    private void signOut() {
+        SharedPreferences prefs =
+                getSharedPreferences(
+                        getString(R.string.keys_shared_prefs),
+                        Context.MODE_PRIVATE);
+
+        prefs.edit().remove(getString(R.string.keys_prefs_jwt)).apply();
+        PushyTokenViewModel model = new ViewModelProvider(this)
+                .get(PushyTokenViewModel.class);
+
+        // When we hear back from the web service quit
+        model.addResponseObserver(this, result -> finishAndRemoveTask());
+
+        model.deleteTokenFromWebservice(
+                new ViewModelProvider(this)
+                        .get(UserInfoViewModel.class)
+                        .getJwt()
+        );
     }
 
     private void refreshPage() {

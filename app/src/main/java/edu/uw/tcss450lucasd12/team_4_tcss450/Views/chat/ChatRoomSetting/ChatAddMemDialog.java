@@ -21,6 +21,11 @@ public class ChatAddMemDialog extends DialogFragment {
     private UserInfoViewModel mUserModel;
 
     private FragmentAddMemberCardBinding mBinding;
+    private final int mChatId;
+
+    public ChatAddMemDialog(int chatId) {
+        mChatId = chatId;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +53,10 @@ public class ChatAddMemDialog extends DialogFragment {
                 .setPositiveButton(R.string.add_member, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //mAddMemberModel.addMember();
+                        mBinding.editTextEmail.getText().toString();
+                        mAddMemberModel.addOtherMembers(mChatId,
+                                mUserModel.getJwt(),
+                                mBinding.editTextEmail.getText().toString());
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

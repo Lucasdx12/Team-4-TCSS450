@@ -18,7 +18,7 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
 public class ChatAddDialog extends DialogFragment {
 
-    private ChatAddRoomViewModel mAddChatModel;
+    private ChatAddRoomViewModel mAddRoomModel;
     private UserInfoViewModel mUserModel;
 
     private FragmentAddChatCardBinding mBinding;
@@ -28,7 +28,7 @@ public class ChatAddDialog extends DialogFragment {
         super.onCreate(savedInstanceState);
         ViewModelProvider provider = new ViewModelProvider(getActivity());
 
-        mAddChatModel = provider.get(ChatAddRoomViewModel.class);
+        mAddRoomModel = provider.get(ChatAddRoomViewModel.class);
         mUserModel = provider.get(UserInfoViewModel.class);
     }
 
@@ -49,7 +49,7 @@ public class ChatAddDialog extends DialogFragment {
                 .setPositiveButton(R.string.create_room, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        mAddChatModel.createRoom(mUserModel.getJwt(),
+                        mAddRoomModel.createRoom(mUserModel.getJwt(),
                                 mBinding.editTextRoomName.getText().toString());
                     }
                 })

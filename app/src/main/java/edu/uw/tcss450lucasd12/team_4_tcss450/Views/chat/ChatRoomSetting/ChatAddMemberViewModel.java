@@ -70,6 +70,53 @@ public class ChatAddMemberViewModel extends AndroidViewModel {
                 .addToRequestQueue(request);
     }
 
+    public void addOtherMembers(final int chatId, final String jwt, final String email) {
+        String url = getApplication().getResources().getString(R.string.base_url)
+                + "chats/" + chatId
+                + "/" + email;
+
+        Request request = new JsonObjectRequest(
+                Request.Method.PUT,
+                url,
+                null,
+                this::handleSuccess,
+                this::handleError) {
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> header = new HashMap<>();
+
+                // Add headers <key,value>
+                header.put("Authorization", jwt);
+                return header;
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        // Instantiate the RequestQueue and add the request to the queue.
+        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
+                .addToRequestQueue(request);
+    }
+
+    private void handleSuccess(final JSONObject response) {
+        try {
+            int memberid = response.getInt("memberid");
+            Log.e("CHATADDMEMBER", memberid + " ");
+            boolean isTrue = response.getBoolean("success");
+            Log.e("CHATADDMEMBERBOOLEAN", isTrue + " ");
+
+            mResponse.setValue(response);
+        } catch (JSONException e) {
+            Log.e("JSON PARSE ERROR", "Found in handle Success ChatAddMemberViewModel");
+            Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
+
+        }
+    }
+
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             Log.e("NETWORK ERROR", error.getMessage());

@@ -108,4 +108,16 @@
         app:layout_constraintLeft_toRightOf="@id/buttonForgotPassword"
         app:layout_constraintTop_toBottomOf="@id/buttonLogin" />
 
+    <Switch
+        android:id="@+id/switch_signin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+
+        android:checked="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogin" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

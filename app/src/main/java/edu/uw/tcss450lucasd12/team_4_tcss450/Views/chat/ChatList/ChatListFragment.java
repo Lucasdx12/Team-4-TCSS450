@@ -72,9 +72,9 @@ public class ChatListFragment extends Fragment {
         });
 
         mAddRoomModel.addResponseObserver(getViewLifecycleOwner(), response -> {
-//            mAddMemModel.addMember(mAddChatModel.getChatId(),
-//                    mUserModel.getJwt());
-//            recyclerView.getAdapter().notifyDataSetChanged();
+            mAddMemModel.addMember(mAddRoomModel.getChatId(),
+                    mUserModel.getJwt());
+            recyclerView.getAdapter().notifyDataSetChanged();
         });
 
         mAddMemModel.addResponseObserver(getViewLifecycleOwner(), response -> {

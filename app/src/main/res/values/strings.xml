@@ -27,6 +27,9 @@
     <string name="prompt_email_pass">Send email to reset your password.</string>
     <string name="prompt_change_pass">Change your password.</string>
 
+    <string name="switch_sign_in">Stay Signed in</string>
+    <string name="keys_shared_prefs">My Auth App Shared Prefs</string>
+    <string name="keys_prefs_jwt">Shared Prefs JWT</string>
 
     <!-- Current Weather -->
     <string name="currentCity">Tacoma</string>

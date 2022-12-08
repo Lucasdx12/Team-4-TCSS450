@@ -41,7 +41,8 @@
 
 
         <item android:id="@+id/log_out"
-            android:title="@string/settings_logoff"/>
+            android:title="@string/settings_logoff"
+            app:showAsAction="never"/>
 
         <item android:id="@+id/ChangePassword"
             android:title="@string/settings_change_password"/>

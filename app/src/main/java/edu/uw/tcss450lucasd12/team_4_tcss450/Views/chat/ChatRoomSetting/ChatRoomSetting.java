@@ -43,6 +43,7 @@ public class ChatRoomSetting extends Fragment {
 
         mArgs = ChatRoomSettingArgs.fromBundle(getArguments());
         mEmailModel.getAllEmails(mUserModel.getJwt(), mArgs.getChatId());
+        Log.e("CHATIDSETTING", mArgs.getChatId() + " ");
     }
 
     @Override
@@ -80,7 +81,7 @@ public class ChatRoomSetting extends Fragment {
     }
 
     private void openDialog() {
-        DialogFragment dialogFragment = new ChatAddMemDialog();
+        DialogFragment dialogFragment = new ChatAddMemDialog(mArgs.getChatId());
         dialogFragment.show(getChildFragmentManager(), "addmember");
     }
 }
