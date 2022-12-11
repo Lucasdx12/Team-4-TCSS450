@@ -29,53 +29,44 @@ public class ContactsListFragment extends Fragment {
     private ContactsViewModel mModel;
     private UserInfoViewModel mUserModel;
 
-    private void configImageButton(View v) {
-        ImageButton button = (ImageButton) v.findViewById(R.id.imagep);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(), "Viewing profile:", Toast.LENGTH_LONG).show();
-            }
-        });
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ViewModelProvider provider = new ViewModelProvider(getActivity());
+        mModel = provider.get(ContactsViewModel.class);
+        mUserModel = provider.get(UserInfoViewModel.class);
+        mModel.connectGet(mUserModel.getJwt());
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contacts_list, container, false);
 
-        if (view instanceof RecyclerView) {
-            ((RecyclerView) view).setAdapter(
-                    new ContactsRecyclerViewAdapter(ContactsListGenerator.getContactsList()));
-        }
+//        if (view instanceof RecyclerView) {
+//            ((RecyclerView) view).setAdapter(
+//                    new ContactsRecyclerViewAdapter(ContactsListGenerator.getContactsList()));
+//        }
 
         return view;
 
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        mModel = new ViewModelProvider(getActivity()).get(ContactsViewModel.class);
-////        mModel.getSelectedContact(); //.connectGet()
-//    }
+        FragmentContactsListBinding binding = FragmentContactsListBinding.bind(getView());
 
-
-//    @Override
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//
-//        FragmentContactsListBinding binding = FragmentContactsListBinding.bind(getView());
-//
-//        mModel.addContactsObserver(getViewLifecycleOwner(), contactList -> {
-//            if (!contactList.isEmpty()) {
-//                binding.listRoot.setAdapter(
-//                        new ContactsRecyclerViewAdapter(contactList)
-//                );
-//                binding.layoutWait.setVisibility(View.GONE);
-//            }
-//        });
-//    }
+        mModel.addContactsObserver(getViewLifecycleOwner(), contactList -> {
+            if (!contactList.isEmpty()) {
+                binding.listRoot.setAdapter(
+                        new ContactsRecyclerViewAdapter(contactList)
+                );
+                binding.layoutWait.setVisibility(View.GONE);
+            }
+        });
+    }
 
 }

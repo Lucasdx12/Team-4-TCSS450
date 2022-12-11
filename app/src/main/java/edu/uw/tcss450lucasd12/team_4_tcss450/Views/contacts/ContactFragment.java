@@ -20,6 +20,7 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
  * A simple {@link Fragment} subclass.
  */
 public class ContactFragment extends Fragment {
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,9 +40,6 @@ public class ContactFragment extends Fragment {
         binding.namep.setText(args.getContact().getNickname());
         int friendStatus = args.getContact().getFriendStatus();
 
-        UserInfoViewModel model = new ViewModelProvider(getActivity()).get(UserInfoViewModel.class);
-        binding.namep.setText(args.getContact().getNickname());
-
         binding.friendButton.setOnClickListener(button ->
         {
             /*
@@ -59,6 +57,35 @@ public class ContactFragment extends Fragment {
             }
 //            binding.friendButton.setText();
         });
+
+//        if(status == 1) {
+//            contactStatus = "Friends";
+//            binding.friendButton.setOnClickListener(button -> {
+//                binding.buttonContactStatus.setText("Add Friend");
+//                binding.buttonRemoveContact.setVisibility(View.GONE);
+//                binding.buttonContactStatus.setOnClickListener(request ->{
+//                    binding.buttonContactStatus.setText("Requested");
+//                    binding.buttonRemoveContact.setText("Cancel Request");
+//                    binding.buttonRemoveContact.setVisibility(View.VISIBLE);
+//                });
+//            });
+//
+//        } else {
+//            contactStatus = "Add Friend";
+//            binding.friendButton.setOnClickListener(button -> {
+//                binding.friendButton.setText("Requested");
+//                binding.friendButton.setText("Cancel Request");
+//                binding.friendButton.setVisibility(View.VISIBLE);
+//                binding.friendButton.setOnClickListener(request ->{
+//                    binding.friendButton.setVisibility(View.GONE);
+//                    binding.friendButton.setText("Add Friend");
+//                });
+//            });
+//
+//            binding.buttonRemoveContact.setVisibility(View.GONE);
+//        }
+//
+//        binding.buttonContactStatus.setText(contactStatus);
     }
 
 

@@ -48,6 +48,94 @@ public class ContactsViewModel extends AndroidViewModel {
         mContacts.observe(owner, observer);
     }
 
+    private void handleResult(final JSONObject result) {
+        IntFunction<String> getString =
+                getApplication().getResources()::getString;
+        try {
+            JSONArray contacts = result.getJSONArray("rows");
+
+            for(int i = 0; i < contacts.length(); i++) {
+                JSONObject jsonContact = contacts.getJSONObject(i);
+                Contact contact = new Contact.Builder(
+                        jsonContact.getString(
+                                getString.apply(
+                                        R.string.keys_json_contacts_username)),
+                        jsonContact.getString(getString.apply(
+                                R.string.keys_json_contacts_email)),
+                        jsonContact.getInt(getString.apply(
+                                R.string.keys_json_contacts_friendstatus)),
+                        jsonContact.getInt(getString.apply(
+                                R.string.keys_json_contacts_blockedstatus)))
+                        .build();
+
+//                Contact contact = new Contact(
+//                jsonContact.getString("Username"),
+//                jsonContact.getString("Email"),
+//                jsonContact.getInt("FriendStatus"),
+//                jsonContact.getInt("BlockedStatus"));
+
+                if (!mContacts.getValue().contains(contact)) {
+                    mContacts.getValue().add(contact);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("ERROR!", e.getMessage());
+        }
+
+        mContacts.setValue(mContacts.getValue());
+
+
+
+
+
+//        IntFunction<String> getString =
+//                getApplication().getResources()::getString;
+//        try {
+//            JSONObject root = result;
+//            if (root.has(getString.apply(R.string.keys_json_contact_rowCount))) {
+//                JSONObject response =
+//                        root.getJSONObject(getString.apply(
+//                                R.string.keys_json_contact_rowCount));
+//                if (response.has(getString.apply(R.string.keys_json_contact_rows))) {
+//                    JSONArray data = response.getJSONArray(
+//                            getString.apply(R.string.keys_json_contact_rows));
+//
+//                    for(int i = 0; i < data.length(); i++) {
+//                        JSONObject jsonContact = data.getJSONObject(i);
+//                        Contact contact = new Contact.Builder(
+//                                jsonContact.getString(
+//                                        getString.apply(
+//                                                R.string.keys_json_contacts_username)),
+//                                jsonContact.getString(
+//                                        getString.apply(
+//                                                R.string.keys_json_contacts_email)))
+//                                .addFriendStatus(jsonContact.getInt(
+//                                        getString.apply(
+//                                                R.string.keys_json_contacts_friendstatus)))
+//                                .addBlockedStatus(jsonContact.getInt(
+//                                        getString.apply(
+//                                                R.string.keys_json_contacts_blockedstatus)))
+//                                .build();
+//                        if (!mContacts.getValue().contains(contact)) {
+//                            mContacts.getValue().add(contact);
+//                        }
+//                    }
+//                } else {
+//                    Log.e("ERROR!", "No data array");
+//                }
+//            } else {
+//                Log.e("ERROR!", "JSON Parse Error");
+//            }
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            Log.e("ERROR!", e.getMessage());
+//        }
+//
+//        mContacts.setValue(mContacts.getValue());
+    }
+
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             Log.e("NETWORK ERROR", error.getMessage());
@@ -60,82 +148,35 @@ public class ContactsViewModel extends AndroidViewModel {
         }
     }
 
-
-    //TODO: connect to contact info in server
-//    //handle non-error response (JSON parsed & placed into list of BlogPost obj)
-//    private void handleResult(final JSONObject result) {
-//        IntFunction<String> getString =
-//                getApplication().getResources()::getString;
-//        try {
-//            JSONObject root = result;
-//            if (root.has(getString.apply(R.string.keys_json_blogs_response))) {
-//                JSONObject response =
-//                        root.getJSONObject(getString.apply(
-//                                R.string.keys_json_blogs_response));
-//                if (response.has(getString.apply(R.string.keys_json_blogs_data))) {
-//                    JSONArray data = response.getJSONArray(
-//                            getString.apply(R.string.keys_json_blogs_data));
-//                    for(int i = 0; i < data.length(); i++) {
-//                        JSONObject jsonBlog = data.getJSONObject(i);
-//                        BlogPost post = new BlogPost.Builder(
-//                                jsonBlog.getString(
-//                                        getString.apply(
-//                                                R.string.keys_json_blogs_pubdate)),
-//                                jsonBlog.getString(
-//                                        getString.apply(
-//                                                R.string.keys_json_blogs_title)))
-//                                .addTeaser(jsonBlog.getString(
-//                                        getString.apply(
-//                                                R.string.keys_json_blogs_teaser)))
-//                                .addUrl(jsonBlog.getString(
-//                                        getString.apply(
-//                                                R.string.keys_json_blogs_url)))
-//                                .build();
-//                        if (!mBlogList.getValue().contains(post)) {
-//                            mBlogList.getValue().add(post);
-//                        }
-//                    }
-//                } else {
-//                    Log.e("ERROR!", "No data array");
-//                }
-//            } else {
-//                Log.e("ERROR!", "No response");
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//            Log.e("ERROR!", e.getMessage());
-//        }
-//        mBlogList.setValue(mBlogList.getValue());
-//    }
-
-//    public void connectGet() {
-//        String url =
-//                "https://tcss450-team4-webservice.herokuapp.com/contacts";
-//        Request request = new JsonObjectRequest(
-//                Request.Method.GET,
-//                url,
-//                null, //no body for this get request
-//                this::handleResult,
-//                this::handleError) {
-//            @Override
-//            public Map<String, String> getHeaders() {
-//                Map<String, String> headers = new HashMap<>();
-//                // add headers <key,value>
-//                headers.put(
-//                        //hard-coded JWT (JSON Web Token) - authenticate after user signed in
-//
-//                        "Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNmYjMxQGZha2UuZW1haWwuY29tIiwibWVtYmVyaWQiOjI4OCwiaWF0IjoxNjY2NTU3ODQ2LCJleHAiOjE2NzUxOTc4NDZ9.f7IVbAzJbX72vjRUbadIksMzNm6xkPi1l_R_C4O9zb4");
-//                return headers;
-//            }
-//        };
-//        request.setRetryPolicy(new DefaultRetryPolicy(
-//                10_000,
-//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-//        //Instantiate the RequestQueue and add the request to the queue
-//        Volley.newRequestQueue(getApplication().getApplicationContext())
-//                .add(request);
-//    }
+    public void connectGet(final String jwt) {
+        String url =
+                getApplication().getResources().getString(R.string.base_url) + "contacts/";
+        Request request = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null, //no body for this get request
+                this::handleResult,
+                this::handleError) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                // add headers <key,value>
+                headers.put(
+                        //hard-coded JWT (JSON Web Token) - authenticate after user signed in
+                        "Authorization",
+                        jwt
+                );
+                return headers;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                10_000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        //Instantiate the RequestQueue and add the request to the queue
+        Volley.newRequestQueue(getApplication().getApplicationContext())
+                .add(request);
+    }
 
     /*
     Friend status -> 1 = friend, 0 = not-friend, 2 = blocked

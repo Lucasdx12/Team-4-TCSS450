@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="keys_json_contacts_response">response</string>
+
+    <integer name="keys_json_contact_rowCount">0</integer>
+    <string name="keys_json_contact_rows">rows</string>
+    <string name="keys_json_contacts_username">username</string>
+    <string name="keys_json_contacts_email">email</string>
+    <string name="keys_json_contacts_friendstatus">friendstatus</string>
+    <string name="keys_json_contacts_blockedstatus">blockedstatus</string>
+
+</resources>
