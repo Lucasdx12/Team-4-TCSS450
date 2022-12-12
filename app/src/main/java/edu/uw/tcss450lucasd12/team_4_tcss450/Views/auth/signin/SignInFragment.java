@@ -31,22 +31,27 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.utils.PasswordValidator;
 
 /**
  * A simple {@link Fragment} subclass.
+ * @author Alexz Rosario
  */
 public class SignInFragment extends Fragment {
-
+    /** Binding to xml */
     private FragmentSignInBinding mBinding;
+    /** View Model */
     private SignInViewModel mSignInModel;
-
+    /** Pushy Token */
     private PushyTokenViewModel mPushyTokenViewModel;
+    /** User Model */
     private UserInfoViewModel mUserViewModel;
-
+    /** Email Verification */
     private PasswordValidator mEmailValidator = checkPwdLength(2)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdSpecialChar("@"));
-
+    /** Password Verification */
     private PasswordValidator mPassWordValidator = checkPwdLength(1)
             .and(checkExcludeWhiteSpace());
-
+    /**
+     * Required empty public constructor
+     */
     public SignInFragment() {
         // Required empty public constructor
     }
@@ -151,25 +156,34 @@ public class SignInFragment extends Fragment {
             }
         }
     }
-
+    /**
+     * Attempt Sign In
+     * @param button
+     */
     private void attemptSignIn(final View button) {
         validateEmail();
     }
-
+    /**
+     * Validate Email
+     */
     private void validateEmail() {
         mEmailValidator.processResult(
                 mEmailValidator.apply(mBinding.editEmail.getText().toString().trim()),
                 this::validatePassword,
                 result -> mBinding.editEmail.setError("Please enter a valid Email address."));
     }
-
+    /**
+     * Validate Password
+     */
     private void validatePassword() {
         mPassWordValidator.processResult(
                 mPassWordValidator.apply(mBinding.editPassword.getText().toString()),
                 this::verifyAuthWithServer,
                 result -> mBinding.editPassword.setError("Please enter a valid Password."));
     }
-
+    /**
+     * Http call through View Model
+     */
     private void verifyAuthWithServer() {
         mSignInModel.connect(
                 mBinding.editEmail.getText().toString(),

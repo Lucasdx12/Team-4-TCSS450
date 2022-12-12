@@ -24,19 +24,20 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.utils.PasswordValidator;
 
 /**
  * A simple {@link Fragment} subclass.
+ * @author Alexz Rosario
  */
 public class RegisterFragment extends Fragment {
-
+    /** Binding to xml */
     private FragmentRegisterBinding binding;
-
+    /** View Model */
     private RegisterViewModel mRegisterModel;
-
+    /** Name Verification */
     private PasswordValidator mNameValidator = checkPwdLength(1);
-
+    /** Email Verification */
     private PasswordValidator mEmailValidator = checkPwdLength(2)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdSpecialChar("@"));
-
+    /** Password Verification */
     private PasswordValidator mPassWordValidator =
             checkClientPredicate(pwd -> pwd.equals(binding.confirmPassword.getText().toString()))
                     .and(checkPwdLength(7))
@@ -44,7 +45,9 @@ public class RegisterFragment extends Fragment {
                     .and(checkExcludeWhiteSpace())
                     .and(checkPwdDigit())
                     .and(checkPwdLowerCase().or(checkPwdUpperCase()));
-
+    /**
+     * Required empty public constructor
+     */
     public RegisterFragment() {
         // Required empty public constructor
     }
@@ -71,11 +74,16 @@ public class RegisterFragment extends Fragment {
         mRegisterModel.addResponseObserver(getViewLifecycleOwner(),
                 this::observeResponse);
     }
-
+    /**
+     * Attempt Register
+     * @param button
+     */
     private void attemptRegister(final View button) {
         validateFirst();
     }
-
+    /**
+     * Validate First Name
+     */
     private void validateFirst() {
         mNameValidator.processResult(
                 mNameValidator.apply(binding.editFirstName.getText().toString().trim()),
@@ -83,7 +91,9 @@ public class RegisterFragment extends Fragment {
                 result -> binding.editFirstName.setError("Please enter a first name.\n"+
                                                          " * Must be of length 1"));
     }
-
+    /**
+     * Validate Last Name
+     */
     private void validateLast() {
         mNameValidator.processResult(
                 mNameValidator.apply(binding.editLastName.getText().toString().trim()),
@@ -91,7 +101,9 @@ public class RegisterFragment extends Fragment {
                 result -> binding.editLastName.setError("Please enter a last name.\n"+
                                                         " * Must be of length 1"));
     }
-
+    /**
+     * Validate Display Name
+     */
     private void validateDisplay() {
         mNameValidator.processResult(
                 mNameValidator.apply(binding.editDisplayName.getText().toString().trim()),
@@ -99,7 +111,9 @@ public class RegisterFragment extends Fragment {
                 result -> binding.editDisplayName.setError("Please enter a display name of length 1\n"+
                                                            " * Must be unique."));
     }
-
+    /**
+     * Validate Email
+     */
     private void validateEmail() {
         mEmailValidator.processResult(
                 mEmailValidator.apply(binding.editEmail.getText().toString().trim()),
@@ -109,6 +123,9 @@ public class RegisterFragment extends Fragment {
                                                      " * No spaces are allowed."));
     }
 
+    /**
+     * Validate Password Match
+     */
     private void validatePasswordsMatch() {
         PasswordValidator matchValidator =
                 checkClientPredicate(
@@ -119,7 +136,9 @@ public class RegisterFragment extends Fragment {
                 this::validatePassword,
                 result -> binding.editPassword.setError("Passwords must match."));
     }
-
+    /**
+     * Validate Password
+     */
     private void validatePassword() {
         mPassWordValidator.processResult(
                 mPassWordValidator.apply(binding.editPassword.getText().toString()),
@@ -131,7 +150,9 @@ public class RegisterFragment extends Fragment {
                                                         " * Must include a digit (0-9)\n"+
                                                         " * No spaces are allowed."));
     }
-
+    /**
+     * Http call through View Model
+     */
     private void verifyAuthWithServer() {
         mRegisterModel.connect(
                 binding.editFirstName.getText().toString(),
@@ -143,7 +164,9 @@ public class RegisterFragment extends Fragment {
         //result of connect().
 
     }
-
+    /**
+     * Helper to abstract the navigation
+     */
     private void navigateToLogin() {
         RegisterFragmentDirections.ActionRegisterFragmentToSignInFragment directions =
                 RegisterFragmentDirections.actionRegisterFragmentToSignInFragment();

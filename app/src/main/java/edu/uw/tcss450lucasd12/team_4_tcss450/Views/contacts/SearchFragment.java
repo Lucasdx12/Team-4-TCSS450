@@ -25,17 +25,23 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.utils.PasswordValidator;
 
 /**
  * A simple {@link Fragment} subclass.
+ * @author Alexz Rosario
  */
 public class SearchFragment extends Fragment {
-
+    /** Binding to xml */
     private FragmentSearchBinding binding;
+    /** User Model */
     private UserInfoViewModel mUserModel;
+    /** View Model */
     private SearchViewModel mSearchViewModel;
-
+    /** Email Verification */
     private PasswordValidator mEmailValidator = checkPwdLength(2)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdSpecialChar("@"));
 
+    /**
+     * Required empty public constructor
+     */
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -65,10 +71,17 @@ public class SearchFragment extends Fragment {
                 this::observeResponse);
     }
 
+    /**
+     * Attempt Search
+     * @param button
+     */
     private void attemptSearch(final View button) {
         validateEmail();
     }
 
+    /**
+     * Validate Email
+     */
     private void validateEmail() {
         mEmailValidator.processResult(
                 mEmailValidator.apply(binding.editEmail.getText().toString().trim()),
@@ -78,6 +91,9 @@ public class SearchFragment extends Fragment {
                         " * No spaces are allowed."));
     }
 
+    /**
+     * Http call through View Model
+     */
     private void verifyAuthWithServer() {
         mSearchViewModel.connect(
                 mUserModel.getEmail(),
@@ -87,7 +103,10 @@ public class SearchFragment extends Fragment {
 
     }
 
-    private void navigateToLogin() {
+    /**
+     * Reset Email text to blank
+     */
+    private void resetEmail() {
         binding.editEmail.setText("");
     }
 
@@ -108,7 +127,7 @@ public class SearchFragment extends Fragment {
                     Log.e("JSON Parse Error", e.getMessage());
                 }
             } else {
-                navigateToLogin();
+                resetEmail();
             }
         } else {
             Log.d("JSON Response", "No Response");

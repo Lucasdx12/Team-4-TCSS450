@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
@@ -22,21 +23,39 @@ import java.nio.charset.Charset;
 import java.util.Objects;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
-
+/**
+ * @author Alexz Rosario
+ */
 public class SearchViewModel extends AndroidViewModel {
+    /**
+     * Response
+     */
     private MutableLiveData<JSONObject> mResponse;
 
+    /**
+     * Set mResponse
+     * @param application
+     */
     public SearchViewModel(@NonNull Application application) {
         super(application);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
     }
 
+    /**
+     * Event handler
+     * @param owner
+     * @param observer
+     */
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
         mResponse.observe(owner, observer);
     }
 
+    /**
+     * Error for HTTP call
+     * @param error
+     */
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             try {
@@ -61,6 +80,11 @@ public class SearchViewModel extends AndroidViewModel {
         }
     }
 
+    /**
+     * HTTP Call
+     * @param myEmail
+     * @param friendEmail
+     */
     public void connect(final String myEmail, final String friendEmail) {
         String url = getApplication().getResources().getString(R.string.base_url) + "addContact";
         JSONObject body = new JSONObject();

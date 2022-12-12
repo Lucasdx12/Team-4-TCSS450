@@ -26,17 +26,20 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.utils.PasswordValidator;
 
 /**
  * A simple {@link Fragment} subclass.
+ * @author Alexz Rosario
  */
 public class ForgotPasswordFragment extends Fragment {
-
+    /** Binding to xml */
     private FragmentForgotPasswordBinding binding;
-
+    /** View Model */
     private ForgotPasswordViewModel mForgotPasswordModel;
-
+    /** Email Verification */
     private PasswordValidator mEmailValidator = checkPwdLength(2)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdSpecialChar("@"));
-
+    /**
+     * Required empty public constructor
+     */
     public ForgotPasswordFragment() {
         // Required empty public constructor
     }
@@ -64,11 +67,16 @@ public class ForgotPasswordFragment extends Fragment {
         mForgotPasswordModel.addResponseObserver(getViewLifecycleOwner(),
                 this::observeResponse);
     }
-
+    /**
+     * Attempt Forgot Password
+     * @param button
+     */
     private void attemptForgotPassword(final View button) {
         validateEmail();
     }
-
+    /**
+     * Validate Email
+     */
     private void validateEmail() {
         mEmailValidator.processResult(
                 mEmailValidator.apply(binding.editEmail.getText().toString().trim()),
@@ -77,6 +85,9 @@ public class ForgotPasswordFragment extends Fragment {
                         " * Must include an @\n"+
                         " * No spaces are allowed."));
     }
+    /**
+     * Http call through View Model
+     */
     private void verifyAuthWithServer() {
         mForgotPasswordModel.connect(
                 binding.editEmail.getText().toString());
@@ -84,6 +95,9 @@ public class ForgotPasswordFragment extends Fragment {
         //result of connect().
 
     }
+    /**
+     * Helper to abstract the navigation
+     */
     private void navigateToLogin() {
         ForgotPasswordFragmentDirections.ActionForgotPasswordFragmentToSignInFragment directions =
                 ForgotPasswordFragmentDirections.actionForgotPasswordFragmentToSignInFragment();

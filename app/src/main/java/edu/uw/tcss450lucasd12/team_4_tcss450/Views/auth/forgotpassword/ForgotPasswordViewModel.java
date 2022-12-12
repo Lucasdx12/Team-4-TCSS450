@@ -23,22 +23,36 @@ import java.nio.charset.Charset;
 import java.util.Objects;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
-
+/**
+ * @author Alexz Rosario
+ */
 public class ForgotPasswordViewModel extends AndroidViewModel {
-
+    /**
+     * Response
+     */
     private MutableLiveData<JSONObject> mResponse;
-
+    /**
+     * Set mResponse
+     * @param application
+     */
     public ForgotPasswordViewModel(@NonNull Application application) {
         super(application);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
     }
-
+    /**
+     * Event handler
+     * @param owner
+     * @param observer
+     */
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
         mResponse.observe(owner, observer);
     }
-
+    /**
+     * Error for HTTP call
+     * @param error
+     */
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             try {
@@ -62,7 +76,10 @@ public class ForgotPasswordViewModel extends AndroidViewModel {
             }
         }
     }
-
+    /**
+     * HTTP Call
+     * @param email
+     */
     public void connect(final String email) {
         String url = getApplication().getResources().getString(R.string.base_url)+"forgot" ;
         JSONObject body = new JSONObject();

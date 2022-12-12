@@ -35,15 +35,15 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.utils.PasswordValidator;
  * A simple {@link Fragment} subclass.
  */
 public class ChangePasswordFragment extends Fragment {
-
+    /** Binding to xml */
     private FragmentChangePasswordBinding binding;
-
+    /** View Model */
     private ChangePasswordViewModel mChangePasswordViewModel;
-
+    /** Email Verification */
     private PasswordValidator mEmailValidator = checkPwdLength(2)
             .and(checkExcludeWhiteSpace())
             .and(checkPwdSpecialChar("@"));
-
+    /** Password Verification */
     private PasswordValidator mPassWordValidator =
             checkClientPredicate(pwd -> pwd.equals(binding.editPassword.getText().toString()))
                     .and(checkPwdLength(7))
@@ -51,7 +51,9 @@ public class ChangePasswordFragment extends Fragment {
                     .and(checkExcludeWhiteSpace())
                     .and(checkPwdDigit())
                     .and(checkPwdLowerCase().or(checkPwdUpperCase()));
-
+    /**
+     * Required empty public constructor
+     */
     public ChangePasswordFragment() {
         // Required empty public constructor
     }
@@ -79,10 +81,16 @@ public class ChangePasswordFragment extends Fragment {
         mChangePasswordViewModel.addResponseObserver(getViewLifecycleOwner(),
                 this::observeResponse);
     }
+    /**
+     * Attempt Forgot Password
+     * @param button
+     */
     private void attemptForgotPassword(final View button) {
         validateEmail();
     }
-
+    /**
+     * Validate Email
+     */
     private void validateEmail() {
         mEmailValidator.processResult(
                 mEmailValidator.apply(binding.editEmail.getText().toString().trim()),
@@ -91,7 +99,9 @@ public class ChangePasswordFragment extends Fragment {
                         " * Must include an @\n"+
                         " * No spaces are allowed."));
     }
-
+    /**
+     * Validate Password
+     */
     private void validatePassword() {
         mPassWordValidator.processResult(
                 mPassWordValidator.apply(binding.editPassword.getText().toString()),
@@ -103,6 +113,9 @@ public class ChangePasswordFragment extends Fragment {
                         " * Must include a digit (0-9)\n"+
                         " * No spaces are allowed."));
     }
+    /**
+     * Http call through View Model
+     */
     private void verifyAuthWithServer() {
         mChangePasswordViewModel.connect(
                 binding.editEmail.getText().toString(),
@@ -111,6 +124,9 @@ public class ChangePasswordFragment extends Fragment {
         //result of connect().
 
     }
+    /**
+     * Helper to abstract the navigation
+     */
     private void navigateToLogin() {
         binding.editEmail.setText("");
         binding.editPassword.setText("");
