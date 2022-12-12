@@ -25,8 +25,7 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentContactsListBin
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
 public class ContactsListFragment extends Fragment {
-
-    private ContactsViewModel mModel;
+private ContactsViewModel mModel;
     private UserInfoViewModel mUserModel;
 
     @Override
@@ -35,6 +34,7 @@ public class ContactsListFragment extends Fragment {
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         mModel = provider.get(ContactsViewModel.class);
         mUserModel = provider.get(UserInfoViewModel.class);
+
         mModel.connectGet(mUserModel.getJwt());
     }
 
