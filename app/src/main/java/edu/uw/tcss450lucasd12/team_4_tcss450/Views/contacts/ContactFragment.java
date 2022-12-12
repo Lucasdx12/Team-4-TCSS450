@@ -11,16 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.viewpager.widget.ViewPager;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentContactProfileBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
 /**
+ * @author stephanie gibbs
  * A simple {@link Fragment} subclass.
  */
 public class ContactFragment extends Fragment {
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -29,7 +30,9 @@ public class ContactFragment extends Fragment {
         return v;
     }
 
-    //initializes the Views w/ blog text
+    /*
+    Creates profile binding and friend button functionality.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -55,38 +58,7 @@ public class ContactFragment extends Fragment {
                 args.getContact().setFriendStatus(1);
                 binding.friendButton.setText(binding.friendButton.getTextOn());
             }
-//            binding.friendButton.setText();
         });
-
-//        if(status == 1) {
-//            contactStatus = "Friends";
-//            binding.friendButton.setOnClickListener(button -> {
-//                binding.buttonContactStatus.setText("Add Friend");
-//                binding.buttonRemoveContact.setVisibility(View.GONE);
-//                binding.buttonContactStatus.setOnClickListener(request ->{
-//                    binding.buttonContactStatus.setText("Requested");
-//                    binding.buttonRemoveContact.setText("Cancel Request");
-//                    binding.buttonRemoveContact.setVisibility(View.VISIBLE);
-//                });
-//            });
-//
-//        } else {
-//            contactStatus = "Add Friend";
-//            binding.friendButton.setOnClickListener(button -> {
-//                binding.friendButton.setText("Requested");
-//                binding.friendButton.setText("Cancel Request");
-//                binding.friendButton.setVisibility(View.VISIBLE);
-//                binding.friendButton.setOnClickListener(request ->{
-//                    binding.friendButton.setVisibility(View.GONE);
-//                    binding.friendButton.setText("Add Friend");
-//                });
-//            });
-//
-//            binding.buttonRemoveContact.setVisibility(View.GONE);
-//        }
-//
-//        binding.buttonContactStatus.setText(contactStatus);
     }
-
 
 }

@@ -23,9 +23,11 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentContactsCardBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentContactsListBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
-
+/**
+@author stephanie gibbs
+ */
 public class ContactsListFragment extends Fragment {
-private ContactsViewModel mModel;
+    private ContactsViewModel mModel;
     private UserInfoViewModel mUserModel;
 
     @Override
@@ -43,11 +45,6 @@ private ContactsViewModel mModel;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contacts_list, container, false);
-
-//        if (view instanceof RecyclerView) {
-//            ((RecyclerView) view).setAdapter(
-//                    new ContactsRecyclerViewAdapter(ContactsListGenerator.getContactsList()));
-//        }
 
         return view;
 

@@ -1,7 +1,9 @@
 package edu.uw.tcss450lucasd12.team_4_tcss450.Views.contacts;
 
 import java.io.Serializable;
-
+/**
+@author stephanie gibbs
+ */
 public class Contact implements Serializable {
 
     private final String mNickname;
@@ -21,11 +23,6 @@ public class Contact implements Serializable {
             this.mFriendStatus = friendStatus; //0=not-friend, 1=friend
             this.mBlockedStatus = blockedStatus; //0=not-blocked, 1=blocked
         }
-
-//        public Builder addEmail(final String val) {
-//            mEmail = val;
-//            return this;
-//        }
 
         public Builder addFriendStatus(final int val) {
             mFriendStatus = val;

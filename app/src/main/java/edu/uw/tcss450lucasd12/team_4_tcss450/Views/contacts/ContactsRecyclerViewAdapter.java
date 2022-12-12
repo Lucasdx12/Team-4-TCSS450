@@ -14,7 +14,9 @@ import java.util.List;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentContactsCardBinding;
-
+/**
+@author stephanie gibbs
+ */
 public class ContactsRecyclerViewAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<ContactsRecyclerViewAdapter.ContactsListViewHolder> {
 
     // Store all of the blogs to present
@@ -39,12 +41,6 @@ public class ContactsRecyclerViewAdapter extends androidx.recyclerview.widget.Re
 
     @Override
     public void onBindViewHolder(@NonNull ContactsListViewHolder holder, int position) {
-//        String userImage = mContacts.get(position).getImage(); //TODO: add image for contact
-//        String username = mContacts.get(position).getNickname();
-//        String usermail = mContacts.get(position).getEmail();
-//        holder.name.setText(username);
-//        holder.email.setText(usermail);
-
         holder.setContact(mContacts.get(position));
     }
 
@@ -68,14 +64,7 @@ public class ContactsRecyclerViewAdapter extends androidx.recyclerview.widget.Re
             name = itemView.findViewById(R.id.namep);
             email = itemView.findViewById(R.id.emailp);
 
-//            mBinding.emailp.setOnClickListener(this::handleMoreOrLess);
         }
-
-
-//        private void handleMoreOrLess(final View button) {
-//            mExpandedFlags.put(mContact, !mExpandedFlags.get(mContact));
-//            displayPreview();
-//        }
 
         void setContact(final Contact contact) {
             mContact = contact;
@@ -86,16 +75,6 @@ public class ContactsRecyclerViewAdapter extends androidx.recyclerview.widget.Re
                         ContactsListFragmentDirections
                                 .actionContactsToContactFragment(contact));
             });
-
-//            final String preview1 = Html.fromHtml(
-//                            contact.getNickname(),
-//                            Html.FROM_HTML_MODE_COMPACT)
-//                    .toString().substring(0,30);
-//
-//            final String preview2 = Html.fromHtml(
-//                            contact.getEmail(),
-//                            Html.FROM_HTML_MODE_COMPACT)
-//                    .toString().substring(0,30);
 
             mBinding.namep.setText(contact.getNickname());
             mBinding.emailp.setText(contact.getEmail());

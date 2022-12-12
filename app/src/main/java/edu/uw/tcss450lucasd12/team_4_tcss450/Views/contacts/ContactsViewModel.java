@@ -31,23 +31,34 @@ import java.util.function.IntFunction;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
-
+/**
+@author stephanie gibbs
+ */
 public class ContactsViewModel extends AndroidViewModel {
-private MutableLiveData<List<Contact>> mContacts;
+    private MutableLiveData<List<Contact>> mContacts;
     private static ArrayList users = new ArrayList<>();
     private static int rowSizeTables = 0;
 
+    /*
+    Instantiate mContacts.
+     */
     public ContactsViewModel(@NonNull Application application) {
         super(application);
         mContacts = new MutableLiveData<>();
         mContacts.setValue(new ArrayList<>());
     }
 
+    /*
+    adds observer for contacts object.
+     */
     public void addContactsObserver(@NonNull LifecycleOwner owner,
                                    @NonNull Observer<? super List<Contact>> observer) { //String username,
         mContacts.observe(owner, observer);
     }
 
+    /*
+    takes in JSON from GET endpoint contacts/, displays current users friends
+     */
     private void handleResult(final JSONObject result) {
         int initSize = rowSizeTables;
 
@@ -89,6 +100,9 @@ private MutableLiveData<List<Contact>> mContacts;
         }
     }
 
+    /*
+    handles error when response not happening
+     */
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
             Log.e("NETWORK ERROR", error.getMessage());
@@ -101,6 +115,9 @@ private MutableLiveData<List<Contact>> mContacts;
         }
     }
 
+    /*
+    connect to heroku database at GET enpoint for contact. Send in jwt from user
+     */
     public void connectGet(final String jwt) {
         String url =
                 getApplication().getResources().getString(R.string.base_url) + "contacts/";
@@ -131,42 +148,4 @@ private MutableLiveData<List<Contact>> mContacts;
                 .add(request);
     }
 
-    /*
-    Friend status -> 1 = friend, 0 = not-friend, 2 = blocked
-     */
-//    public void friendStatusProfile(final String email, final String jwt, final int friendStatus) {
-//        //String url = "https://tcss450-team4-webservice.herokuapp.com/contacts";
-//
-//        String url = getApplication().getResources().getString(R.string.base_url) +
-//                "contacts";
-//
-//        JSONObject body = new JSONObject();
-//        try {
-//            body.put("email", email); //TODO: check email name in server
-//            body.put("friendStatus", friendStatus);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//        Request request = new JsonObjectRequest(
-//                Request.Method.POST,
-//                url,
-//                body, // Push token found in the JSONObject body
-//                mResponse::setValue, // We get a response but do nothing with it
-//                this::handleError) {
-//
-//            @Override
-//            public Map<String, String> getHeaders() {
-//                Map<String, String> headers = new HashMap<>();
-//
-//                // Add headers <key,value>
-//                headers.put("Authorization", jwt);
-//                return headers;
-//            }
-//        };
-//
-//        // Instantiate the RequestQueue and add the request to the queue.
-//        RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
-//                .addToRequestQueue(request);
-//    }
 }

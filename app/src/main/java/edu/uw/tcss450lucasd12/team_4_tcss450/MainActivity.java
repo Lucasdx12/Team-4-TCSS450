@@ -52,7 +52,9 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.model.NewMessageCountViewModel;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.PushyTokenViewModel;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 import edu.uw.tcss450lucasd12.team_4_tcss450.services.PushReceiver;
-
+/**
+@author stephanie, paul, alec, alexz, & lucas
+ */
 public class MainActivity extends AppCompatActivity {
 
     // For Pushy (Notifications) to the user.
