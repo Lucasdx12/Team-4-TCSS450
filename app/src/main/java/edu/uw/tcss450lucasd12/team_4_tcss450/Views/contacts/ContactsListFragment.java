@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
+import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoom.ChatRoomFragmentArgs;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentContactsCardBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentContactsListBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
@@ -35,6 +36,7 @@ public class ContactsListFragment extends Fragment {
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         mModel = provider.get(ContactsViewModel.class);
         mUserModel = provider.get(UserInfoViewModel.class);
+
         mModel.connectGet(mUserModel.getJwt());
     }
 

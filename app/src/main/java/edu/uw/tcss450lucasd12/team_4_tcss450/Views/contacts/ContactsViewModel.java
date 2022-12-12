@@ -6,10 +6,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -27,15 +25,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.IntFunction;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
-import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
 
 public class ContactsViewModel extends AndroidViewModel {
     private MutableLiveData<List<Contact>> mContacts;
-
-//    private final MutableLiveData<JSONObject> mResponse;
+    private static ArrayList users = new ArrayList<>();
+    private static int rowSizeTables = 0;
 
     public ContactsViewModel(@NonNull Application application) {
         super(application);
@@ -44,96 +40,49 @@ public class ContactsViewModel extends AndroidViewModel {
     }
 
     public void addContactsObserver(@NonNull LifecycleOwner owner,
-                                   @NonNull Observer<? super List<Contact>> observer) {
+                                   @NonNull Observer<? super List<Contact>> observer) { //String username,
         mContacts.observe(owner, observer);
     }
 
     private void handleResult(final JSONObject result) {
-        IntFunction<String> getString =
-                getApplication().getResources()::getString;
+        int initSize = rowSizeTables;
+
         try {
             JSONArray contacts = result.getJSONArray("rows");
+            rowSizeTables = contacts.length();
 
-            for(int i = 0; i < contacts.length(); i++) {
-                JSONObject jsonContact = contacts.getJSONObject(i);
-                Contact contact = new Contact.Builder(
-                        jsonContact.getString(
-                                getString.apply(
-                                        R.string.keys_json_contacts_username)),
-                        jsonContact.getString(getString.apply(
-                                R.string.keys_json_contacts_email)),
-                        jsonContact.getInt(getString.apply(
-                                R.string.keys_json_contacts_friendstatus)),
-                        jsonContact.getInt(getString.apply(
-                                R.string.keys_json_contacts_blockedstatus)))
-                        .build();
+            if (users.size() != rowSizeTables) { //check if any new friends were added, if not don't fetch JSON that already is displayed
+                for (int i = 0; i < contacts.length(); i++) {
+                    JSONObject jsonContact = contacts.getJSONObject(i);
 
-//                Contact contact = new Contact(
-//                jsonContact.getString("Username"),
-//                jsonContact.getString("Email"),
-//                jsonContact.getInt("FriendStatus"),
-//                jsonContact.getInt("BlockedStatus"));
+                    Contact contact = new Contact(
+                            jsonContact.getString("username"),
+                            jsonContact.getString("email"),
+                            jsonContact.getInt("friendstatus"),
+                            jsonContact.getInt("blockedstatus")
+                    );
 
-                if (!mContacts.getValue().contains(contact)) {
-                    mContacts.getValue().add(contact);
+                    if (!users.contains(jsonContact.getString("username"))) {
+                        users.add(jsonContact.getString("username"));
+                    }
+
+                    if (!mContacts.getValue().contains(contact) && !mContacts.getValue().contains(users)) {
+                        mContacts.getValue().add(contact);
+                    }
+
                 }
+
+
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
             Log.e("ERROR!", e.getMessage());
         }
 
-        mContacts.setValue(mContacts.getValue());
-
-
-
-
-
-//        IntFunction<String> getString =
-//                getApplication().getResources()::getString;
-//        try {
-//            JSONObject root = result;
-//            if (root.has(getString.apply(R.string.keys_json_contact_rowCount))) {
-//                JSONObject response =
-//                        root.getJSONObject(getString.apply(
-//                                R.string.keys_json_contact_rowCount));
-//                if (response.has(getString.apply(R.string.keys_json_contact_rows))) {
-//                    JSONArray data = response.getJSONArray(
-//                            getString.apply(R.string.keys_json_contact_rows));
-//
-//                    for(int i = 0; i < data.length(); i++) {
-//                        JSONObject jsonContact = data.getJSONObject(i);
-//                        Contact contact = new Contact.Builder(
-//                                jsonContact.getString(
-//                                        getString.apply(
-//                                                R.string.keys_json_contacts_username)),
-//                                jsonContact.getString(
-//                                        getString.apply(
-//                                                R.string.keys_json_contacts_email)))
-//                                .addFriendStatus(jsonContact.getInt(
-//                                        getString.apply(
-//                                                R.string.keys_json_contacts_friendstatus)))
-//                                .addBlockedStatus(jsonContact.getInt(
-//                                        getString.apply(
-//                                                R.string.keys_json_contacts_blockedstatus)))
-//                                .build();
-//                        if (!mContacts.getValue().contains(contact)) {
-//                            mContacts.getValue().add(contact);
-//                        }
-//                    }
-//                } else {
-//                    Log.e("ERROR!", "No data array");
-//                }
-//            } else {
-//                Log.e("ERROR!", "JSON Parse Error");
-//            }
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//            Log.e("ERROR!", e.getMessage());
-//        }
-//
-//        mContacts.setValue(mContacts.getValue());
+        if (initSize < rowSizeTables) { //double check that there is new friends added
+            mContacts.setValue(mContacts.getValue());
+        }
     }
 
     private void handleError(final VolleyError error) {
