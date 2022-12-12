@@ -37,7 +37,9 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentLandingBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentWeatherBinding;
 
-
+/**
+ * @author Lucas Dahl
+ */
 public class WeatherService extends AndroidViewModel {
 
     //******************** Properties *****************************
@@ -47,6 +49,10 @@ public class WeatherService extends AndroidViewModel {
 
     //******************** Constructor *****************************
 
+        /**
+     * Default constructor 
+     * @param application
+     */
     public WeatherService(@NonNull Application application) {
         super(application);
         mResponse = new MutableLiveData<>();
@@ -55,6 +61,16 @@ public class WeatherService extends AndroidViewModel {
 
     //********************  Methods *****************************
 
+    
+        /**
+     *  This method gets the current weather info
+     * @param cityText the city
+     * @param tempText the temp
+     * @param tempHighLowText the temp high
+     * @param weatherText the temp low
+     * @param weatherIcon the current weather icon
+     * @param jwt the jwt
+     */
     public static void getWeatherInfo(TextView cityText, TextView tempText, TextView tempHighLowText, TextView weatherText, ImageView weatherIcon, String jwt) {
 
         // Properties
@@ -134,6 +150,11 @@ public class WeatherService extends AndroidViewModel {
 
     }
 
+        /**
+     *  This method will get the forecast
+     * @param binding the fragment binding 
+     * @param jwt the jwt
+     */
     public static void getForecast(FragmentWeatherBinding binding, String jwt) {
 
         String url = "https://tcss450-2022au-group4.herokuapp.com/forecast";
@@ -227,6 +248,11 @@ public class WeatherService extends AndroidViewModel {
 
     }
 
+        /**
+     *  This method will get the hourly forecast
+     * @param binding the weather fragment binding
+     * @param jwt the jwt
+     */
     public static void getHourlyForecast(FragmentWeatherBinding binding, String jwt) {
 
         String url = "https://tcss450-2022au-group4.herokuapp.com/hourlyForecast";
@@ -324,10 +350,10 @@ public class WeatherService extends AndroidViewModel {
 
 
 
-    public void addResponseObserver(@NonNull LifecycleOwner owner,
-                                    @NonNull Observer<? super JSONObject> observer) {
-        mResponse.observe(owner, observer);
-    }
+//     public void addResponseObserver(@NonNull LifecycleOwner owner,
+//                                     @NonNull Observer<? super JSONObject> observer) {
+//         mResponse.observe(owner, observer);
+//     }
 
     private void handleError(final VolleyError error) {
         if (Objects.isNull(error.networkResponse)) {
@@ -343,7 +369,11 @@ public class WeatherService extends AndroidViewModel {
 
     //******************** Helpers *****************************
 
-    // This method will convert a string in Kel into Fer.
+        /**
+     *  This method will convert a string in Kel into Fer.
+     * @param temp the temp in kel
+     * @return the temp in fer
+     */
     public static String convertKelToFer(String temp) {
 
         DecimalFormat df = new DecimalFormat("#0.00");
@@ -352,7 +382,11 @@ public class WeatherService extends AndroidViewModel {
 
     }
 
-    // Time in 3 hour increments
+        /**
+     * Converts time
+     * @param time the time to convert
+     * @return the converted time
+     */
     public static String convertTime(String time) {
         Date date = new Date(Integer.parseInt(time) * 1000L);
         SimpleDateFormat simpDate;
@@ -360,6 +394,11 @@ public class WeatherService extends AndroidViewModel {
         return simpDate.format(date).toString();
     }
 
+        /**
+     *  Converts the date
+     * @param time the date to convert
+     * @return the converted time
+     */
     public static String convertDate(String time) {
         Date date = new Date(Integer.parseInt(time) * 1000L);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("E");
