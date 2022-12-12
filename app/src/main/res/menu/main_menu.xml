@@ -34,9 +34,9 @@
         android:textColor="@color/black"
         />
     <item
-        android:id="@+id/ChangePassword"
-        android:icon="@drawable/ic_password"
-        android:title="@string/title_change_password"
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/ic_search_24dp"
+        android:title="@string/title_search"
         android:textColor="@color/black"
         />
 

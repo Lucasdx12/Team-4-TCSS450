@@ -235,6 +235,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="searchFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="13" />
+                            <option name="y" value="-420" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="weather">
                     <value>
                       <LayoutPositions>

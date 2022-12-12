@@ -56,6 +56,8 @@
     <string name="title_chat_init">Chat</string>
     <string name="title_chat_room">Chat Room</string>
     <string name="title_change_password">Change Password</string>
+    <string name="title_search">Search</string>
+    <string name="title_search_contacts">Search for a User</string>
 
     <!-- Web Service URL -->
     <string name="base_url">https://tcss450-2022au-group4.herokuapp.com/</string>

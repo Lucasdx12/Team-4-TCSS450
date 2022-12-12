@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Views.contacts.SearchFragment">
+
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="16dp"
+        android:autofillHints=""
+        android:hint="@string/prompt_enter_email"
+        android:inputType="text|textEmailAddress|textEmailSubject"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"  />
+
+
+    <Button
+        android:id="@+id/buttonSearch"
+        android:layout_width="380dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16sp"
+        android:text="@string/title_search_contacts"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:theme="@style/Button"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/editEmail" />
+</androidx.constraintlayout.widget.ConstraintLayout>
