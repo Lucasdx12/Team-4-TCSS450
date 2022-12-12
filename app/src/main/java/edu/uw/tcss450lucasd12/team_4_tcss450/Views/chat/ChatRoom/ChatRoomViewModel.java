@@ -27,9 +27,10 @@ import java.util.Objects;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
-import edu.uw.tcss450lucasd12.team_4_tcss450.model.NewMessageCountViewModel;
 
 /**
+ * View Model for the Chat Room Fragment to get all the messages in
+ * the specific chat room.
  *
  * @author Paul Lee
  * @version Fall 2022
@@ -43,6 +44,11 @@ public class ChatRoomViewModel extends AndroidViewModel {
      */
     private Map<Integer, MutableLiveData<List<ChatRoom>>> mMessages;
 
+    /**
+     * Constructor
+     *
+     * @param application Application
+     */
     public ChatRoomViewModel(@NonNull Application application) {
         super(application);
         mMessages = new HashMap<>();

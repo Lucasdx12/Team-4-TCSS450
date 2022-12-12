@@ -18,15 +18,29 @@ public final class ChatList implements Serializable {
     private final int mChatId;
     private final String mTitle;
 
+    /**
+     * Constructor
+     *
+     * @param chatId chatId of the chatroom
+     * @param title the name of the chatroom
+     */
     public ChatList(int chatId, String title) {
         this.mChatId = chatId;
         this.mTitle = title;
     }
 
+    /**
+     * Get the chat Id of the chat room.
+     * @return chat id
+     */
     public int getChatId() {
         return this.mChatId;
     }
 
+    /**
+     * Get the name/title of the chat room
+     * @return name/title of the chat room
+     */
     public String getTitle() {
         return this.mTitle;
     }

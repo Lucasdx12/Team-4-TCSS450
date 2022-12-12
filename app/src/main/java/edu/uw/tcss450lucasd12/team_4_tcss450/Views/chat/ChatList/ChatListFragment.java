@@ -19,7 +19,7 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatListBinding
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link Fragment} subclass for the chat list.
  * @author Paul Lee
  * @version Fall 2022
  */

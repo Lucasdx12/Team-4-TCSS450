@@ -14,7 +14,6 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.Charset;
@@ -26,6 +25,7 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
 
 /**
+ * View Model for adding members in the specific chat room.
  *
  * @author Paul Lee
  * @version Fall 2022
@@ -33,17 +33,35 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
 public class ChatAddMemberViewModel extends AndroidViewModel {
     private final MutableLiveData<JSONObject> mResponse;
 
+    /**
+     * Constructor
+     *
+     * @param application Application
+     */
     public ChatAddMemberViewModel(@NonNull Application application) {
         super(application);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
     }
 
+    /**
+     * Register as an observer to listen when a member is added to the chat room
+     *
+     * @param owner the fragments lifecycle owner
+     * @param observer the observer
+     */
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
         mResponse.observe(owner, observer);
     }
 
+    /**
+     * Makes a request to the web service
+     * to put the user who created the chat room into the chat room
+     *
+     * @param chatId the chatId of the chat room to add the member into
+     * @param jwt the users signed JWT
+     */
     public void addMember(final int chatId, final String jwt) {
         String url = getApplication().getResources().getString(R.string.base_url) +
             "chats/" + chatId;
@@ -75,6 +93,14 @@ public class ChatAddMemberViewModel extends AndroidViewModel {
                 .addToRequestQueue(request);
     }
 
+    /**
+     * Makes a request to the web service
+     * to put other members into the specific chat room
+     *
+     * @param chatId the chatId of the chat room to add the member into
+     * @param jwt the users signed JWT
+     * @param email the email to add into the chat room
+     */
     public void addOtherMembers(final int chatId, final String jwt, final String email) {
         String url = getApplication().getResources().getString(R.string.base_url)
                 + "chats/" + chatId

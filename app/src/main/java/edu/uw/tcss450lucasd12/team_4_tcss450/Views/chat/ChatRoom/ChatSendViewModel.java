@@ -26,6 +26,8 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
 
 /**
+ * View Model for sending messages into
+ * the chat room.
  *
  * @author Paul Lee
  * @version Fall 2022
@@ -33,17 +35,36 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
 public class ChatSendViewModel extends AndroidViewModel {
     private final MutableLiveData<JSONObject> mResponse;
 
+    /**
+     * Constructor
+     *
+     * @param application Application
+     */
     public ChatSendViewModel(@NonNull Application application) {
         super(application);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
     }
 
+    /**
+     * Register as an observer to listen when the user sent a message.
+     *
+     * @param owner the fragments lifecycle owner
+     * @param observer the observer
+     */
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
         mResponse.observe(owner, observer);
     }
 
+    /**
+     * Makes a request to the web service
+     * to post the message into the chat rooms.
+     *
+     * @param chatId the chat id to send the message to.
+     * @param jwt the users signed JWT
+     * @param message the message to be sent
+     */
     public void sendMessage(final int chatId, final String jwt, final String message) {
         String url = getApplication().getResources().getString(R.string.base_url) +
                 "messages";

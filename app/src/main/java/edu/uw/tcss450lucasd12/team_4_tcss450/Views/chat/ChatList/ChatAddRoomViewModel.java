@@ -26,6 +26,7 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
 
 /**
+ * View Model for creating new chat room
  *
  * @author Paul Lee
  * @version Fall 2022
@@ -34,12 +35,22 @@ public class ChatAddRoomViewModel extends AndroidViewModel {
     private final MutableLiveData<JSONObject> mResponse;
     private int mChatId = -1;
 
+    /**
+     * Constructor class
+     *
+     * @param application Application
+     */
     public ChatAddRoomViewModel(@NonNull Application application) {
         super(application);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
     }
 
+    /**
+     * Register as an observer to listen to when a room is created.
+     * @param owner the fragments lifecycle owner
+     * @param observer the observer
+     */
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
         mResponse.observe(owner, observer);
@@ -55,6 +66,12 @@ public class ChatAddRoomViewModel extends AndroidViewModel {
         return this.mChatId;
     }
 
+    /**
+     * Makes a request to create a new chat room.
+     *
+     * @param jwt the users signed JWT
+     * @param name the name of the newly created chat room.
+     */
     public void createRoom(final String jwt, final String name) {
         String url = getApplication().getResources().getString(R.string.base_url) +
                 "chats";
@@ -96,7 +113,6 @@ public class ChatAddRoomViewModel extends AndroidViewModel {
     private void handleSuccess(final JSONObject response) {
         try {
             mChatId = response.getInt("chatID");
-            Log.e("ChatAddRoom Instance Integer", "Changed CHat Id: " + mChatId);
             mResponse.setValue(response);
 
         } catch (JSONException e) {

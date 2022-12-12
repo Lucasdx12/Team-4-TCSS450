@@ -14,7 +14,6 @@ import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.Charset;
@@ -26,24 +25,45 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
 
 /**
+ * View Model for when deleting members from a specific chat room.
  *
  * @author Paul Lee
  * @version Fall 2022
  */
-public class ChatDeleteMemberViewModel extends AndroidViewModel {
+public class ChatRemoveMemberViewModel extends AndroidViewModel {
     private MutableLiveData<JSONObject> mResponse;
 
-    public ChatDeleteMemberViewModel(@NonNull Application application) {
+    /**
+     * Constructor
+     *
+     * @param application Application
+     */
+    public ChatRemoveMemberViewModel(@NonNull Application application) {
         super(application);
         mResponse = new MutableLiveData<>();
         mResponse.setValue(new JSONObject());
     }
 
+    /**
+     * Register as an observer to listen to when the member is removed from the
+     * chat room.
+     *
+     * @param owner the fragments lifecycle owner
+     * @param observer the observer
+     */
     public void addResponseObserver(@NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super JSONObject> observer) {
         mResponse.observe(owner, observer);
     }
 
+    /**
+     * Makes a request to the web service to remove the member from the
+     * chat room.
+     *
+     * @param chatId the chat Id of the chat room
+     * @param jwt the users signed JWT
+     * @param email the email to remove
+     */
     public void deleteMember(final int chatId, final String jwt, final String email) {
         String url = getApplication().getResources().getString(R.string.base_url) +
                 "chats/" + chatId +

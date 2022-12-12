@@ -24,11 +24,10 @@ import java.util.Map;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatRoomBinding;
-import edu.uw.tcss450lucasd12.team_4_tcss450.model.NewMessageCountViewModel;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link Fragment} subclass of the chat room.
  * @author Paul Lee
  * @version Fall 2022
  */

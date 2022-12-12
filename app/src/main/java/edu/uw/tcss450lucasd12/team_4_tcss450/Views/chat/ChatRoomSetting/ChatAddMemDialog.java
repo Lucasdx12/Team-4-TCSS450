@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -17,6 +16,8 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentAddMemberCardBi
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
 /**
+ * A custom dialog prompting the user to add members into the
+ * specific chat room.
  *
  * @author Paul Lee
  * @version Fall 2022
@@ -29,6 +30,11 @@ public class ChatAddMemDialog extends DialogFragment {
     private FragmentAddMemberCardBinding mBinding;
     private final int mChatId;
 
+    /**
+     * Constructor
+     *
+     * @param chatId the chatId to add the member into
+     */
     public ChatAddMemDialog(int chatId) {
         mChatId = chatId;
     }
@@ -59,7 +65,6 @@ public class ChatAddMemDialog extends DialogFragment {
                 .setPositiveButton(R.string.add_member, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Log.e("ChatAddMemDialog", mBinding.editTextEmail.getText().toString());
                         mAddMemberModel.addOtherMembers(mChatId,
                                 mUserModel.getJwt(),
                                 mBinding.editTextEmail.getText().toString().trim());

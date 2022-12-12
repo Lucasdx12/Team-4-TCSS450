@@ -13,6 +13,8 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatMemberCardBinding;
 
 /**
+ * Sets up the recycler view in chat room setting to get the list of emails
+ * and a button to remove them from the chat room.
  *
  * @author Paul Lee
  * @version Fall 2022
@@ -21,9 +23,17 @@ public class ChatRoomSettingRecyclerViewAdapter extends RecyclerView.Adapter<Cha
     private final List<String> mEmails;
     private final int mChatId;
     private final String mJwt;
-    private final ChatDeleteMemberViewModel mDelMem;
+    private final ChatRemoveMemberViewModel mDelMem;
 
-    public ChatRoomSettingRecyclerViewAdapter(List<String> emails, int chatId, String jwt, ChatDeleteMemberViewModel delMem) {
+    /**
+     * Constructor
+     *
+     * @param emails list of emails
+     * @param chatId the chat id of the chatroom
+     * @param jwt the users signed JWT
+     * @param delMem View Model to include the button to delete the member for each card.
+     */
+    public ChatRoomSettingRecyclerViewAdapter(List<String> emails, int chatId, String jwt, ChatRemoveMemberViewModel delMem) {
         this.mEmails = emails;
         this.mChatId = chatId;
         this.mJwt = jwt;
@@ -49,18 +59,29 @@ public class ChatRoomSettingRecyclerViewAdapter extends RecyclerView.Adapter<Cha
     }
 
     /**
-     *
+     * Objects from this class represent an Individual row View from the List
+     * of rows in the Chat Room Setting Recycler View
      */
     public class ChatRoomSettingViewHolder extends RecyclerView.ViewHolder {
         private final View mView;
         private FragmentChatMemberCardBinding mBinding;
 
+        /**
+         * Constructor
+         *
+         * @param view View
+         */
         public ChatRoomSettingViewHolder(@NonNull View view) {
             super(view);
             mView = view;
             mBinding = FragmentChatMemberCardBinding.bind(view);
         }
 
+        /**
+         * Properly set the email card
+         *
+         * @param email the email to set
+         */
         void setEmails(final String email) {
 
             mBinding.textMemEmail.setText(email);

@@ -8,6 +8,7 @@ import java.util.List;
 import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatList;
 
 /**
+ * A generator to include hard-coded messages inside the chat room.
  *
  * @author Paul Lee
  * @version Fall 2022
@@ -16,8 +17,8 @@ public final class ChatRoomGenerator {
     private static ChatRoom[] chats;
     private static final String[] mNames = {"Paul", "Lucas", "Alexz", "Alec", "Steph", "David", "Charles"};
 
-    public static int pointer = 2;
-    public static int messages = 8;
+    private static int pointer = 2;
+    private static int messages = 8;
 
     static {
 //        chats = new ChatRoom[messages];
@@ -39,14 +40,26 @@ public final class ChatRoomGenerator {
 //                    "5:15 PM");
     }
 
+    /**
+     * Get the List of Chat Rooms
+     * @return the list of chat rooms
+     */
     public static List<ChatRoom> getChatRoomList() {
         return Arrays.asList(chats);
     }
 
+    /**
+     * Get the array of chat rooms
+     * @return the array of chat rooms
+     */
     public static ChatRoom[] getCHATS() {
         return Arrays.copyOf(chats, chats.length);
     }
 
+    /**
+     * Adds a new message to the list
+     * @param newMessage the message to be added
+     */
     public static void addMessage(ChatRoom newMessage) {
         Log.i("POINTER", pointer +" ");
         Log.i("MESSAGES", messages + " ");

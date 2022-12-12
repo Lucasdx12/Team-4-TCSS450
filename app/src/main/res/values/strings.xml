@@ -45,7 +45,7 @@
     <string name="title_add_member">Add Member</string>
     <string name="enter_member_email">Enter Member\'s Email</string>
     <string name="add_member">Add</string>
-    <string name="delete_member">Delete</string>
+    <string name="remove_member">Remove</string>
     <string name="ok">OK</string>
 
     <!--TODO: added for landing, weather, & contacts -->

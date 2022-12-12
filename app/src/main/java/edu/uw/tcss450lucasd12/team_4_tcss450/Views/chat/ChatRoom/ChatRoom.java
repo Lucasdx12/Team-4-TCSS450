@@ -6,7 +6,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * The items that will be contained inside the chatrooms, which will be individual
@@ -21,14 +20,20 @@ public final class ChatRoom implements Serializable {
     private final String mMessage;
     private final String mSender;
     private final String mTimeStamp;
-    private final String mUsername;
 
+    /**
+     * Constructor
+     *
+     * @param messageId the id of the message
+     * @param message the message sent
+     * @param sender the name of the user who sent the message
+     * @param timeStamp the time of the message sent
+     */
     public ChatRoom(int messageId, String message, String sender, String timeStamp) {
         this.mMessageId = messageId;
         this.mMessage = message;
         this.mSender = sender;
         this.mTimeStamp = timeStamp;
-        this.mUsername = "";
     }
 
     /**
@@ -44,17 +49,28 @@ public final class ChatRoom implements Serializable {
                 msg.getString("message"),
                 msg.getString("email"),
                 msg.getString("timestamp"));
-//                msg.getString("username"));
     }
 
+    /**
+     * Get the id of the message
+     * @return the message id
+     */
     public int getMessageId() {
         return this.mMessageId;
     }
 
+    /**
+     * Get the message
+     * @return the message
+     */
     public String getMessage() {
         return this.mMessage;
     }
 
+    /**
+     * Get the sender
+     * @return the sender
+     */
     public String getSender() {
         return this.mSender;
     }
@@ -62,10 +78,6 @@ public final class ChatRoom implements Serializable {
     public String getTimeStamp() {
         return this.mTimeStamp;
     }
-
-//    public String getUsername() {
-//        return this.mUsername;
-//    }
 
     /**
      * Provides equality solely based on MessageId.

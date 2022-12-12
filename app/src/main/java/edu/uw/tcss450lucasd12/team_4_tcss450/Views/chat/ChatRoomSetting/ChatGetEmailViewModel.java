@@ -29,6 +29,8 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
 
 /**
+ * View Model for getting all the emails in a specific chat room
+ * from the database.
  *
  * @author Paul Lee
  * @version Fall 2022
@@ -37,17 +39,36 @@ public class ChatGetEmailViewModel extends AndroidViewModel {
     private Map<Integer, MutableLiveData<List<String>>> mEmails;
     private int mChatId;
 
+    /**
+     * Constructor
+     *
+     * @param application Application
+     */
     public ChatGetEmailViewModel(@NonNull Application application) {
         super(application);
         mEmails = new HashMap<>();
     }
 
+    /**
+     * Register as an observer to listen to a specific chat setting's list of emails
+     *
+     * @param chatId the chat ID of the chat to observer
+     * @param owner the fragments lifecycle owner
+     * @param observer the observer
+     */
     public void addResponseObserver(int chatId,
                                     @NonNull LifecycleOwner owner,
                                     @NonNull Observer<? super List<String>> observer) {
         getOrCreateMapEntry(chatId).observe(owner, observer);
     }
 
+    /**
+     * Return a reference to the List<> associated with the chat setting. If the View Model does
+     * not have a mapping for this chatID, it will be created.
+     *
+     * @param chatId the id of the chat room List to retrieve
+     * @return a reference to the list of emails.
+     */
     public List<String> getListOfEmailsByChatId(final int chatId) {
         return getOrCreateMapEntry(chatId).getValue();
     }
@@ -59,6 +80,13 @@ public class ChatGetEmailViewModel extends AndroidViewModel {
         return mEmails.get(chatId);
     }
 
+    /**
+     * Makes a request to the web service to get all the emails that are associated
+     * with the specific chat Id and adds it to the List. Informs observers of the update.
+     *
+     * @param jwt the users signed JWT
+     * @param chatId the chat Id to request the list of emails
+     */
     public void getAllEmails(final String jwt, final int chatId) {
         mChatId = chatId;
         String url = getApplication().getResources().getString(R.string.base_url) +
@@ -100,7 +128,6 @@ public class ChatGetEmailViewModel extends AndroidViewModel {
             for (int i = 0; i < listOfEmails.length(); i++) {
                 JSONObject email = listOfEmails.getJSONObject(i);
                 String userEmail = email.getString("email");
-                Log.e("USEREMAILS", userEmail);
 
                 if (!emails.contains(userEmail)) {
                     // Don't add a duplicate

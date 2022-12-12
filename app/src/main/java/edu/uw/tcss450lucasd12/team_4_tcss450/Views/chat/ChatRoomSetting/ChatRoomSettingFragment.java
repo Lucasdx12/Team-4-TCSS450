@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,9 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatRoomSetting
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link Fragment} subclass for the chat room setting.
+ * ChatRoomSettingFragment is the fragment that consists of the settings for the
+ * chat room. Here, users can add/delete members.
  *
  * @author Paul Lee
  * @version Fall 2022
@@ -27,7 +28,7 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 public class ChatRoomSettingFragment extends Fragment {
 
     private ChatAddMemberViewModel mAddMemModel;
-    private ChatDeleteMemberViewModel mDelMemModel;
+    private ChatRemoveMemberViewModel mDelMemModel;
     private ChatGetEmailViewModel mEmailModel;
     private UserInfoViewModel mUserModel;
 
@@ -39,7 +40,7 @@ public class ChatRoomSettingFragment extends Fragment {
         ViewModelProvider provider = new ViewModelProvider(getActivity());
 
         mAddMemModel = provider.get(ChatAddMemberViewModel.class);
-        mDelMemModel = provider.get(ChatDeleteMemberViewModel.class);
+        mDelMemModel = provider.get(ChatRemoveMemberViewModel.class);
         mEmailModel = provider.get(ChatGetEmailViewModel.class);
         mUserModel = provider.get(UserInfoViewModel.class);
 
