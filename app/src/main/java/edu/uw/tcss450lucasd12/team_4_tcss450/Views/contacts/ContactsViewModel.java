@@ -33,7 +33,7 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
 
 public class ContactsViewModel extends AndroidViewModel {
-    private MutableLiveData<List<Contact>> mContacts;
+private MutableLiveData<List<Contact>> mContacts;
 
 //    private final MutableLiveData<JSONObject> mResponse;
 
