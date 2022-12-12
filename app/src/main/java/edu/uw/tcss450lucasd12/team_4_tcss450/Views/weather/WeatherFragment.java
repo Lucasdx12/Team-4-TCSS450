@@ -23,7 +23,7 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentWeatherBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
 /**
- * A simple {@link Fragment} subclass.
+ * @author lucas Dahl and Alec dowty
  */
 public class WeatherFragment extends Fragment {
 
