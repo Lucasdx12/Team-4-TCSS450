@@ -28,6 +28,11 @@ import java.util.Objects;
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
 
+/**
+ *
+ * @author Paul Lee
+ * @version Fall 2022
+ */
 public class ChatGetEmailViewModel extends AndroidViewModel {
     private Map<Integer, MutableLiveData<List<String>>> mEmails;
     private int mChatId;

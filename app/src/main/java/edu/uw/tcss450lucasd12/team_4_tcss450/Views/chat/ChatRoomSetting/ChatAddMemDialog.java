@@ -16,6 +16,11 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentAddMemberCardBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
+/**
+ *
+ * @author Paul Lee
+ * @version Fall 2022
+ */
 public class ChatAddMemDialog extends DialogFragment {
 
     private ChatAddMemberViewModel mAddMemberModel;
@@ -57,7 +62,7 @@ public class ChatAddMemDialog extends DialogFragment {
                         Log.e("ChatAddMemDialog", mBinding.editTextEmail.getText().toString());
                         mAddMemberModel.addOtherMembers(mChatId,
                                 mUserModel.getJwt(),
-                                mBinding.editTextEmail.getText().toString());
+                                mBinding.editTextEmail.getText().toString().trim());
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

@@ -28,6 +28,11 @@ import java.util.Objects;
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
 
+/**
+ *
+ * @author Paul Lee
+ * @version Fall 2022
+ */
 public class ChatListViewModel extends AndroidViewModel {
 
     /**
@@ -91,9 +96,7 @@ public class ChatListViewModel extends AndroidViewModel {
                 JSONObject list = lists.getJSONObject(i);
                 ChatList cList = new ChatList(
                         list.getInt("chatid"),
-                        list.getString("name"),
-                        "RECENT_MESSAGE",
-                        "TIME STAMP"
+                        list.getString("name")
                 );
                 if (!chatLists.contains(cList)) {
                     // Don't add a duplicate

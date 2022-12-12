@@ -16,6 +16,12 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentAddChatCardBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
+/**
+ * Creates a custom dialog for adding new chat rooms
+ *
+ * @author Paul Lee
+ * @version Fall 2022
+ */
 public class ChatAddDialog extends DialogFragment {
 
     private ChatAddRoomViewModel mAddRoomModel;
@@ -50,7 +56,7 @@ public class ChatAddDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         mAddRoomModel.createRoom(mUserModel.getJwt(),
-                                mBinding.editTextRoomName.getText().toString());
+                                mBinding.editTextRoomName.getText().toString().trim());
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

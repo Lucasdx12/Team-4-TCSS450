@@ -39,6 +39,7 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatList;
 import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatListFragment;
 import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatListGenerator;
 import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatListRecyclerViewAdapter;
+import edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatList.ChatListViewModel;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatListBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentLandingBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
@@ -57,6 +58,7 @@ public class LandingFragment extends Fragment {
     private ImageView mCurrentWeatherIcon;
     private RecyclerView mNotifications;
     private UserInfoViewModel mUserModel;
+    private ChatListViewModel mChatModel;
 
 
     //******************** Constructor *****************************
@@ -76,6 +78,9 @@ public class LandingFragment extends Fragment {
         super.onCreate(savedInstanceState);
         ViewModelProvider provider = new ViewModelProvider(getActivity());
         mUserModel = provider.get(UserInfoViewModel.class);
+        mChatModel = provider.get(ChatListViewModel.class);
+
+        mChatModel.getChats(mUserModel.getJwt());
     }
 
     @Override
@@ -101,9 +106,9 @@ public class LandingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         FragmentLandingBinding binding = FragmentLandingBinding.bind(getView());
 
-        ChatHelper chatHelper = new ChatHelper();
+        binding.recentNotifications.setAdapter(new LandingRecyclerViewAdapter(mChatModel.getChatList()));
 
-        binding.recentNotifications.setAdapter(new LandingRecyclerViewAdapter(chatHelper.getChatList()));
+        mChatModel.addChatListObserver(getViewLifecycleOwner(), observer -> binding.recentNotifications.getAdapter().notifyDataSetChanged());
     }
 
     //********************  Methods *****************************

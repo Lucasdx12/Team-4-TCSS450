@@ -8,6 +8,8 @@ import org.json.JSONObject;
 import java.io.Serializable;
 
 /**
+ * ChatList of each individual chats room that the user is in,
+ * which will be displayed in the chat list.
  *
  * @author Paul Lee
  * @version Autumn 2022
@@ -15,14 +17,10 @@ import java.io.Serializable;
 public final class ChatList implements Serializable {
     private final int mChatId;
     private final String mTitle;
-    private final String mRecentMessage;
-    private final String mTimeStamp;
 
-    public ChatList(int chatId, String title, String recentMessage, String timeStamp) {
+    public ChatList(int chatId, String title) {
         this.mChatId = chatId;
         this.mTitle = title;
-        this.mRecentMessage = recentMessage;
-        this.mTimeStamp = timeStamp;
     }
 
     public int getChatId() {
@@ -31,14 +29,6 @@ public final class ChatList implements Serializable {
 
     public String getTitle() {
         return this.mTitle;
-    }
-
-    public String getRecentMessage() {
-        return this.mRecentMessage;
-    }
-
-    public String getTimeStamp() {
-        return this.mTimeStamp;
     }
 
     /**

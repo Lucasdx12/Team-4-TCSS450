@@ -68,7 +68,11 @@ public class ChatListFragment extends Fragment {
 
 
         mListModel.addChatListObserver(getViewLifecycleOwner(), list -> {
-            recyclerView.getAdapter().notifyDataSetChanged();
+            if (!list.isEmpty()) {
+                recyclerView.getAdapter().notifyDataSetChanged();
+                binding.layoutChatListWait.setVisibility(View.GONE);
+            }
+
         });
 
         mAddRoomModel.addResponseObserver(getViewLifecycleOwner(), response -> {
@@ -82,6 +86,10 @@ public class ChatListFragment extends Fragment {
         });
     }
 
+    /**
+     * Helper method to get the custom dialog box for adding
+     * new chat rooms.
+     */
     private void openDialog() {
         DialogFragment dialogFragment = new ChatAddDialog();
         dialogFragment.show(getChildFragmentManager(), "addroom");

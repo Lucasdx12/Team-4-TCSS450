@@ -78,7 +78,7 @@
     </fragment>
     <fragment
         android:id="@+id/chatRoomSetting"
-        android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoomSetting.ChatRoomSetting"
+        android:name="edu.uw.tcss450lucasd12.team_4_tcss450.Views.chat.ChatRoomSetting.ChatRoomSettingFragment"
         android:label="ChatRoomSetting" >
         <argument
             android:name="chatId"

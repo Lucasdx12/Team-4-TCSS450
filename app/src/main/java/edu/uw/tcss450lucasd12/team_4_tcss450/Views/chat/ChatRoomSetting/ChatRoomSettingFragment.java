@@ -9,13 +9,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.auth0.android.jwt.JWT;
 
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatRoomSettingBinding;
@@ -23,15 +20,18 @@ import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
+ *
+ * @author Paul Lee
+ * @version Fall 2022
  */
-public class ChatRoomSetting extends Fragment {
+public class ChatRoomSettingFragment extends Fragment {
 
     private ChatAddMemberViewModel mAddMemModel;
     private ChatDeleteMemberViewModel mDelMemModel;
     private ChatGetEmailViewModel mEmailModel;
     private UserInfoViewModel mUserModel;
 
-    private ChatRoomSettingArgs mArgs;
+    private ChatRoomSettingFragmentArgs mArgs;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,9 +43,8 @@ public class ChatRoomSetting extends Fragment {
         mEmailModel = provider.get(ChatGetEmailViewModel.class);
         mUserModel = provider.get(UserInfoViewModel.class);
 
-        mArgs = ChatRoomSettingArgs.fromBundle(getArguments());
+        mArgs = ChatRoomSettingFragmentArgs.fromBundle(getArguments());
         mEmailModel.getAllEmails(mUserModel.getJwt(), mArgs.getChatId());
-        Log.e("CHATIDSETTING", mArgs.getChatId() + " ");
     }
 
     @Override
@@ -87,6 +86,10 @@ public class ChatRoomSetting extends Fragment {
         });
     }
 
+    /**
+     * Helper method to get the custom dialog box for adding
+     * new members into the current chat room.
+     */
     private void openDialog() {
         DialogFragment dialogFragment = new ChatAddMemDialog(mArgs.getChatId());
         dialogFragment.show(getChildFragmentManager(), "addmember");

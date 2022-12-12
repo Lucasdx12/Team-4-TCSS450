@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".Views.chat.ChatRoomSetting.ChatRoomSetting"
+        tools:context=".Views.chat.ChatRoomSetting.ChatRoomSettingFragment"
         tools:listitem="@layout/fragment_chat_member_card" />
 
     <Button

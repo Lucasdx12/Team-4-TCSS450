@@ -57,8 +57,6 @@ public class LandingRecyclerViewAdapter extends RecyclerView.Adapter<LandingRecy
             });
 
             mBinding.textChatTitle.setText(chat.getTitle());
-            mBinding.textRecentMessage.setText(chat.getRecentMessage());
-            mBinding.textTimeOfMessage.setText(chat.getTimeStamp());
         }
     }
 }

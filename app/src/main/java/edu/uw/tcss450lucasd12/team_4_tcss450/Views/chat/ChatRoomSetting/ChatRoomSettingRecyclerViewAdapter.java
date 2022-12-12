@@ -12,6 +12,11 @@ import java.util.List;
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatMemberCardBinding;
 
+/**
+ *
+ * @author Paul Lee
+ * @version Fall 2022
+ */
 public class ChatRoomSettingRecyclerViewAdapter extends RecyclerView.Adapter<ChatRoomSettingRecyclerViewAdapter.ChatRoomSettingViewHolder> {
     private final List<String> mEmails;
     private final int mChatId;

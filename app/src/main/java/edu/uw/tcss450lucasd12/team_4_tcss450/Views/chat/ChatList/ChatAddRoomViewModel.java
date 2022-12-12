@@ -25,9 +25,14 @@ import java.util.Objects;
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.io.RequestQueueSingleton;
 
+/**
+ *
+ * @author Paul Lee
+ * @version Fall 2022
+ */
 public class ChatAddRoomViewModel extends AndroidViewModel {
     private final MutableLiveData<JSONObject> mResponse;
-    private int chatId = -1;
+    private int mChatId = -1;
 
     public ChatAddRoomViewModel(@NonNull Application application) {
         super(application);
@@ -40,13 +45,14 @@ public class ChatAddRoomViewModel extends AndroidViewModel {
         mResponse.observe(owner, observer);
     }
 
+    /**
+     * Returns the chat Id of the new chat room to be used
+     * to add the user who created the chat room.
+     *
+     * @return the chat Id of the new chat room.
+     */
     public int getChatId() {
-        if (this.chatId == -1) {
-            Log.e("WHHYYYY", "CHATID IS: " + this.chatId);
-        } else {
-            Log.e("ChatAddRoomViewModel getChatId method", "Let's see: " + this.chatId);
-        }
-        return this.chatId;
+        return this.mChatId;
     }
 
     public void createRoom(final String jwt, final String name) {
@@ -89,12 +95,8 @@ public class ChatAddRoomViewModel extends AndroidViewModel {
 
     private void handleSuccess(final JSONObject response) {
         try {
-            Log.e("CHATADDROOMVIEWMODEL", response.toString());
-            int chatId2 = response.getInt("chatID");
-            Log.e("CHATADDROOM INTEGER", "New Chat Id: " + chatId2);
-
-            chatId = response.getInt("chatID");
-            Log.e("ChatAddRoom Instance Integer", "Changed CHat Id: " + chatId);
+            mChatId = response.getInt("chatID");
+            Log.e("ChatAddRoom Instance Integer", "Changed CHat Id: " + mChatId);
             mResponse.setValue(response);
 
         } catch (JSONException e) {

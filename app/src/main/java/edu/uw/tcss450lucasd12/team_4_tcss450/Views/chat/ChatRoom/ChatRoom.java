@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * The items that will be contained inside the chatrooms, which will be individual
+ * messages.
  *
  * @author Paul Lee
  * @version Fall 2022

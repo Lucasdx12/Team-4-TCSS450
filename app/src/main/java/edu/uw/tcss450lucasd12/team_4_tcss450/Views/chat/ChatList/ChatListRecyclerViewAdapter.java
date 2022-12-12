@@ -74,8 +74,6 @@ public class ChatListRecyclerViewAdapter extends androidx.recyclerview.widget.Re
             });
 
             mBinding.textChatTitle.setText(chat.getTitle());
-            mBinding.textRecentMessage.setText(chat.getRecentMessage());
-            mBinding.textTimeOfMessage.setText(chat.getTimeStamp());
         }
     }
 }

@@ -24,8 +24,8 @@ public class ChatHelper {
      */
     public ChatHelper() {
         mChatList = new ArrayList<>();
-        ChatList first = new ChatList(1, "Global Chat", "untitled", "N/A");
-        ChatList second = new ChatList(2, "Chat", "untitled2", "N/A2");
+        ChatList first = new ChatList(1, "Global Chat");
+        ChatList second = new ChatList(2, "Chat");
 
         mChatList.add(first);
         mChatList.add(second);

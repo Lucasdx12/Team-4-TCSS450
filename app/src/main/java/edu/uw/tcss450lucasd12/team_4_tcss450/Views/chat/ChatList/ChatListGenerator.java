@@ -25,8 +25,8 @@ public final class ChatListGenerator {
     static {
         CHATS = new ChatList[ROOM];
         for (int i = 1; i < CHATS.length + 1; i++) {
-            CHATS[0] = new ChatList(i, "Chat Room Title" + i,
-                    "Recent Message" + i, "4:25PM");
+//            CHATS[0] = new ChatList(i, "Chat Room Title" + i,
+//                    "Recent Message" + i, "4:25PM");
         }
     }
 

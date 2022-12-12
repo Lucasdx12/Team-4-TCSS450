@@ -104,6 +104,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+        navView.setOnItemSelectedListener(item -> {
+            NavigationUI.onNavDestinationSelected(item, navController);
+            
+            return true;
+        });
+
         messageCount(navView, navController);
 
         //Action Bar (bar at top with settings and activity names):
@@ -264,7 +270,9 @@ public class MainActivity extends AppCompatActivity {
         finish();
         startActivity(getIntent());
     }
+
     private void messageCount(BottomNavigationView navView, NavController navController) {
+        ChatRoomViewModel mModel = new ViewModelProvider(this).get(ChatRoomViewModel.class);
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destination.getId() == R.id.chatRoomFragment) {
