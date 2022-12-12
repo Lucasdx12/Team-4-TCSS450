@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -53,7 +54,7 @@ public class ChatAddMemDialog extends DialogFragment {
                 .setPositiveButton(R.string.add_member, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        mBinding.editTextEmail.getText().toString();
+                        Log.e("ChatAddMemDialog", mBinding.editTextEmail.getText().toString());
                         mAddMemberModel.addOtherMembers(mChatId,
                                 mUserModel.getJwt(),
                                 mBinding.editTextEmail.getText().toString());

@@ -82,7 +82,7 @@ public class ChatRoomFragment extends Fragment {
         // Send the user to the bottom of the recycler view.
         recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
 
-        binding.button.setOnClickListener(button -> {
+        binding.buttonMemberList.setOnClickListener(button -> {
             Navigation.findNavController(getView()).navigate(
                     ChatRoomFragmentDirections
                             .actionChatRoomFragmentToChatRoomSetting(mArgs.getChat().getChatId()));

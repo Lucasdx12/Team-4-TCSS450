@@ -35,11 +35,13 @@
             android:background="@android:drawable/screen_background_light_transparent"
             android:src="@drawable/ic_chat_message_send_32" />
 
-        <Button
-            android:id="@+id/button"
+        <ImageButton
+            android:id="@+id/buttonMemberList"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="1"
+            android:background="@android:drawable/screen_background_light_transparent"
+            android:src="@drawable/ic_baseline_group_32"
             android:text="@string/settings" />
 
     </LinearLayout>

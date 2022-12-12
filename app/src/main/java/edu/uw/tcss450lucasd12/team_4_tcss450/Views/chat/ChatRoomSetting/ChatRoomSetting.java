@@ -15,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.auth0.android.jwt.JWT;
+
 import edu.uw.tcss450lucasd12.team_4_tcss450.R;
 import edu.uw.tcss450lucasd12.team_4_tcss450.databinding.FragmentChatRoomSettingBinding;
 import edu.uw.tcss450lucasd12.team_4_tcss450.model.UserInfoViewModel;
@@ -72,6 +74,11 @@ public class ChatRoomSetting extends Fragment {
         });
 
         mEmailModel.addResponseObserver(mArgs.getChatId(), getViewLifecycleOwner(), list -> {
+            recyclerView.getAdapter().notifyDataSetChanged();
+        });
+
+        mAddMemModel.addResponseObserver(getViewLifecycleOwner(), observer -> {
+            mEmailModel.getAllEmails(mUserModel.getJwt(), mArgs.getChatId());
             recyclerView.getAdapter().notifyDataSetChanged();
         });
 

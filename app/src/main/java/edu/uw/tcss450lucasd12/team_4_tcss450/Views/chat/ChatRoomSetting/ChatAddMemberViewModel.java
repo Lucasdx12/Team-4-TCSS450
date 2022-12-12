@@ -79,7 +79,7 @@ public class ChatAddMemberViewModel extends AndroidViewModel {
                 Request.Method.PUT,
                 url,
                 null,
-                this::handleSuccess,
+                mResponse::setValue,
                 this::handleError) {
 
             @Override
@@ -100,21 +100,6 @@ public class ChatAddMemberViewModel extends AndroidViewModel {
         // Instantiate the RequestQueue and add the request to the queue.
         RequestQueueSingleton.getInstance(getApplication().getApplicationContext())
                 .addToRequestQueue(request);
-    }
-
-    private void handleSuccess(final JSONObject response) {
-        try {
-            int memberid = response.getInt("memberid");
-            Log.e("CHATADDMEMBER", memberid + " ");
-            boolean isTrue = response.getBoolean("success");
-            Log.e("CHATADDMEMBERBOOLEAN", isTrue + " ");
-
-            mResponse.setValue(response);
-        } catch (JSONException e) {
-            Log.e("JSON PARSE ERROR", "Found in handle Success ChatAddMemberViewModel");
-            Log.e("JSON PARSE ERROR", "Error: " + e.getMessage());
-
-        }
     }
 
     private void handleError(final VolleyError error) {
